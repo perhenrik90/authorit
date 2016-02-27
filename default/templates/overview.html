@@ -1,0 +1,34 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1>
+      {% blocktrans %}Welcome{% endblocktrans %} {{user.first_name}}
+      {{user.last_name}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <p>{% blocktrans %}Your projects{% endblocktrans %}
+  <table class="table">
+    {% for c in courses %}
+    <tr>
+      <td>{{c.title}}</td>
+    </tr>
+      
+    {% endfor %}
+  </table>
+  </div>
+</div>
+{% endblock %}
