@@ -1,0 +1,14 @@
+{% load staticfiles %}
+{% load url from future %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta rel="stylesheet" type="text/css" href="{static 'css/bootstrap.css' "/>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
