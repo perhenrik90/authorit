@@ -3,14 +3,18 @@
  *
  * @author Per-Henik Kvalnes - 2016
  ********************************************/
-widgetCount = 0;
-
+var first = false;
+var selectedCol = null;
 
 /************************
  * Create a column 
  ************************/
 function createColumn(col_type)
 {
+    if(first == 0)
+    {
+	widgetCount = $("#slide")[0].children.length;
+    }
     e = document.createElement("div");
     e.className = col_type;
     e.innerHTML = "text here";
@@ -63,10 +67,16 @@ function saveColumn()
     edit = $("#edit")[0];
     console.log(edit.editon);
     
-    col = $("#"+edit.editon)[0];
+    col = selectedCol;
     col.innerHTML = tinymce.activeEditor.getContent()
     document.body.removeChild($("#popup")[0]);
     tinymce.remove();
+
+    // update the form to post the new view
+    slide = $("#slide")[0];
+    
+    $("#html_form")[0].value = slide.innerHTML;
+    console.log($("#html_form"));
 }
 
 
@@ -76,6 +86,7 @@ function saveColumn()
 function editColumn(id)
 {
     col = this
+    selectedCol = this;
     
     popup = document.createElement("div");
     popup.id = "popup";
@@ -92,7 +103,7 @@ function editColumn(id)
     // create the text area
     tarea = document.createElement("textarea");
     tarea.id = "edit";
-    tarea.editon = this.id;
+   
     tarea.innerHTML = col.innerHTML;
     popup.appendChild(tarea);
     
@@ -114,3 +125,5 @@ function editColumn(id)
 	      }
     tinymce.init(options);
 }
+
+

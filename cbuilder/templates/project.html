@@ -1,0 +1,43 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<div class="row">
+  <div class="col-sm-12">
+    {{course.title}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    {{course.description}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      {% for s in slides %}
+      <tr>
+	<td>{{s.title}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

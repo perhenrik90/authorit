@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load url from future %}
-
 {% block head %}
 <script src="{% static 'js/slidebuilder.js' %}"></script>
 <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
@@ -19,12 +18,33 @@
     <li><a onclick="addRow('two')">{% blocktrans %}Double row{% endblocktrans %}</a></li>
     <li><a onclick="addRow('three')">{% blocktrans %}Tripple row{% endblocktrans %}</a></li>
   </ul>
-</li> 
+</li>
+<li>
+  <form method="post" action="{% url 'cbuilder.views.save_slide' %}">
+    <p class="navbar-btn">
+    <input class="btn btn-default" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/></p>
+    <input name="sid" type="hidden" value="{{slide.id}}"/>
+    <input name="html" type="hidden" value="{{slide.html}}" id="html_form"/>
+    {% csrf_token %}
+  </form>
+</li>
 {% endblock %}
 
 
 {% block content %}
-<div id="slide">
+{% if message %}
+<p>{{message}}</p>
 
+{% else %}
+<div id="slide">
+  {{slide.html | safe}}
 </div>
+
+<script>
+  // setup listener for old data 
+  $(".col-sm-12").click(editColumn);
+  $(".col-sm-6").click(editColumn);
+  $(".col-sm-4").click(editColumn);
+</script>
+{% endif %}
 {% endblock %}
