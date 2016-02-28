@@ -21,7 +21,8 @@ class Slide(models.Model):
     course = models.ForeignKey(Course)
 
     number = models.IntegerField()
-
+    inMenu = models.BooleanField(default=False)
+    
     class Meta:
         unique_together = ('number', 'course')
 
