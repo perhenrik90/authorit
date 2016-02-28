@@ -37,7 +37,7 @@
 <li>
   <form method="post" action="{% url 'cbuilder.views.save_slide' %}">
     <p class="navbar-btn">
-    <input class="btn btn-default" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/></p>
+      <input class="btn btn-default" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/></p>
     <input name="sid" type="hidden" value="{{slide.id}}"/>
     <input name="html" type="hidden" value="{{slide.html}}" id="html_form"/>
     {% csrf_token %}
@@ -49,9 +49,7 @@
 {% block content %}
 {% if message %}
 <p>{{message}}</p>
-
 {% else %}
-
 {% if prev_slide %}
 <div class="nav_button">
   <a class="glyphicon glyphicon-menu-left btn btn-default" aria-hidden="true"
@@ -59,12 +57,11 @@
 </div>
 {% endif %}
 
-<div class="col-sm-12">
-  <div id="slide">
 
-  {{slide.html | safe}}
-</div>
-</div>
+  <div id="slide">
+    {{slide.html | safe}}
+  </div>
+
 {% if next_slide.title %}
 <div class="nav_button" style="right:0px;">
   <a class="glyphicon glyphicon-menu-right btn btn-default" aria-hidden="true"

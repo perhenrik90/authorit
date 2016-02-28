@@ -83,11 +83,11 @@ function saveColumn()
 /*********************************
  * Edit one column!
  *********************************/
-function editColumn(id)
+function editColumn()
 {
     col = this
     selectedCol = this;
-    
+    console.log(col);
     popup = document.createElement("div");
     popup.id = "popup";
     popup.className = "popup";
