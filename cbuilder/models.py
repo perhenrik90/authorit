@@ -15,7 +15,6 @@ class Slide(models.Model):
     title = models.CharField(max_length=26)
     modified = models.DateTimeField(auto_now=True)
 
-    
     html = models.CharField(max_length=1500)
     course = models.ForeignKey(Course)
 

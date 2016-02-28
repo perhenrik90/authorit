@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'authorit.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^overview$', 'default.views.overview', name='overview'),
+    url(r'^dashboard$', 'default.views.dashboard', name='dashboard'),
     url(r'^course/', include('cbuilder.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

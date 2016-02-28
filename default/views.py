@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from cbuilder.models import Course
 
 
-def overview(request):
+def dashboard(request):
 
     c = {}
 

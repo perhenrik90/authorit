@@ -35,8 +35,12 @@ def edit_slide(request):
 
     if 'sid' in request.GET:
         sid = request.GET['sid']
-        slide = Slide.objects.get(id=sid)
-        c["slide"] = slide
+
+        try:
+            slide = Slide.objects.get(id=sid)
+            c["slide"] = slide
+        except Exception:
+            c["message"] = _("Course with id %s not found!" % pid)
         
 
     else:
@@ -47,6 +51,39 @@ def edit_slide(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
+
+
+def create_slide(request):
+
+    c = {}
+
+    if 'pid' in request.POST:
+        try:
+            pid = request.POST["pid"]
+            course = Course.objects.get(id=pid)
+            slide = Slide(title=request.POST["title"], course=course)
+
+            # add a default header
+            slide.html = '<div class="row"><div id="wd1" class="col-sm-12"><h1>%s</h1></div></div>' % slide.title
+            slide.save()
+            return HttpResponseRedirect(reverse('cbuilder.views.edit_slide')+"?sid=%s" % slide.id)            
+        except Exception:
+            c["message"] = _("Could not create a new slide to course %s" %course.title)
+            
+    # if no post are given
+    if 'pid' in request.GET:
+        try:
+            pid = request.GET["pid"]
+            c["course"] = Course.objects.get(id=pid)
+        except Exception:
+            c["message"] = _("Course with id %s not found!" % pid)
+
+    else:
+        c["message"] = _("No course id given. Can not create slide!")
+    
+    template = loader.get_template("create_slide.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
 
 
 def save_slide(request):
