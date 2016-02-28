@@ -9,6 +9,8 @@ class Course(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.title
 
 class Slide(models.Model):
 
@@ -22,3 +24,6 @@ class Slide(models.Model):
 
     class Meta:
         unique_together = ('number', 'course')
+
+    def __unicode__(self):
+        return self.course.title +' '+str(self.number)+" : "+self.title
