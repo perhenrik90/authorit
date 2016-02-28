@@ -7,6 +7,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from cbuilder.models import Course, Slide
 
+#
+# Describe a project
+#
 def project(request):
 
     c = {}
@@ -28,10 +31,10 @@ def project(request):
     return HttpResponse(template.render(context))	
 
 
+
 #
 # View for editing slides
 #
-
 def edit_slide(request):
 
     c = {}
@@ -120,5 +123,21 @@ def save_slide(request):
         return HttpResponseRedirect(reverse('cbuilder.views.edit_slide')+"?sid=%s" % slide.id)
 
 
+##################
+# Delete a slide
+##################
+def delete_slide(request):
 
+    c = {}
+    if 'sid' in request.POST:
+        sid = request.POST["sid"]
+
+        try:
+            slide = Slide.objects.get(id=sid)
+            slide.delete()
+            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % slide.course.id)
         
+        except Exception:
+            c["message"] =  _("Could not find slide with id %s" % sid)
+            
+    return HttpResponseRedirect(reverse('default.views.dashboard'))
