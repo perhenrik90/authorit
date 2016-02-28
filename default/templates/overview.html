@@ -25,6 +25,8 @@
     {% for c in courses %}
     <tr>
       <td>{{c.title}}</td>
+      <td><a href="{% url 'cbuilder.views.project' %}?pid={{c.id}}">
+	  {% blocktrans %}Edit{% endblocktrans %}</a></td>
     </tr>
       
     {% endfor %}
