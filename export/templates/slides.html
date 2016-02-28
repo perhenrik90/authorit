@@ -1,0 +1,131 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- init bootstrap -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+
+<link rel="stylesheet" href="{% static 'css/slides_default.css' " type="text/css"></link>
+
+
+
+
+<title>E-learning</title>
+
+</head>
+<body>
+  <div class="container">
+
+    <!-- header initialized by navbar.js -->
+    <nav class="navbar navbar-default" id="navbar">
+
+    </nav>
+
+    <!-- write your slides here -->
+    <div id="slides">
+    <div class="slide" title="Introduction">
+      <div class="row">
+	<div class="col-md-12">
+	  <h1>Learninghack</h1>
+	  <p>A bootsrap e-learning template with TinCan and SCORM support.</p>
+	  <p>This template is usefull when you wish to make responsive content and 
+	    want it to communicate with e-learning systems.</p>
+	</div>
+      </div>
+    </div>
+
+    <div class="slide" title="Functionalities">
+      <!-- write bootstrap here -->
+      <div class="row">
+	<div class="col-md-12">
+	  <h1>What can you do with this template?</h1>
+	</div>
+	<div class="col-md-4">
+	  <p>The project consist of slides defined by the a div tag with
+	    'slide' class name. Soon there will be more tags like 
+	  'quiz' or 'gallery' div tags.</p>
+	</div>
+	<div class="col-md-4">
+	  <p>Inside a slidetag you can use bootstrap code 
+	    to define the content</p>
+	</div>
+	<div class="col-md-4">
+	  <p>The content will then be responsive!</p>
+	</div>
+      </div>
+    </div>
+    <!-- end slide 1 -->
+
+
+    <!-- slide 2 -->
+    <div class="slide" title="Last slide">
+      <div class="row">
+	<div class="col-md-12">
+	  <h1>Why does it matter?</h1>
+	  <p>Not evereything is posible to make with an e-learning autheringtool.
+	    Therefore I have made this template</p>
+	</div>
+      </div>
+    </div>
+
+
+    <!-- last slide empty -->
+    <div class="slide" title="Last slide">
+      <div class="row">
+	<div class="col-md-12">
+		<p>Does not show</p>
+	</div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <!-- the navigation bar is updated by slidework.js -->
+    <div id="navBar" class="row">
+      <div class="col-sm-3">
+	</br>
+	<div id="bardiv">
+	</div>
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3 pull-right">
+	<nav>
+	  <!-- back and next buttons -->
+	  <ul class="pager" id="pager">
+	    <li><a onclick="se.previousSlide()">Tilbake</a></li>
+	    <li><a onclick="se.nextSlide()">Neste</a></li>
+	  </ul>
+	</nav>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- execute scripts -->
+  <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static  'js/urltools.js' %}"></script>
+  <script src="{% static  'js/slidework.js' %}"></script>
+  <script src="{% static  'js/navbar.js' %}"></script>
+  <script src="{% static  'js/marker.js' %}"></script>
+
+  <!-- <script src="conf.js"></script> -->
+  <!-- <script src="lib/SCORM_API_wrapper.js"></script> -->
+  <!-- <script src="lib/tincan.js"></script> -->
+
+  <script>
+    var se = initSlideEngine();
+    initNavBar(se);
+  </script>
+</body>
+</html>
