@@ -1,7 +1,11 @@
 /********************
  * Slide edit CSS
  ********************/
-
+#slide
+{
+	margin-left:52px;
+	margin-right:52px;
+}
 
 .col-sm-4:hover
 {
