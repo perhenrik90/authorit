@@ -93,12 +93,26 @@ function editColumn()
     popup.className = "popup";
     document.body.appendChild(popup);
 
+    // Save button
     save = document.createElement("div");
     save.className = "btn btn-primary";
     save.innerHTML = "Save";
     save.onclick = saveColumn;
     
     popup.appendChild(save);
+
+    // Delete row button
+    delete_row = document.createElement("div");
+    delete_row.className = "btn btn-danger";
+    delete_row.innerHTML = "Delete row";
+    delete_row.onclick = function(){
+	var par = selectedCol.parentNode;
+	slide = $("#slide")[0];
+	slide.removeChild(par);
+	saveColumn();
+    }
+    popup.appendChild(delete_row);
+
     
     // create the text area
     tarea = document.createElement("textarea");
