@@ -28,6 +28,9 @@ def project(request):
     return HttpResponse(template.render(context))	
 
 
+#
+# View for editing slides
+#
 
 def edit_slide(request):
 
@@ -41,7 +44,19 @@ def edit_slide(request):
             c["slide"] = slide
         except Exception:
             c["message"] = _("Course with id %s not found!" % pid)
-        
+
+        # add next prev if it exsists!
+        try:
+            c["prev_slide"] = Slide.objects.get(number=slide.number-1, course=slide.course)
+        except Exception:
+            pass
+            
+        # add next slide if it exsists!
+        try:
+            c["next_slide"] = Slide.objects.get(number=slide.number+1, course=slide.course)
+        except Exception:
+            pass
+            
 
     else:
         c["message"] = _("No slide id was given!")
@@ -63,10 +78,16 @@ def create_slide(request):
             course = Course.objects.get(id=pid)
             slide = Slide(title=request.POST["title"], course=course)
 
+            # add a new slide number (at the end)
+            slide.number = len(Slide.objects.filter(course=course))+1
+            
             # add a default header
             slide.html = '<div class="row"><div id="wd1" class="col-sm-12"><h1>%s</h1></div></div>' % slide.title
             slide.save()
+
+            # send the user to edit slide
             return HttpResponseRedirect(reverse('cbuilder.views.edit_slide')+"?sid=%s" % slide.id)            
+
         except Exception:
             c["message"] = _("Could not create a new slide to course %s" %course.title)
             
@@ -84,6 +105,7 @@ def create_slide(request):
     template = loader.get_template("create_slide.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
+
 
 
 def save_slide(request):

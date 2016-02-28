@@ -6,6 +6,17 @@
 <script src="{% static 'js/slidebuilder.js' %}"></script>
 <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
+
+<style>
+  .nav_button
+  {
+  position:fixed;
+  top:48%;
+  bottom:auto;
+
+  }
+  
+</style>
 {% endblock %}
 
 {% block ekstra_nav %}
@@ -40,9 +51,26 @@
 <p>{{message}}</p>
 
 {% else %}
-<div id="slide">
+
+{% if prev_slide %}
+<div class="nav_button">
+  <a class="glyphicon glyphicon-menu-left btn btn-default" aria-hidden="true"
+     href="{% url 'cbuilder.views.edit_slide' %}?sid={{prev_slide.id}}"></a>
+</div>
+{% endif %}
+
+<div class="col-sm-12">
+  <div id="slide">
+
   {{slide.html | safe}}
 </div>
+</div>
+{% if next_slide.title %}
+<div class="nav_button" style="right:0px;">
+  <a class="glyphicon glyphicon-menu-right btn btn-default" aria-hidden="true"
+     href="{% url 'cbuilder.views.edit_slide' %}?sid={{next_slide.id}}"></a>
+</div>
+{% endif %}
 
 <script>
   // setup listener for old data 

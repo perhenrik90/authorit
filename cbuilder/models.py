@@ -18,3 +18,7 @@ class Slide(models.Model):
     html = models.CharField(max_length=1500)
     course = models.ForeignKey(Course)
 
+    number = models.IntegerField()
+
+    class Meta:
+        unique_together = ('number', 'course')
