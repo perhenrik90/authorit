@@ -17,8 +17,7 @@
 
 
 
-<title>E-learning</title>
-
+<title>{{course.title}}</title>
 </head>
 <body>
   <div class="container">
@@ -29,65 +28,14 @@
     </nav>
 
     <!-- write your slides here -->
+
     <div id="slides">
-    <div class="slide" title="Introduction">
-      <div class="row">
-	<div class="col-md-12">
-	  <h1>Learninghack</h1>
-	  <p>A bootsrap e-learning template with TinCan and SCORM support.</p>
-	  <p>This template is usefull when you wish to make responsive content and 
-	    want it to communicate with e-learning systems.</p>
-	</div>
+      {% for slide in slides %}
+      <div class="slide" title="{{slide.title}}">
+	{{slide.html|safe}}
+
       </div>
-    </div>
-
-    <div class="slide" title="Functionalities">
-      <!-- write bootstrap here -->
-      <div class="row">
-	<div class="col-md-12">
-	  <h1>What can you do with this template?</h1>
-	</div>
-	<div class="col-md-4">
-	  <p>The project consist of slides defined by the a div tag with
-	    'slide' class name. Soon there will be more tags like 
-	  'quiz' or 'gallery' div tags.</p>
-	</div>
-	<div class="col-md-4">
-	  <p>Inside a slidetag you can use bootstrap code 
-	    to define the content</p>
-	</div>
-	<div class="col-md-4">
-	  <p>The content will then be responsive!</p>
-	</div>
-      </div>
-    </div>
-    <!-- end slide 1 -->
-
-
-    <!-- slide 2 -->
-    <div class="slide" title="Last slide">
-      <div class="row">
-	<div class="col-md-12">
-	  <h1>Why does it matter?</h1>
-	  <p>Not evereything is posible to make with an e-learning autheringtool.
-	    Therefore I have made this template</p>
-	</div>
-      </div>
-    </div>
-
-
-    <!-- last slide empty -->
-    <div class="slide" title="Last slide">
-      <div class="row">
-	<div class="col-md-12">
-		<p>Does not show</p>
-	</div>
-      </div>
-    </div>
-
-
-
-
+      {% endfor %}
 
 
     <!-- the navigation bar is updated by slidework.js -->
