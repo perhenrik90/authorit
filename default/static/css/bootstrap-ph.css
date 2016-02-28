@@ -2,3 +2,15 @@
 {
 	padding:0px;
 }
+
+.popup
+{
+    position:fixed;
+    background-color:rgba(10,10,10,0.5);
+    padding:20px;
+    left:0px;
+    top:0px;
+    right:0px;
+    bottom:0px;
+}
+
