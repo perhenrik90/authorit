@@ -23,7 +23,7 @@
 </div>
 
 
-{{message}}
+
 <!-- button row for manipulating slides -->
 <div class="row">
   <div class="col-sm-12">
@@ -45,10 +45,30 @@
 	    {% blocktrans %}Edit{% endblocktrans %}</a></td>
 	<td>
 	  <form action="{% url 'cbuilder.views.delete_slide' %}" method="POST">
-	  <input type="hidden" name="sid" value="{{s.id}}"/>
-	  <input type="submit" class="btn btn-danger" value="{% blocktrans %}Delete{% endblocktrans %}"/>
-	  {% csrf_token %}
+	    <input type="hidden" name="sid" value="{{s.id}}"/>
+	    <input type="submit" class="btn btn-danger" value="{% blocktrans %}Delete{% endblocktrans %}"/>
+	    {% csrf_token %}
 	  </form>
+	</td>
+	<td>
+	  {% if s.prevSlide %}
+	  <form action="{% url 'cbuilder.views.swap_slide' %}" method="POST">
+	    <input value="{{s.id}}" name="sid1" type="hidden"/>
+	    <input value="{{s.prevSlide.id}}" name="sid2" type="hidden"/>
+	    {% csrf_token %}
+	    <input type="submit" class="glyphicon glyphicon-menu-up btn btn-default" value="{% blocktrans %}Up{% endblocktrans %}">
+	  </form>
+	  {% endif %}
+	</td>
+		<td>
+	  {% if s.nextSlide %}
+	  <form action="{% url 'cbuilder.views.swap_slide' %}" method="POST">
+	    <input value="{{s.id}}" name="sid1" type="hidden"/>
+	    <input value="{{s.nextSlide.id}}" name="sid2" type="hidden"/>
+	    {% csrf_token %}
+	    <input type="submit" class="glyphicon glyphicon-menu-up btn btn-default" value="{% blocktrans %}Down{% endblocktrans %}">
+	  </form>
+	  {% endif %}
 	</td>
 	
       </tr>

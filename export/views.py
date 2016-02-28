@@ -14,7 +14,7 @@ def preview(request):
         pid = request.GET['pid']
         course = Course.objects.get(id=pid)
         c["course"] = course
-        c["slides"] = Slide.objects.filter(course=course)
+        c["slides"] = Slide.objects.filter(course=course).order_by("number")
         
     else:
         c["message"] = _("Course not found!")

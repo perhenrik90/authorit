@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from cbuilder.models import Course, Slide
 
 #
-# Describe a project
+# View a project
 #
 def project(request):
 
@@ -19,7 +19,16 @@ def project(request):
 
         try:
             c["course"] = Course.objects.get(id=pid)
-            c["slides"] = Slide.objects.filter(course=c["course"])
+            c["slides"] = Slide.objects.filter(course=c["course"]).order_by('number')
+
+            # Set up references to next and previous slides
+            for i in range(len(c["slides"])):
+
+                if i < len(c["slides"])-1:
+                    c["slides"][i].nextSlide = c["slides"][i+1]
+                if i > 1:
+                    c["slides"][i].prevSlide = c["slides"][i-1]
+                    
         except Exception:
             c["message"] = _("Course with id %s not found" % pid)
             
@@ -70,13 +79,16 @@ def edit_slide(request):
     return HttpResponse(template.render(context))	
 
 
-
+#
+# Creates a new slide
+#
 def create_slide(request):
 
     c = {}
 
     if 'pid' in request.POST:
         try:
+            # try to get model from id
             pid = request.POST["pid"]
             course = Course.objects.get(id=pid)
             slide = Slide(title=request.POST["title"], course=course)
@@ -140,4 +152,30 @@ def delete_slide(request):
         except Exception:
             c["message"] =  _("Could not find slide with id %s" % sid)
             
+    return HttpResponseRedirect(reverse('default.views.dashboard'))
+
+
+def swap_slide(request):
+
+    c = {}
+
+    if 'sid1' in request.POST and 'sid2' in request.POST:
+        sid1 = request.POST['sid1']
+        sid2 = request.POST['sid2']
+
+        slide1 = Slide.objects.get(id=sid1)
+        slide2 = Slide.objects.get(id=sid2)
+
+        # swap the slide numbers
+        t1 = slide1.number
+        t2 = slide2.number
+        slide1.number = 10000000
+        slide1.save()
+        slide2.number = t1
+        slide2.save()
+        slide1.number = t2
+        slide1.save()
+
+        return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % slide1.course.id)
+
     return HttpResponseRedirect(reverse('default.views.dashboard'))
