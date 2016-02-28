@@ -53,7 +53,7 @@ function makeNavHeader()
 
     brand = document.createElement("div");
     brand.className =  "navbar-brand";
-    brand.innerHTML = CONF["projectname"];
+    //brand.innerHTML = CONF["projectname"];
     head.appendChild(brand);
     
     return head;
