@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Course(models.Model):
 
     title = models.CharField(max_length=26)
+    code = models.CharField(max_length=80,unique=True)
     description = models.CharField(max_length=300)
 
     created = models.DateTimeField(auto_now_add=True)
@@ -11,6 +12,7 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.title
+
 
 class Slide(models.Model):
 
