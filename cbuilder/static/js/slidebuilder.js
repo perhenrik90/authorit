@@ -26,7 +26,7 @@ function createColumn(col_type)
 
 
 
-function addRow(type="one")
+function addRow(type)
 {
     slide = $("#slide")[0];
 
