@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Template, Context
 from django.http import HttpResponse
 
+from authorit import settings
 from cbuilder.models import Course, Slide
 
 def preview(request):
@@ -18,7 +19,10 @@ def preview(request):
         
     else:
         c["message"] = _("Course not found!")
-        
+
+    x = open(settings.MEDIA_ROOT+"file.xml","w")
+    x.write("<html></html>")
+
     template = loader.get_template("slides.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))
