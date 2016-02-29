@@ -1,0 +1,61 @@
+/****************************************
+ * Default css for the project.
+ * Make's the project work 
+ * @author Per-Henrik Kvalnes - 2015
+ ****************************************/
+
+/** slide styling **/
+.slide
+{
+    margin:25px;
+}
+#slides
+{
+    margin-bottom:120px;
+}
+
+
+
+/** Navigation styling **/
+.nav_button
+{
+    position:fixed;
+    top:48%;
+    bottom:auto;
+
+}
+
+#navBar
+{
+    position:fixed;
+    width:80%;
+    bottom:0px;
+    background:#FFF;
+    background:rgba(255,255,255,0.8);
+}
+
+
+.btn
+{
+    position:relative;
+}
+
+.btn-disabled
+{
+}
+
+.btn:hover
+{
+
+}
+	     
+
+
+/**************
+ * Marker CSS
+ **************/
+.marker_yellow
+{
+    background-color:yellow;
+
+}

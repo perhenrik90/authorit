@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- init bootstrap -->
+<link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+<link rel="stylesheet" href="sdefault.css" type="text/css"></link>
+
+
+
+
+<title>{{course.title}}</title>
+</head>
+<body>
+  <div class="container">
+
+    <!-- header initialized by navbar.js -->
+    <nav class="navbar navbar-default" id="navbar">
+
+    </nav>
+
+    <!-- write your slides here -->
+
+    <div id="slides">
+      {% for slide in slides %}
+      <div class="slide" title="{{slide.title}}">
+	{{slide.html|safe}}
+      </div>
+      {% endfor %}
+
+
+      <!-- the navigation bar is updated by slidework.js -->
+      <div class="nav_button" style="left:0px;">
+	<a class="glyphicon glyphicon-menu-left btn btn-default" aria-hidden="true" onclick="se.previousSlide()"></a>
+
+      </div>
+      <div class="nav_button" style="right:0px;">
+	<a class="glyphicon glyphicon-menu-right btn btn-default" aria-hidden="true" onclick="se.nextSlide()"></a>
+      </div>
+
+      <div id="navBar" class="row">
+      <div class="col-sm-3">
+	</br>
+	<div id="bardiv">
+	</div>
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3 pull-right">
+	<nav>
+	  <!-- back and next buttons -->
+	  <ul class="pager" id="pager">
+	    
+	  </ul>
+	</nav>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- execute scripts -->
+  <script src="jquery-1.12.1.min.js"></script>
+  <script src="bootstrap.js"></script>
+  <script src="urltools.js"></script>
+  <script src="slidework.js"></script>
+  <script src="navbar.js"></script>
+  <script src="marker.js"></script>
+
+  <!-- <script src="conf.js"></script> -->
+  <!-- <script src="lib/SCORM_API_wrapper.js"></script> -->
+  <!-- <script src="lib/tincan.js"></script> -->
+
+  <script>
+    var se = initSlideEngine();
+    initNavBar(se);
+  </script>
+</body>
+</html>

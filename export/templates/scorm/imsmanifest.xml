@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<manifest>
+	<metadata>
+		<schema>ADL SCORM</schema>
+		<schemaversion>1.2</schemaversion>
+	</metadata>
+	<organizations default="{{course.title}}">
+		<organization identifier="{{course.title}}">
+			<title>{{course.title}}</title>
+			<item identifier="{{course.title}}_item" identifierref="main">
+				<title>{{course.title}}</title>
+			</item>
+		</organization>
+	</organizations>
+	<resources>
+		<resource adlcp:scormtype="sco" href="index.html" identifier="main" type="webcontent"/>
+	</resources>
+</manifest>
+

@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from authorit import settings
 from cbuilder.models import Course, Slide
 
+from export.scorm import SCORM
+
 def preview(request):
 
     c = {}
@@ -16,12 +18,14 @@ def preview(request):
         course = Course.objects.get(id=pid)
         c["course"] = course
         c["slides"] = Slide.objects.filter(course=course).order_by("number")
+        sco = SCORM(course, c["slides"])
+        sco.export_sco()
         
     else:
         c["message"] = _("Course not found!")
 
-    x = open(settings.MEDIA_ROOT+"file.xml","w")
-    x.write("<html></html>")
+
+
 
     template = loader.get_template("slides.html")
     context = RequestContext(request, c)
