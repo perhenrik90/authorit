@@ -32,7 +32,7 @@ class SCORM:
 
 
         # export files to tmp direcotry
-        def export_sco(self):
+        def export_scorm(self):
                 c = {}
                 c["course"] = self.course
                 c["slides"] = self.slides
@@ -107,6 +107,7 @@ class SCORM:
 
                 z.close()
                 
+		return self.scorm_path
                 #slides = render(temp)
                 # print(slides)
 

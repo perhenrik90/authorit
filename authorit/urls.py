@@ -8,10 +8,10 @@ urlpatterns = patterns('',
 
     url(r'^dashboard$', 'default.views.dashboard', name='dashboard'),
     url(r'^preview$', 'export.views.preview', name='preview'),
+    url(r'^export_scorm$', 'export.views.export_scorm', name='export_scorm'),
 
 
     url(r'^course/', include('cbuilder.urls')),
-
 
     url(r'^admin/', include(admin.site.urls)),
 )

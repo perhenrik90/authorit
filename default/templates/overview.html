@@ -32,6 +32,9 @@
 	  {% blocktrans %}Edit{% endblocktrans %}</a></td>
       <td><a href="{% url 'export.views.preview' %}?pid={{c.id}}" class="btn btn-default" target="_blank">
 	  {% blocktrans %}Preview{% endblocktrans %}</a></td>
+      <td><a href="{% url 'export.views.export_scorm' %}?pid={{c.id}}" class="btn btn-default" target="_blank">
+	  {% blocktrans %}Export SCORM{% endblocktrans %}</a></td>
+
     </tr>
       
     {% endfor %}

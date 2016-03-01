@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.encoding import smart_str
 from authorit import settings
 from cbuilder.models import Course, Slide
 
