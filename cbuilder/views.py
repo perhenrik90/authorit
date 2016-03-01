@@ -242,18 +242,18 @@ def upload_image(request):
 
     if 'pid' in request.POST:
 
-        #try:
-        # try to get model from id
-        pid = request.POST["pid"]
-        course = Course.objects.get(id=pid)
-        imgfile = request.FILES["img"]
-        description = request.POST["description"]
+        try:
+
+            pid = request.POST["pid"]
+            course = Course.objects.get(id=pid)
+            imgfile = request.FILES["img"]
+            description = request.POST["description"]
         
-        img = Image(course=course, img=imgfile, description=description)
-        img.save()
-        return HttpResponseRedirect(reverse('default.views.dashboard'))
-        #except Exception:
-    
+            img = Image(course=course, img=imgfile, description=description)
+            img.save()
+            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % course.id)
+        except Exception:
+            c["message"] = _("Upload failed!")
 
 
     if 'pid' in request.GET:
