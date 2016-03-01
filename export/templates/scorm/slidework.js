@@ -103,15 +103,9 @@ function initSlideEngine()
     pbar.id = "course_progress_bar";
 
 
-    // init reporting tools 
-    // if(CONF['type'] == "scorm1.2")
-    // {
     SCORMInit();
-    // }
-    // if(CONF['type'] == "tincan")
-    // {
-    // 	TinCanInit();
-    // }
+
+
 
     // setup keybindings fo the document
     document.onkeydown = function(e)
@@ -137,14 +131,9 @@ function initSlideEngine()
 
 function setCourseComplete()
 {
-    // if(CONF['type'] == "scorm1.2")
-    // {
+
     SCORMComplete()
-    // }	
-    // if(CONF['type'] == "tincan")
-    // {
-    // 	TinCanComplete()
-    // }
+ 
 }
 
 
@@ -155,14 +144,17 @@ function setCourseComplete()
 function SCORMInit()
 {
 	s = pipwerks.SCORM.init()	
+        pipwerks.SCORM.set('cmi.core.lesson_status', 'incomplete')
+        pipwerks.SCORM.save()
 	if(!s){alert("Could not connect to the LMS!")}
 }
 
 function SCORMComplete()
 {
 	s = pipwerks.SCORM.set('cmi.core.lesson_status', 'completed')
+        pipwerks.SCORM.save()
 	if(!s){alert('Could not set the course to completed!');}
-	SCORMQuit();
+	//SCORMQuit();
 }
 
 function SCORMQuit()

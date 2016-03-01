@@ -30,3 +30,17 @@ def preview(request):
     template = loader.get_template("slides.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))
+
+
+def export_scorm(request):
+
+    if 'pid' in request.GET:
+        pid = request.GET['pid']
+        course = Course.objects.get(id=pid)
+        c["course"] = course
+        c["slides"] = Slide.objects.filter(course=course).order_by("number")
+        sco = SCORM(course, c["slides"])
+        sco.export_sco()
+
+    response = HttpResponse(content_type='zip')
+    response['Content-Disposition'] = 'attachment; filename="scorm.zip"'
