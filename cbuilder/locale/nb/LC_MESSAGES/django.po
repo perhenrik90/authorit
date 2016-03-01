@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-01 12:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/create_course.html:15
+msgid "Creating a new course"
+msgstr "Lag et nytt kurs"
+
+#: templates/create_course.html:23 templates/create_slide.html:29
+msgid "Title"
+msgstr "Tittel"
+
+#: templates/create_course.html:24 templates/create_slide.html:30
+msgid "title here"
+msgstr "tittel her"
+
+#: templates/create_course.html:25
+msgid "Course code"
+msgstr "Kurskode"
+
+#: templates/create_course.html:26
+msgid "coursecode here"
+msgstr "kurskode her"
+
+#: templates/create_course.html:28 templates/create_course.html.py:29
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: templates/create_course.html:36 templates/create_slide.html:38
+#: templates/project.html:32
+msgid "Create slide"
+msgstr "Lag slide"
+
+#: templates/create_slide.html:22
+msgid "Creating slide for"
+msgstr "Lag slide for"
+
+#: templates/edit_slide.html:25
+msgid "Course"
+msgstr "Kurs"
+
+#: templates/edit_slide.html:29
+msgid "Add row"
+msgstr "Lag rad"
+
+#: templates/edit_slide.html:32
+msgid "Single row"
+msgstr "Enslig rad"
+
+#: templates/edit_slide.html:33
+msgid "Double row"
+msgstr "Dobbel rad"
+
+#: templates/edit_slide.html:34
+msgid "Tripple row"
+msgstr "Trippel rad"
+
+#: templates/edit_slide.html:40
+msgid "Save"
+msgstr "Lagre"
+
+#: templates/project.html:45
+msgid "Edit"
+msgstr "Rediger"
+
+#: templates/project.html:49
+msgid "Delete"
+msgstr "Slett"
+
+#: templates/project.html:59
+msgid "Up"
+msgstr "Opp"
+
+#: templates/project.html:69
+msgid "Down"
+msgstr "Ned"
+
+#: views.py:18 views.py:54 views.py:91 views.py:121 views.py:181 views.py:203
+msgid "You must be logged in to see this page"
+msgstr "Du må være logget inn får å se siden"
+
+#: views.py:37
+#, python-format
+msgid "Course with id %s not found"
+msgstr "Kurs med id %s er ikke funnet"
+
+#: views.py:40
+msgid "Project id not given!"
+msgstr "Prosjekt id er ikke gitt!"
+
+#: views.py:64 views.py:152
+#, python-format
+msgid "Course with id %s not found!"
+msgstr "Kurs med id %s er ikke funnet!"
+
+#: views.py:80
+msgid "No slide id was given!"
+msgstr "Lysbilde med id var ikke gitt!"
+
+#: views.py:106
+msgid "Can not create the project. The course code is not unique!"
+msgstr "Kan ikke lage prosjekt. Kurskoden må være unik!"
+
+#: views.py:144
+#, python-format
+msgid "Could not create a new slide to course %s"
+msgstr "Kan ikke lage nytt lysbilde til kurs %s"
+
+#: views.py:155
+msgid "No course id given. Can not create slide!"
+msgstr "Ingen kursid er gitt. Kan ikke lage slide!"
+
+#: views.py:194
+#, python-format
+msgid "Could not find slide with id %s"
+msgstr "Kan ikke finne slide med id %s"
