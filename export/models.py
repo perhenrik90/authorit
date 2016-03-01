@@ -13,6 +13,11 @@ class Build(models.Model):
     build_path = models.CharField(max_length=80)
     course = models.ForeignKey(Course)
 
+    def __unicode__(self):
+        return self.created
+
+    def __str__(self):
+        return self.course.title.encode('utf8')
     
 # Describe one file in the build
 class BuildFile(models.Model):
