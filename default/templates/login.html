@@ -1,0 +1,40 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{% blocktrans %}Login{% endblocktrans %}</h1><br/>
+    <p>{{message}}</p>
+  </div>
+</div>
+
+<div class="row">
+  <form  method="POST">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="form-group">
+	<label for="username">{% blocktrans %}Username{% endblocktrans %}</label>
+	<input type="text" id="username" name="username"/><br/>
+	<label for="pass">{% blocktrans %}Password{% endblocktrans %}</label>
+	<input type="password" id="pass" name="pass"/><br/>
+	<input type="submit" value="{% blocktrans %}Login{% endblocktrans %}" class="btn btn-default"/>
+	{% csrf_token %}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Template, Context
 from django.http import HttpResponse, HttpResponseRedirect
 
+from default.views import login_view
 from cbuilder.models import Course, Slide
 
 #
@@ -13,7 +14,10 @@ from cbuilder.models import Course, Slide
 def project(request):
 
     c = {}
-
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+    
     if "pid" in request.GET:
         pid = request.GET["pid"]
 
@@ -45,9 +49,11 @@ def project(request):
 # View for editing slides
 #
 def edit_slide(request):
-
     c = {}
-
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+    
     if 'sid' in request.GET:
         sid = request.GET['sid']
 
@@ -79,11 +85,42 @@ def edit_slide(request):
     return HttpResponse(template.render(context))	
 
 
-#
-# Creates a new slide
-#
-def create_slide(request):
+def create_course(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
 
+
+    if 'title' in request.POST:
+
+        co = Course(title=request.POST["title"],
+                   description=request.POST["description"],
+                   code=request.POST["code"],
+                   owner=request.user)
+
+        try:
+            co.save()
+            return redirect(login_view)
+        except Exception:
+            c["message"] = _("Can not create the project. The course code is not unique!")
+        
+    
+    template = loader.get_template("create_course.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
+    
+
+
+
+########################
+# Creates a new slide
+########################
+def create_slide(request):
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+    
     c = {}
 
     if 'pid' in request.POST:
@@ -139,8 +176,12 @@ def save_slide(request):
 # Delete a slide
 ##################
 def delete_slide(request):
-
     c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+    
     if 'sid' in request.POST:
         sid = request.POST["sid"]
 
@@ -158,6 +199,9 @@ def delete_slide(request):
 def swap_slide(request):
 
     c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
 
     if 'sid1' in request.POST and 'sid2' in request.POST:
         sid1 = request.POST['sid1']

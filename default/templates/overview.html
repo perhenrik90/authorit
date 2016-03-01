@@ -9,21 +9,25 @@
 {% block ekstra_nav %}
 {% endblock %}
 
-
 {% block content %}
 <div class="row">
   <div class="col-sm-12">
     <h1>
       {% blocktrans %}Welcome{% endblocktrans %} {{user.first_name}}
-      {{user.last_name}}
+      {{user.last_name}}</h1>
+        <p>{% blocktrans %}Your projects{% endblocktrans %}</p>
   </div>
+
+
 </div>
 
 {{message}}
 
 <div class="row">
-  <div class="col-sm-12">
-    <p>{% blocktrans %}Your projects{% endblocktrans %}
+
+  
+  <div class="col-sm-9">
+
   <table class="table">
     {% for c in courses %}
     <tr>
@@ -39,6 +43,11 @@
       
     {% endfor %}
   </table>
+  </div>
+    <div class="col-sm-3">
+    <a href="{% url 'cbuilder.views.create_course' %}" class="btn btn-primary">
+      {% blocktrans %}Create course{% endblocktrans %}
+    </a>
   </div>
 </div>
 {% endblock %}
