@@ -231,3 +231,38 @@ def swap_slide(request):
         return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % slide1.course.id)
 
     return HttpResponseRedirect(reverse('default.views.dashboard'))
+
+
+def upload_image(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+
+    if 'pid' in request.POST:
+
+        #try:
+        # try to get model from id
+        pid = request.POST["pid"]
+        course = Course.objects.get(id=pid)
+        imgfile = request.FILES["img"]
+        description = request.POST["description"]
+        
+        img = Image(course=course, img=imgfile, description=description)
+        img.save()
+        return HttpResponseRedirect(reverse('default.views.dashboard'))
+        #except Exception:
+    
+
+
+    if 'pid' in request.GET:
+        course = Course.objects.get(id=request.GET["pid"])
+        c["course"] = course
+
+    else:
+        c["message"] = _("No course id was given!")
+            
+    template = loader.get_template("upload_img.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
