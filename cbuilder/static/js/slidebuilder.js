@@ -55,6 +55,17 @@ function addRow(type)
 	en3 = createColumn("col-sm-4");
 	new_row.appendChild(en3);
     }
+    if(type == "four")
+    {
+	en1 = createColumn("col-sm-3");
+	new_row.appendChild(en1);
+	en2 = createColumn("col-sm-3");
+	new_row.appendChild(en2);
+	en3 = createColumn("col-sm-3");
+	new_row.appendChild(en3);
+	en4 = createColumn("col-sm-3");
+	new_row.appendChild(en4);
+    }
 }
 
 
@@ -65,7 +76,6 @@ function addRow(type)
 function saveColumn()
 {
     edit = $("#edit")[0];
-    console.log(edit.editon);
     
     col = selectedCol;
     col.innerHTML = tinymce.activeEditor.getContent()
@@ -76,7 +86,6 @@ function saveColumn()
     slide = $("#slide")[0];
     
     $("#html_form")[0].value = slide.innerHTML;
-    console.log($("#html_form"));
 }
 
 
@@ -95,16 +104,22 @@ function editColumn()
 
     // Save button
     save = document.createElement("div");
-    save.className = "btn btn-primary";
-    save.innerHTML = "Save";
+    save.className = "glyphicon glyphicon-save btn btn-primary";
+    save.innerHTML = "";
     save.onclick = saveColumn;
-    
     popup.appendChild(save);
+
+    // add iamge
+    add_img = document.createElement("div");
+    add_img.className = "glyphicon glyphicon glyphicon-picture btn btn-primary";
+    add_img.innerHTML = "";
+    add_img.onclick = insertImage;
+    popup.appendChild(add_img);
 
     // Delete row button
     delete_row = document.createElement("div");
-    delete_row.className = "btn btn-danger";
-    delete_row.innerHTML = "Delete row";
+    delete_row.className = "btn btn-danger glyphicon glyphicon-trash";
+
     delete_row.onclick = function(){
 	var par = selectedCol.parentNode;
 	slide = $("#slide")[0];
@@ -141,3 +156,32 @@ function editColumn()
 }
 
 
+
+function insertImage()
+{
+
+    div = document.getElementById("popup");
+    div.innerHTML = "";
+
+    images_path = getImagePaths();
+
+    // add image and close
+    function selectImage(e)
+    {
+	tinymce.remove();
+	selectedCol.innerHTML = "<img src='"+this.src+"' width='100%'></img>"
+	$("#html_form")[0].value = slide.innerHTML;
+	document.body.removeChild($("#popup")[0]);
+    }
+    
+    for(i = 0; i < images_path.length; i ++)
+    {
+	img = document.createElement("img");
+	img.style.width = "100px";
+	img.src = images_path[i];
+	img.onclick = selectImage;
+	div.appendChild(img);
+    }
+
+
+}

@@ -10,9 +10,9 @@
   {
   l = [];
   {% for image in images %}
-  l.append({{image.path}});
-  return l;
+  l.push("/media/{{image.img}}");
   {% endfor %}
+  return l;
   }
 </script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
@@ -23,7 +23,6 @@
   position:fixed;
   top:48%;
   bottom:auto;
-
   }
   
 </style>
@@ -42,6 +41,7 @@
     <li><a onclick="addRow('one')">{% blocktrans %}Single row{% endblocktrans %}</a></li>
     <li><a onclick="addRow('two')">{% blocktrans %}Double row{% endblocktrans %}</a></li>
     <li><a onclick="addRow('three')">{% blocktrans %}Tripple row{% endblocktrans %}</a></li>
+    <li><a onclick="addRow('four')">{% blocktrans %}Four row{% endblocktrans %}</a></li>
   </ul>
 </li>
 <li>
@@ -84,6 +84,7 @@
   $(".col-sm-12").click(editColumn);
   $(".col-sm-6").click(editColumn);
   $(".col-sm-4").click(editColumn);
+  $(".col-sm-3").click(editColumn);
 </script>
 {% endif %}
 {% endblock %}

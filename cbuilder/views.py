@@ -62,7 +62,8 @@ def edit_slide(request):
 
         try:
             slide = Slide.objects.get(id=sid)
-            c["images"] = Image.objects.filter(course=slide.course) 
+            c["slide"] = slide
+            c["images"] = Image.objects.filter(course=slide.course)
 
             
         except Exception:
@@ -79,7 +80,7 @@ def edit_slide(request):
             c["next_slide"] = Slide.objects.get(number=slide.number+1, course=slide.course)
         except Exception:
             pass
-
+            
 
     else:
         c["message"] = _("No slide id was given!")
