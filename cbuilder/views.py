@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Template, Context
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.encoding import smart_text
 
 from default.views import login_view
 from cbuilder.models import Course, Slide
@@ -166,6 +168,8 @@ def save_slide(request):
         html = request.POST["html"]
         sid = request.POST["sid"]
 
+        html = smart_text(html)
+        
         slide = Slide.objects.get(id=sid)
         slide.html = html
         slide.save()
