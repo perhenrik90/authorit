@@ -87,3 +87,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'media/'
+SCORM_ROOT = 'export/templates/scorm/'

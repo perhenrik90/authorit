@@ -55,6 +55,13 @@ class SCORM:
                 f.close()
                 z.write(self.path+"bootstrap.css", arcname="bootstrap.css")
 
+                    
+          
+                z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.eot", arcname="glyphicons-halflings-regular.eot")
+                z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.ttf", arcname="glyphicons-halflings-regular.ttf")
+                z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.woff", arcname="glyphicons-halflings-regular.woff")
+                z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.woff2", arcname="glyphicons-halflings-regular.woff2")
+                
                 temp = loader.get_template("scorm/bootstrap.js")
                 f = open(self.path+"bootstrap.js","w")
                 f.write(temp.render(context))
