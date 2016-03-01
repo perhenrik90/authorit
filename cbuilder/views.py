@@ -47,7 +47,6 @@ def project(request):
     return HttpResponse(template.render(context))	
 
 
-
 #
 # View for editing slides
 #
