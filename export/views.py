@@ -20,13 +20,10 @@ def preview(request):
         course = Course.objects.get(id=pid)
         c["course"] = course
         c["slides"] = Slide.objects.filter(course=course).order_by("number")
-        sco = SCORM(course, c["slides"])
 
         
     else:
         c["message"] = _("Course not found!")
-
-
 
 
     template = loader.get_template("slides.html")
