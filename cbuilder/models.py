@@ -30,3 +30,11 @@ class Slide(models.Model):
 
     def __unicode__(self):
         return self.course.title +' '+str(self.number)+" : "+self.title
+
+    
+class Image(models.Model):
+
+    img = models.FileField(upload_to="img/%Y")
+    description = models.CharField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(Course)

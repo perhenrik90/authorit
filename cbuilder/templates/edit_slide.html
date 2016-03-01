@@ -5,6 +5,16 @@
 {% block head %}
 <script src="{% static 'js/slidebuilder.js' %}"></script>
 <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
+<script>
+  function getImagePaths()
+  {
+  l = [];
+  {% for image in images %}
+  l.append({{image.path}});
+  return l;
+  {% endfor %}
+  }
+</script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
 
 <style>
