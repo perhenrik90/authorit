@@ -12,10 +12,11 @@ import sys
 class SCORM:
 
         # consctruct an exporter with a reference to a course
-        def __init__(self, course, slides):
+        def __init__(self, course, slides, images):
                 self.course = course
                 self.slides = slides
-
+                self.images = images
+                
                 if not os.path.isdir(settings.MEDIA_ROOT):
                         os.makedirs(settings.MEDIA_ROOT)
 
@@ -27,9 +28,13 @@ class SCORM:
 
                 if not os.path.isdir(settings.MEDIA_ROOT+"tmp/"+course.code):
                         os.makedirs(settings.MEDIA_ROOT+"tmp/"+course.code)
+
+                if not os.path.isdir(settings.MEDIA_ROOT+"tmp/"+course.code+"/img/"):
+                        os.makedirs(settings.MEDIA_ROOT+"tmp/"+course.code+"/img/")
                         
                       
                 self.path = settings.MEDIA_ROOT+'tmp/'+course.code+"/"
+                self.img_path = settings.MEDIA_ROOT+"tmp/"+course.code+"/img/"
                 self.scorm_path = settings.MEDIA_ROOT+'scorm/'+course.code+".zip"
 
 
@@ -55,8 +60,6 @@ class SCORM:
                 f.close()
                 z.write(self.path+"bootstrap.css", arcname="bootstrap.css")
 
-                    
-          
                 z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.eot", arcname="glyphicons-halflings-regular.eot")
                 z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.ttf", arcname="glyphicons-halflings-regular.ttf")
                 z.write(settings.SCORM_ROOT+"glyphicons-halflings-regular.woff", arcname="glyphicons-halflings-regular.woff")
@@ -112,6 +115,11 @@ class SCORM:
                 f.write(temp.render(context))
                 f.close()
                 z.write(self.path+"SCORM_API_wrapper.js", arcname="SCORM_API_wrapper.js")
+
+                for img in self.images:
+                        full_p = settings.MEDIA_ROOT+str(img.img)
+                        z.write(full_p)
+
                 
 
                 z.close()
