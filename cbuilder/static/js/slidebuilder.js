@@ -66,6 +66,20 @@ function addRow(type)
 	en4 = createColumn("col-sm-3");
 	new_row.appendChild(en4);
     }
+    if(type == "smallbig")
+    {
+	en1 = createColumn("col-sm-4");
+	new_row.appendChild(en1);
+	en2 = createColumn("col-sm-8");
+	new_row.appendChild(en2);
+    }
+    if(type == "bigsmall")
+    {
+	en1 = createColumn("col-sm-8");
+	new_row.appendChild(en1);
+	en2 = createColumn("col-sm-4");
+	new_row.appendChild(en2);
+    }
 }
 
 

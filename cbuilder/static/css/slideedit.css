@@ -20,6 +20,10 @@
 {
     border:2px solid red;
 }
+.col-sm-8:hover
+{
+    border:2px solid red;
+}
 .col-sm-12:hover
 {
     border:2px solid red;

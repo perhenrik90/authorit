@@ -51,6 +51,8 @@
     <li><a onclick="addRow('two')">{% blocktrans %}Double row{% endblocktrans %}</a></li>
     <li><a onclick="addRow('three')">{% blocktrans %}Tripple row{% endblocktrans %}</a></li>
     <li><a onclick="addRow('four')">{% blocktrans %}Four row{% endblocktrans %}</a></li>
+    <li><a onclick="addRow('smallbig')">{% blocktrans %}Small - Big{% endblocktrans %}</a></li>
+    <li><a onclick="addRow('bigsmall')">{% blocktrans %}Big - Small{% endblocktrans %}</a></li>
   </ul>
 </li>
 <li>
@@ -91,6 +93,7 @@
 <script>
   // setup listener for old data 
   $(".col-sm-12").click(editColumn);
+  $(".col-sm-8").click(editColumn);
   $(".col-sm-6").click(editColumn);
   $(".col-sm-4").click(editColumn);
   $(".col-sm-3").click(editColumn);
