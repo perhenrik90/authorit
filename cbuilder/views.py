@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_text
 
 from default.views import login_view
-from cbuilder.models import Course, Slide,Image
+from cbuilder.models import Course, Slide,Image, Video
 
 #
 # View a project
@@ -27,6 +27,7 @@ def project(request):
             c["course"] = Course.objects.get(id=pid)
             c["slides"] = Slide.objects.filter(course=c["course"]).order_by('number')
             c["images"] = Image.objects.filter(course=c["course"])
+            c["videos"] = Video.objects.filter(course=c["course"])
 
             # Set up references to next and previous slides
             for i in range(len(c["slides"])):
@@ -46,7 +47,6 @@ def project(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
-
 #
 # View for editing slides
 #
@@ -63,8 +63,9 @@ def edit_slide(request):
             slide = Slide.objects.get(id=sid)
             c["slide"] = slide
             c["images"] = Image.objects.filter(course=slide.course)
-
+            c["videos"] = Video.objects.filter(course=slide.course)
             
+    
         except Exception:
             c["message"] = _("Course with id %s not found!" % sid)
 

@@ -116,6 +116,13 @@ function editColumn()
     add_img.onclick = insertImage;
     popup.appendChild(add_img);
 
+    // add video
+    add_vid = document.createElement("div");
+    add_vid.className = "glyphicon glyphicon glyphicon-facetime-video btn btn-primary";
+    add_vid.innerHTML = "";
+    add_vid.onclick = insertImage;
+    popup.appendChild(add_vid);    
+
     // Delete row button
     delete_row = document.createElement("div");
     delete_row.className = "btn btn-danger glyphicon glyphicon-trash";
@@ -181,6 +188,42 @@ function insertImage()
 	img.src = images_path[i];
 	img.onclick = selectImage;
 	div.appendChild(img);
+    }
+
+
+}
+
+
+function insertVideo()
+{
+
+    div = document.getElementById("popup");
+    div.innerHTML = "";
+
+    video_path = getVideoPaths();
+
+    // add image and close
+    function selectVideo(e)
+    {
+	var video_type = "video/mp4";
+
+	if( this.src.indexOf('.ogg') > -1){ video_type = "video/ogg"}
+	if( this.src.indexOf('.ogv') > -1){ video_type = "video/ogg"}
+
+	    
+	selectedCol.innerHTML = "<video src='"+this.src+"' type='"+video_type+"' width='100%' controls ></video>"
+	$("#html_form")[0].value = slide.innerHTML;
+	document.body.removeChild($("#popup")[0]);
+    }
+    
+    for(i = 0; i < video_path.length; i ++)
+    {
+	video = document.createElement("video");
+	video.style.width = "100px";
+	video.type = "video/ogg";
+	video.src = video_path[i];
+	video.onclick = selectVideo;
+	div.appendChild(video);
     }
 
 
