@@ -12,10 +12,11 @@ import sys
 class SCORM:
 
         # consctruct an exporter with a reference to a course
-        def __init__(self, course, slides, images):
+        def __init__(self, course, slides, images,videos):
                 self.course = course
                 self.slides = slides
                 self.images = images
+                self.videos = videos
                 
                 if not os.path.isdir(settings.MEDIA_ROOT):
                         os.makedirs(settings.MEDIA_ROOT)
@@ -116,12 +117,16 @@ class SCORM:
                 f.close()
                 z.write(self.path+"SCORM_API_wrapper.js", arcname="SCORM_API_wrapper.js")
 
+                # add images
                 for img in self.images:
                         full_p = settings.MEDIA_ROOT+str(img.img)
                         z.write(full_p)
 
-                
-
+                # add videos
+                for video in self.videos:
+                        full_p = settings.MEDIA_ROOT+str(video.video)
+                        z.write(full_p)
+                                
                 z.close()
                 
 		return self.scorm_path

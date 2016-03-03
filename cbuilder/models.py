@@ -38,3 +38,12 @@ class Image(models.Model):
     description = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course)
+
+    
+class Video(models.Model):
+
+    description = models.CharField(max_length=250)
+    videotype = models.CharField(max_length=16)
+    video = models.FileField(upload_to="vid/%Y")
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(Course)   

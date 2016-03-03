@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.utils.encoding import smart_str
 
 from authorit import settings
-from cbuilder.models import Course, Slide, Image
+from cbuilder.models import Course, Slide, Image, Video
 from export.models import Build
 
 from export.scorm import SCORM
@@ -43,8 +43,9 @@ def export_scorm(request):
         c["course"] = course
         c["slides"] = Slide.objects.filter(course=course).order_by("number")
         c["images"] = Image.objects.filter(course=course)
+        c["videos"] = Video.objects.filter(course=course)
         
-        sco = SCORM(course, c["slides"], c["images"])
+        sco = SCORM(course, c["slides"], c["images"], c["videos"])
         path = sco.export_scorm()
 
         build = Build(course=course, build_path=path)

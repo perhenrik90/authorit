@@ -1,6 +1,7 @@
 from django.contrib import admin
-from cbuilder.models import Course, Slide,Image
-# Register your models here.
+from cbuilder.models import Course, Slide,Image,Video
+
 admin.site.register(Course)
 admin.site.register(Slide)
 admin.site.register(Image)
+admin.site.register(Video)
