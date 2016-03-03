@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^saveslide$', views.save_slide, name='save slide'),
     url(r'^deleteslide$', views.delete_slide, name='delete slide'),
     url(r'^swapslide$', views.swap_slide, name='swap slide'),
-    url(r'^upload_image$', views.upload_image, name='upload image')
+    url(r'^upload_image$', views.upload_image, name='upload image'),
+    url(r'^upload_video$', views.upload_video, name='upload video')
     
 ]

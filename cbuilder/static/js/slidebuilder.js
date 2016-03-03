@@ -120,7 +120,7 @@ function editColumn()
     add_vid = document.createElement("div");
     add_vid.className = "glyphicon glyphicon glyphicon-facetime-video btn btn-primary";
     add_vid.innerHTML = "";
-    add_vid.onclick = insertImage;
+    add_vid.onclick = insertVideo;
     popup.appendChild(add_vid);    
 
     // Delete row button

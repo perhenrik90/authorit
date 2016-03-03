@@ -266,3 +266,38 @@ def upload_image(request):
     template = loader.get_template("upload_img.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
+
+
+def upload_video(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+
+    if 'pid' in request.POST:
+
+        try:
+
+            pid = request.POST["pid"]
+            course = Course.objects.get(id=pid)
+            vidfile = request.FILES["vid"]
+            description = request.POST["description"]
+        
+            vid = Video(course=course, video=vidfile, description=description)
+            vid.save()
+            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % course.id)
+        except Exception:
+            c["message"] = _("Upload failed!")
+
+
+    if 'pid' in request.GET:
+        course = Course.objects.get(id=request.GET["pid"])
+        c["course"] = course
+
+    else:
+        c["message"] = _("No course id was given!")
+            
+    template = loader.get_template("upload_vid.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	

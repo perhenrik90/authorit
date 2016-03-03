@@ -1,0 +1,48 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{% blocktrans %}Upload video to{% endblocktrans %} {{course.title}}</h1>
+  </div>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+	<label for="title">{% blocktrans %}Video File{% endblocktrans %}</label>
+	<input class="form-control" id="file" name="vid" type="file"/>
+	<input name="pid" type="hidden" value="{{course.id}}"/>
+
+	<label for="description">{% blocktrans %}Description{% endblocktrans %}</label><br/>
+	<textarea name="description" id="description"></textarea>
+	{% csrf_token %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-default">{% blocktrans %}Upload image{% endblocktrans %}</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+{% endblock %}

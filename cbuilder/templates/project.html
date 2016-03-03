@@ -33,6 +33,8 @@
       </a>
       <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_image' %}?pid={{course.id}}">
 	{% blocktrans %}Upload image{% endblocktrans %}</a>
+            <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_video' %}?pid={{course.id}}">
+	      {% blocktrans %}Upload video{% endblocktrans %}</a>
     </div>
   </div>
 </div>
