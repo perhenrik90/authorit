@@ -13,18 +13,18 @@ from export.scorm import SCORM
 
 def preview(request, project):
 
-    print(project)
     c = {}
 
-    if 'pid' in request.GET:
-        pid = request.GET['pid']
-        course = Course.objects.get(id=pid)
+    if(project == ""):
+        c["message"] = _("Course not found!")
+
+
+    else:
+
+        course = Course.objects.get(code=project)
+        print(course)
         c["course"] = course
         c["slides"] = Slide.objects.filter(course=course).order_by("number")
-
-        
-    else:
-        c["message"] = _("Course not found!")
 
 
     template = loader.get_template("slides.html")
