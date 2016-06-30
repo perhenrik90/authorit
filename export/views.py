@@ -11,8 +11,9 @@ from export.models import Build
 
 from export.scorm import SCORM
 
-def preview(request):
+def preview(request, project):
 
+    print(project)
     c = {}
 
     if 'pid' in request.GET:

@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'default.views.login_view', name='login'),
     url(r'^dashboard$', 'default.views.dashboard', name='dashboard'),
-    url(r'^preview$', 'export.views.preview', name='preview'),
+    url(r'^view(?P<project>\w{0,50})/$', 'export.views.preview', name='preview'),
     url(r'^export_scorm$', 'export.views.export_scorm', name='export_scorm'),
 
 
