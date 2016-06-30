@@ -14,6 +14,12 @@ function initSlideEngine()
     se.slides = document.getElementsByClassName("slide");
     se.index = 0;
 
+    // check if TinCan is used
+    if(window.location.search.indexOf("tincan=true")>0)
+    {
+	console.log("Tincan / xAPI is turned on.");
+    }
+    
     // updates the view 
     se.updateView = function()
     {
