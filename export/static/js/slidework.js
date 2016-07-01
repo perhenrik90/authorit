@@ -5,19 +5,27 @@
  * @author Per-Henrik Kvalnes
  ***********************************************/
 
+
+// used for configuration
+CONF = {'manual_registration':false, 'siteurl':window.location, "projectname":'Test'}
+
+
 // setup for all divtags with classname 'slide' 
 function initSlideEngine()
 {
     var se = new Object(); // define a slide engine
-
+    var useTincan = false;
+    
     // data objects / models
     se.slides = document.getElementsByClassName("slide");
     se.index = 0;
 
-    // check if TinCan is used
+    // check if TinCan is used (uses tincan-min.js)
     if(window.location.search.indexOf("tincan=true")>0)
     {
+	useTincan = true;
 	console.log("Tincan / xAPI is turned on.");
+	tincanStarted();
     }
     
     // updates the view 
@@ -47,7 +55,7 @@ function initSlideEngine()
 	}
 	if(se.index == se.slides.length-1)
 	{
-		setCourseComplete();
+		//setCourseComplete();
 	}
 
 	se.updateView();
@@ -141,157 +149,45 @@ function initSlideEngine()
 }
 
 
-function setCourseComplete()
+
+
+
+//
+function setupTinCan()
 {
-    // if(CONF['type'] == "scorm1.2")
-    // {
-    // 	SCORMComplete()
-    // }	
-    // if(CONF['type'] == "tincan")
-    // {
-    // 	TinCanComplete()
-    // }
-}
-
-
-
-
-// SCORM tools
-// Uses the Scorm Libary
-function SCORMInit()
-{
-	s = pipwerks.SCORM.init()	
-	if(!s){alert("Could not connect to the LMS!")}
-}
-
-function SCORMComplete()
-{
-	s = pipwerks.SCORM.set('cmi.core.lesson_status', 'completed')
-	if(!s){alert('Could not set the course to completed!');}
-	SCORMQuit();
-}
-
-function SCORMQuit()
-{
-	pipwerks.SCORM.quit()
-}
-
-/******************
- * Tin Can tools
- *******************/
-
-// retruns an tincan object
-function initTinCan()
-{
-	if(CONF["manual_registration"] == true)
-	{
     var tincan = new TinCan (
-    {
-        recordStores: [
-            {
-                endpoint: CONF["endpoint"],
-                username: CONF["tcusername"],
-                password: CONF["tcpassword"],
-                allowFail: false
-            }
-        ]
-    }
-    );
-    return tincan
-	}
-
-	/** if LRS data is given by parameter **/
-	var endpoint_str = getParameterByName("endpoint");
-   	var auth_str = getParameterByName("auth");
-   	console.log(auth_str);
-	var tincan = new TinCan (
-    {
+	{
             recordStores: [
-            {
-                endpoint:endpoint_str,
-                auth: auth_str,
-                allowFail: false
-            }
-        ]
-    }
+		{
+                    endpoint: "http://lrstest.helsenord.no/data/xAPI/",
+                    username: "b082cf4d6202ece29b637d6b2386712621c36c1c",
+                    password: "02c97d2ca5c2fd5e8e0a4d9a7ab9f1d57a6824b2",
+                    allowFail: false
+		}
+            ]
+	}
     );
-    return tincan
+    return tincan;
 }
 
-// Calls when the users starts the project
-function TinCanInit()
+function tincanStarted()
 {
-	var actor_obj = null;
+    var tincan = setupTinCan()
+    actor = getParameterByName("actor");
+    actor = JSON.parse(actor);
 
-	/** enter name manualy **/
-    if(CONF["manual_registration"])
-    {
-		CONF["name"] = getParameterByName("name");
-		CONF["email"] = getParameterByName("email");
-
-		actor_obj = {
-			mbox:CONF["email"],
-			name:CONF["name"]
-	 	   }
-    }
-    /** if not , get the parameters form the url **/
-	else
-	{
-		actor_obj = JSON.parse(getParameterByName("actor"));
-		console.log(actor_obj);
-	}
-
-    tc = initTinCan();
-    tc.sendStatement(
-	{
-		actor:actor_obj,
-	    verb:{
-		id:"http://adlnet.gov/expapi/verbs/initialized",
-	    "display":{"en-US":"Initialized","nb":"Startet"}},
-	    target:{id:CONF["siteurl"],"definition":
-		   {name:{"en-US":CONF["projectname"],
-			  "nb":CONF["projectname"]}}}
-	}
-    );
+    id = String( window.location );
+    title = document.title;
+    
+    stm = { actor:actor,
+            verb:{id:"http://adlnet.gov/expapi/verbs/attempted",
+		  display:{"en-EN":"Attempted","nb":"Startet"}
+		 },
+            object:{id:"act:authorit",
+                    definition:{name:{"en-US":title}},
+                    description:{"en-US":"User has started the course: "+title}
+                   },
+          };
+    tincan.sendStatement(stm);
 }
 
-
-// Calls when projects is complete and tincan option is set
-var isSetComplete = false;
-function TinCanComplete()
-{
-    if(isSetComplete){return;}
-
-	var actor_obj = null;
-	if(CONF["manual_registration"])
-    {
-		CONF["name"] = getParameterByName("name");
-		CONF["email"] = getParameterByName("email");
-
-		actor_obj = {
-			mbox:CONF["email"],
-			name:CONF["name"]
-	 	   }
-    }
-    /** if not , get the parameters form the url **/
-	else
-	{
-		actor_obj = JSON.parse(getParameterByName("actor"));
-		console.log(actor_obj);
-	}
-
-    tc = initTinCan();
-    tc.sendStatement(
-	{
-	    actor:actor_obj,
-	    verb:{
-		id:"http://adlnet.gov/expapi/verbs/completed",
-	    "display":{"en-US":"Completed","nb":"Fullførte"}},
-	    target:{id:CONF["siteurl"],"definition":
-		   {name:{"en-US":CONF["projectname"],
-			  "nb":CONF["projectname"]}}}
-	}
-    );
-    isSetComplete = true;
-    return se;
-}
