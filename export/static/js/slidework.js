@@ -55,7 +55,11 @@ function initSlideEngine()
 	}
 	if(se.index == se.slides.length-1)
 	{
-		//setCourseComplete();
+	    // if tincan is enabeled
+	    if(useTincan)
+	    {
+		tincanComplete();
+	    }
 	}
 
 	se.updateView();
@@ -152,16 +156,31 @@ function initSlideEngine()
 
 
 
-//
+/******************************************
+ * Tin Can functions 
+ ******************************************/
+
+// initialice tincan
 function setupTinCan()
 {
+    // get the parameters from url
+    endpoint = getParameterByName("endpoint");
+
+    // split the auth token based on base64
+    auth = getParameterByName("auth");
+    auth = auth.replace("Basic ","");
+    auth = window.atob(auth);
+    username = auth.split(":")[0].replace(" ","");
+    password = auth.split(":")[1].replace(" ","");
+
+    // create an tincan instance
     var tincan = new TinCan (
 	{
             recordStores: [
 		{
-                    endpoint: "http://lrstest.helsenord.no/data/xAPI/",
-                    username: "b082cf4d6202ece29b637d6b2386712621c36c1c",
-                    password: "02c97d2ca5c2fd5e8e0a4d9a7ab9f1d57a6824b2",
+                    endpoint: endpoint,
+                    username: username,
+                    password: password,
                     allowFail: false
 		}
             ]
@@ -169,6 +188,29 @@ function setupTinCan()
     );
     return tincan;
 }
+
+function tincanComplete()
+{
+    var tincan = setupTinCan()
+    actor = getParameterByName("actor");
+    actor = JSON.parse(actor);
+
+    id = String( window.location );
+    title = document.title;
+    
+    stm = { actor:actor,
+            verb:{id:"http://adlnet.gov/expapi/verbs/completed",
+		  display:{"en-EN":"Completed","nb":"Fullført"}
+		 },
+            object:{id:"act:authorit",
+                    definition:{name:{"en-US":title}},
+                    description:{"en-US":"User has started the course: "+title}
+                   },
+          };
+    tincan.sendStatement(stm);
+}
+
+
 
 function tincanStarted()
 {
@@ -180,8 +222,8 @@ function tincanStarted()
     title = document.title;
     
     stm = { actor:actor,
-            verb:{id:"http://adlnet.gov/expapi/verbs/attempted",
-		  display:{"en-EN":"Attempted","nb":"Startet"}
+            verb:{id:"http://adlnet.gov/expapi/verbs/started",
+		  display:{"en-EN":"Started","nb":"Startet"}
 		 },
             object:{id:"act:authorit",
                     definition:{name:{"en-US":title}},
