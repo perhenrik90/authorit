@@ -173,6 +173,7 @@ def save_slide(request):
         sid = request.POST["sid"]
 
         html = smart_text(html)
+        print(html)
         
         slide = Slide.objects.get(id=sid)
         slide.html = html

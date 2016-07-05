@@ -14,3 +14,14 @@
     bottom:0px;
 }
 
+.carpet
+{
+    background-color:rgb(255,255,255);
+    position:fixed;
+    left:20px;
+    right:20px;
+    top:20px;
+    bottom:20px;
+    padding:50px;
+}
+

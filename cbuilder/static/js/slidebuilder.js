@@ -135,8 +135,15 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon glyphicon-facetime-video btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertVideo;
-    popup.appendChild(add_vid);    
+    popup.appendChild(add_vid);
 
+    // add quiz
+    add_vid = document.createElement("div");
+    add_vid.className = "glyphicon glyphicon-question-sign btn btn-primary";
+    add_vid.innerHTML = "";
+    add_vid.onclick = insertQuiz;
+    popup.appendChild(add_vid);
+    
     // Delete row button
     delete_row = document.createElement("div");
     delete_row.className = "btn btn-danger glyphicon glyphicon-trash";
