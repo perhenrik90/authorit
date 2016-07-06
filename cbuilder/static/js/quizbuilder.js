@@ -1,4 +1,4 @@
-/*********************************
+/**********************************
  * Used for make simple quiz.
  * A part of sitebuilder.js
  * 
@@ -6,10 +6,6 @@
  *********************************/
 
 // selectedCol is defined by sitebuilder.js
-
-
-
-
 
 function insertQuiz()
 {
@@ -55,7 +51,9 @@ function insertQuiz()
     // add the quiz to the column and close
     function addQuiz()
     {
-	html = "";
+	quiz_id = generateRandomID();
+	
+	html = "<div id='"+quiz_id+"' class='quiz_column'>";
 	html += "<p>"+$("#question")[0].value+"</p>"
 	html += "<hr/>";
 	
@@ -63,13 +61,19 @@ function insertQuiz()
 	for(i = 0; i < alternatives.length; i ++)
 	{
 	    alt = alternatives[i];
-	    html += "<p class='btn btn-primary' value='"+alt.children[1].checked+"'>"+alt.children[2].value;
+	    console.log(alt.children[1].checked);
+
+	    // add class true or false
+	    html += "<p class='btn btn-primary "+alt.children[1].checked
+		+" "+quiz_id+"' onclick='revealQuiz('"+quiz_id+"');'>"+alt.children[2].value;
 	    html += "</p>";
 	}
+	html += "</div>";
 	selectedCol.innerHTML = html;
 
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
+	saveColumn();
     }
     
     div.appendChild(document.createElement("hr"));
@@ -78,4 +82,33 @@ function insertQuiz()
     add.className = "btn btn-primary";
     add.onclick = addQuiz;
     div.appendChild(add);
+}
+
+
+
+
+
+
+
+/************************
+ * Generate a random ID
+ ************************/
+function generateRandomID()
+{
+    var possible = "abcdefghklmnq";
+    var rnd = "";
+    var run = true;
+
+    while(run)
+    {
+	for(i = 0; i < 10; i ++)
+	{
+	    rnd += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	if($(rnd).length == 0)
+	{
+	    run = false;
+	}
+    }
+    return rnd;
 }

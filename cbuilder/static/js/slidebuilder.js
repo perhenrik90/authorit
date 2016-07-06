@@ -86,7 +86,6 @@ function addRow(type)
 /*******************************
  * Save one column and go back
  *******************************/
-
 function saveColumn()
 {
     edit = $("#edit")[0];
