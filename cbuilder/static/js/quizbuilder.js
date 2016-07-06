@@ -70,7 +70,8 @@ function insertQuiz()
 	}
 	html += "</div>";
 	selectedCol.innerHTML = html;
-
+	$("#html_form")[0].value = slide.innerHTML;
+	
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
 	saveColumn();
