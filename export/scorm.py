@@ -79,6 +79,12 @@ class SCORM:
                 f.close()
                 z.write(self.path+"slidework.js", arcname="slidework.js")
 
+                temp = loader.get_template("scorm/quiztool.js")
+                f = open(self.path+"quiztool.js","w")
+                f.write(temp.render(context))
+                f.close()
+                z.write(self.path+"quiztool.js", arcname="quiztool.js")
+
 
                 temp = loader.get_template("scorm/navbar.js")
                 f = open(self.path+"navbar.js","w")
