@@ -25,12 +25,15 @@ function insertQuiz()
     question.id = "question";
     div.appendChild(question);
 
+    alternatives = document.createElement("div");
+    div.appendChild(alternatives);
+    
     var nAlternative = 1;
     function createAlternative()
     {
 	alternative = document.createElement("div");
 	alternative.className = "alternative";
-	div.appendChild(alternative);
+	alternatives.appendChild(alternative);
 	
 	label = document.createElement("p");
 	label.innerHTML = "Alternative "+nAlternative;
@@ -48,6 +51,9 @@ function insertQuiz()
     createAlternative();
     createAlternative();
 
+
+
+    
     // add the quiz to the column and close
     function addQuiz()
     {
@@ -78,10 +84,17 @@ function insertQuiz()
     }
     
     div.appendChild(document.createElement("hr"));
+
     add = document.createElement("p");
     add.innerHTML = "Add";
     add.className = "btn btn-primary";
     add.onclick = addQuiz;
+    div.appendChild(add);
+
+    add = document.createElement("p");
+    add.innerHTML = "Create alternative";
+    add.className = "btn btn-primary";
+    add.onclick = createAlternative;
     div.appendChild(add);
 }
 
