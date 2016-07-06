@@ -39,8 +39,8 @@ function insertQuiz()
 	label.innerHTML = "Alternative "+nAlternative;
 	alternative.appendChild(label)
 	radio = document.createElement("input");
-	radio.type = "radio";
-	radio.name = "right";
+	radio.type = "checkbox";
+	//radio.name = "right";
 	radio.value = nAlternative;
 	
 	alternative.appendChild(radio);
