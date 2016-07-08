@@ -122,7 +122,7 @@ function editColumn()
     save.onclick = saveColumn;
     popup.appendChild(save);
 
-    // add iamge
+    // add image
     add_img = document.createElement("div");
     add_img.className = "glyphicon glyphicon glyphicon-picture btn btn-primary";
     add_img.innerHTML = "";
@@ -136,6 +136,13 @@ function editColumn()
     add_vid.onclick = insertVideo;
     popup.appendChild(add_vid);
 
+    // add well
+    add_vid = document.createElement("div");
+    add_vid.className = "glyphicon glyphicon-text-background btn btn-primary";
+    add_vid.innerHTML = "";
+    add_vid.onclick = insertWell;
+    popup.appendChild(add_vid);
+    
     // add quiz
     add_vid = document.createElement("div");
     add_vid.className = "glyphicon glyphicon-question-sign btn btn-primary";
