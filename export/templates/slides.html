@@ -36,14 +36,19 @@
     </nav>
 
     <!-- write your slides here -->
-
     <div id="slides">
       {% for slide in slides %}
+      {% if slide.inMenu %}
       <div class="slide" title="{{slide.title}}">
 	{{slide.html|safe}}
       </div>
+      {% else %}
+      <div class="slide">
+	{{slide.html|safe}}
+      </div>
+      {% endif %}
       {% endfor %}
-
+    </div>
 
       <!-- the navigation bar is updated by slidework.js -->
       <div class="nav_button" style="left:0px;">
