@@ -1,3 +1,4 @@
+# -*- coding: latin-1 -*-
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse

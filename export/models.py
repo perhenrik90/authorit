@@ -1,3 +1,4 @@
+# -*- coding: latin-1 -*-
 from django.db import models
 from django.utils.encoding import smart_str
 from authorit import settings

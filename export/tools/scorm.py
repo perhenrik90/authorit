@@ -1,3 +1,4 @@
+# -*- coding: latin-1 -*-
 from django.template import loader, Template, Context
 from django.shortcuts import render, redirect
 from authorit import settings
