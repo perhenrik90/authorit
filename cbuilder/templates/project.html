@@ -35,6 +35,8 @@
 	{% blocktrans %}Upload image{% endblocktrans %}</a>
             <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_video' %}?pid={{course.id}}">
 	      {% blocktrans %}Upload video{% endblocktrans %}</a>
+	    <a href="{% url 'export.views.preview' course.code %}" class="btn btn-primary" target="_blank">
+	      {% blocktrans %}Preview{% endblocktrans %}</a>
     </div>
   </div>
 </div>
@@ -48,6 +50,21 @@
 	<td>{{s.title}}</td>
 	<td><a href="{% url 'cbuilder.views.edit_slide' %}?sid={{s.id}}" class="btn btn-primary">
 	    {% blocktrans %}Edit{% endblocktrans %}</a></td>
+
+	<!-- add to menu -->
+	<td>
+	  <form method="POST" action="{% url 'cbuilder.views.toggle_menu_slide' %}">
+	    {% csrf_token %}
+	    <input type="hidden" name="sid" value="{{s.id}}"/>
+	  {% if s.inMenu %}
+	  <button type="submit" class="btn btn-success glyphicon glyphicon-list-alt"/>
+	  {% else %}
+	  <button type="submit" class="btn btn-primary glyphicon glyphicon-list-alt"/>
+	  {% endif %}
+	  </form>
+	</td>
+	
+	<!-- delete -->
 	<td>
 	  <form action="{% url 'cbuilder.views.delete_slide' %}" method="POST">
 	    <input type="hidden" name="sid" value="{{s.id}}"/>

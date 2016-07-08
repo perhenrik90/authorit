@@ -90,6 +90,22 @@ def edit_slide(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
+#
+# Toggle title on / of in menu
+#
+def toggle_menu_slide(request):
+
+    if 'sid' in request.POST:
+        sid = request.POST["sid"]
+        slide = Slide.objects.get(id=sid)
+
+        if slide.inMenu == True: slide.inMenu = False
+        elif slide.inMenu == False: slide.inMenu = True
+
+        slide.save()
+
+    return HttpResponseRedirect(reverse(project)+"?pid="+str(slide.course.id))
+
 
 def create_course(request):
     c = {}
