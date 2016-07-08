@@ -127,6 +127,7 @@ function editColumn()
     add_img.className = "glyphicon glyphicon glyphicon-picture btn btn-primary";
     add_img.innerHTML = "";
     add_img.onclick = insertImage;
+    add_img.title = "Add image";
     popup.appendChild(add_img);
 
     // add video
@@ -134,6 +135,7 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon glyphicon-facetime-video btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertVideo;
+    add_vid.title = "Insert video";
     popup.appendChild(add_vid);
 
     // add well
@@ -141,6 +143,7 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon-text-background btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertWell;
+    add_vid.title = "Add well";
     popup.appendChild(add_vid);
     
     // add quiz
@@ -148,11 +151,13 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon-question-sign btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertQuiz;
+    add_vid.title = "Create quiz";
     popup.appendChild(add_vid);
     
     // Delete row button
     delete_row = document.createElement("div");
     delete_row.className = "btn btn-danger glyphicon glyphicon-trash";
+    delete_row.title = "Delete row";
 
     delete_row.onclick = function(){
 	var par = selectedCol.parentNode;
