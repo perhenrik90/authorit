@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-08 21:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/default.html:32
+msgid "Dashboard"
+msgstr "Oversikt"
+
+#: templates/login.html:20 templates/login.html:34
+msgid "Login"
+msgstr "Logg inn"
+
+#: templates/login.html:30
+msgid "Username"
+msgstr "Brukernavn"
+
+#: templates/login.html:32
+msgid "Password"
+msgstr "Passord"
+
+#: templates/overview.html:16
+msgid "Welcome"
+msgstr "Velkommen"
+
+#: templates/overview.html:18
+msgid "Your projects"
+msgstr "Dine prosjekter"
+
+#: templates/overview.html:36
+msgid "Edit"
+msgstr "Endre"
+
+#: templates/overview.html:38
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: templates/overview.html:40
+msgid "Export SCORM"
+msgstr "Eksporter SCORM"
+
+#: templates/overview.html:49
+msgid "Create course"
+msgstr "Lag kurs"
+
+#: views.py:29
+msgid "Your user is suspended."
+msgstr "Din bruker er suspendert."
+
+#: views.py:45
+msgid "You must be logged in to see this page"
+msgstr "Du må være logget inn for å se denne siden"

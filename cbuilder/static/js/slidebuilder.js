@@ -17,7 +17,7 @@ function createColumn(col_type)
     }
     e = document.createElement("div");
     e.className = col_type;
-    e.innerHTML = "text here";
+    e.innerHTML = i18n.t("builder.texthere");
     e.id = "wd"+widgetCount;
     e.onclick = editColumn;
     widgetCount += 1;
@@ -119,6 +119,7 @@ function editColumn()
     save = document.createElement("div");
     save.className = "glyphicon glyphicon-save btn btn-primary";
     save.innerHTML = "";
+    save.title = i18n.t("builder.save");
     save.onclick = saveColumn;
     popup.appendChild(save);
 
@@ -127,7 +128,7 @@ function editColumn()
     add_img.className = "glyphicon glyphicon glyphicon-picture btn btn-primary";
     add_img.innerHTML = "";
     add_img.onclick = insertImage;
-    add_img.title = "Add image";
+    add_img.title = i18n.t("builder.addimage");
     popup.appendChild(add_img);
 
     // add video
@@ -135,7 +136,7 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon glyphicon-facetime-video btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertVideo;
-    add_vid.title = "Insert video";
+    add_vid.title = i18n.t("builder.addimage");
     popup.appendChild(add_vid);
 
     // add well
@@ -143,7 +144,7 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon-text-background btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertWell;
-    add_vid.title = "Add well";
+    add_vid.title = i18n.t("builder.addwell");
     popup.appendChild(add_vid);
     
     // add quiz
@@ -151,13 +152,13 @@ function editColumn()
     add_vid.className = "glyphicon glyphicon-question-sign btn btn-primary";
     add_vid.innerHTML = "";
     add_vid.onclick = insertQuiz;
-    add_vid.title = "Create quiz";
+    add_vid.title = i18n.t("builder.addquiz");
     popup.appendChild(add_vid);
     
     // Delete row button
     delete_row = document.createElement("div");
     delete_row.className = "btn btn-danger glyphicon glyphicon-trash";
-    delete_row.title = "Delete row";
+    delete_row.title = i18n.t("builder.deleterow");
 
     delete_row.onclick = function(){
 	var par = selectedCol.parentNode;

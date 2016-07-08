@@ -57,9 +57,11 @@
 	    {% csrf_token %}
 	    <input type="hidden" name="sid" value="{{s.id}}"/>
 	  {% if s.inMenu %}
-	  <button type="submit" class="btn btn-success glyphicon glyphicon-list-alt"/>
+	    <button type="submit" title="{% blocktrans %}Remove from the menu{% endblocktrans %}"
+		    class="btn btn-success glyphicon glyphicon-list-alt"/>
 	  {% else %}
-	  <button type="submit" class="btn btn-primary glyphicon glyphicon-list-alt"/>
+	    <button type="submit" title="{% blocktrans %}Add to menu{% endblocktrans %}"
+		    class="btn btn-primary glyphicon glyphicon-list-alt"/>
 	  {% endif %}
 	  </form>
 	</td>

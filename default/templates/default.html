@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+    <script src="{% static 'locales/i18next-1.11.2.js' %}"></script>
+    <script>
+      var option = { resGetPath: '/static/locales/__ns__-__lng__.json' };
+      i18n.init(option);
+    </script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-ph.css' %}"/>
     {% block head %}{% endblock %}

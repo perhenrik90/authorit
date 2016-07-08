@@ -1,0 +1,17 @@
+{
+    "builder":{
+	"deleterow":"Delete Row",
+	"texthere":"Text here",
+	"save":"Save",
+	"addimage":"Add Image",
+	"addvideo":"Add Video",
+	"addwell":"Add Well",
+	"addquiz":"Add Quiz",
+	"add":"Add",
+	"createalternative":"Create alternative",
+	"enterquestion":"Enter question",
+	"alternative":"Alternative",
+	"welltitle":"Title for well",
+	"welltext":"Well text here..."
+    }
+}

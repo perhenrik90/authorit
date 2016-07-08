@@ -23,5 +23,6 @@
     top:20px;
     bottom:20px;
     padding:50px;
+    overflow-y:scroll;
 }
 
