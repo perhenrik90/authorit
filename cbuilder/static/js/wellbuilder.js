@@ -6,7 +6,6 @@
  ****************************************/
 
 // selectedCol is defined by sitebuilder.js
-
 function insertWell()
 {
     // override popup from 
@@ -43,11 +42,40 @@ function insertWell()
     {
 	wells = $(".well_pair");
 	html = "";
+	id = generateRandomID();
+	if(wells.length == 1)
+	{
+	    well = wells[0];
+	    console.log(well);
+	    html += "<div class='well well-lg'>";
+	    html += well.children[2].value;
+	    html += "</div>";
+
+	    selectedCol.innerHTML = html;
+	    $("#html_form")[0].value = slide.innerHTML;
+
+	    // remove the popup screen
+	    document.body.removeChild($("#popup")[0]);
+	    saveColumn();
+	    return;
+	}
+
+	// add buttons
 	for(i = 0; i < wells.length; i++)
 	{
 	    well = wells[i];
-	    console.log(well);
-	    html += "<div class='well well-lg'>";
+	    id_s = id+i;
+	    html += "<p class='btn btn-primary well-button' id='"+id_s+"'>";
+	    html += well.children[0].value + "</p>";
+	}
+
+	// add wells
+	for(i = 0; i < wells.length; i++)
+	{
+	    // use same ids as buttons but with a pre-fix (well)
+	    id_s = 'well'+id+i;
+	    well = wells[i];
+	    html += "<div class='well well-lg' id='"+id_s+"' style='display:none'>";
 	    html += well.children[2].value;
 	    html += "</div>";
 	}
@@ -60,6 +88,12 @@ function insertWell()
 	saveColumn();
 
     }
+
+    addwell = document.createElement("p");
+    addwell.className = "btn btn-primary";
+    addwell.innerHTML = "New well";
+    addwell.onclick = insertWellControllers;
+    div.appendChild(addwell);
     
 
     submit = document.createElement("p");
@@ -67,7 +101,6 @@ function insertWell()
     submit.innerHTML = "Add";
     submit.onclick = addWell;
     div.appendChild(submit);
-
 }
 
 
