@@ -18,7 +18,7 @@ function insertQuiz()
     popup.appendChild(div);
    
     label = document.createElement("p");
-    label.innerHTML = "Enter question";
+    label.innerHTML = i18n.t("builder.enterquestion");
     div.appendChild(label);
     
     question  = document.createElement("input");
@@ -36,7 +36,7 @@ function insertQuiz()
 	alternatives.appendChild(alternative);
 	
 	label = document.createElement("p");
-	label.innerHTML = "Alternative "+nAlternative;
+	label.innerHTML = i18n.t("builder.alternative")+" "+nAlternative;
 	alternative.appendChild(label)
 	radio = document.createElement("input");
 	radio.type = "checkbox";
@@ -86,13 +86,13 @@ function insertQuiz()
     div.appendChild(document.createElement("hr"));
 
     add = document.createElement("p");
-    add.innerHTML = "Add";
+    add.innerHTML = i18n.t("builder.add");
     add.className = "btn btn-primary";
     add.onclick = addQuiz;
     div.appendChild(add);
 
     add = document.createElement("p");
-    add.innerHTML = "Create alternative";
+    add.innerHTML = i18n.t("builder.createalternative");
     add.className = "btn btn-primary";
     add.onclick = createAlternative;
     div.appendChild(add);

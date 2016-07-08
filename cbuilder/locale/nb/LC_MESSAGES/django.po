@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-01 12:30+0000\n"
+"POT-Creation-Date: 2016-07-08 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,8 @@ msgstr "Kurskode"
 msgid "coursecode here"
 msgstr "kurskode her"
 
-#: templates/create_course.html:28 templates/create_course.html.py:29
+#: templates/create_course.html:28 templates/create_course.html:29
+#: templates/upload_img.html:34 templates/upload_vid.html:34
 msgid "Description"
 msgstr "Beskrivelse"
 
@@ -51,82 +52,140 @@ msgstr "Lag slide"
 msgid "Creating slide for"
 msgstr "Lag slide for"
 
-#: templates/edit_slide.html:25
+#: templates/edit_slide.html:45
 msgid "Course"
 msgstr "Kurs"
 
-#: templates/edit_slide.html:29
+#: templates/edit_slide.html:49
 msgid "Add row"
 msgstr "Lag rad"
 
-#: templates/edit_slide.html:32
+#: templates/edit_slide.html:52
 msgid "Single row"
 msgstr "Enslig rad"
 
-#: templates/edit_slide.html:33
+#: templates/edit_slide.html:53
 msgid "Double row"
 msgstr "Dobbel rad"
 
-#: templates/edit_slide.html:34
+#: templates/edit_slide.html:54
 msgid "Tripple row"
 msgstr "Trippel rad"
 
-#: templates/edit_slide.html:40
+#: templates/edit_slide.html:55
+msgid "Four row"
+msgstr "Fire rader"
+
+#: templates/edit_slide.html:56
+msgid "Small - Big"
+msgstr "Liten - Stor"
+
+#: templates/edit_slide.html:57
+msgid "Big - Small"
+msgstr "Stor - Liten"
+
+#: templates/edit_slide.html:63
 msgid "Save"
 msgstr "Lagre"
 
-#: templates/project.html:45
+#: templates/project.html:35 templates/upload_img.html:43
+#: templates/upload_vid.html:43
+msgid "Upload image"
+msgstr "Last opp bilde"
+
+#: templates/project.html:37
+msgid "Upload video"
+msgstr "Last opp video"
+
+#: templates/project.html:39
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: templates/project.html:52
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/project.html:49
+#: templates/project.html:60
+msgid "Remove from the menu"
+msgstr "Fjern fra meny"
+
+#: templates/project.html:63
+msgid "Add to menu"
+msgstr "Legg til meny"
+
+#: templates/project.html:73
 msgid "Delete"
 msgstr "Slett"
 
-#: templates/project.html:59
+#: templates/project.html:83
 msgid "Up"
 msgstr "Opp"
 
-#: templates/project.html:69
+#: templates/project.html:93
 msgid "Down"
 msgstr "Ned"
 
-#: views.py:18 views.py:54 views.py:91 views.py:121 views.py:181 views.py:203
+#: templates/upload_img.html:22
+msgid "Upload image to"
+msgstr "Last opp bilde til"
+
+#: templates/upload_img.html:30
+msgid "File"
+msgstr "Fil"
+
+#: templates/upload_vid.html:22
+msgid "Upload video to"
+msgstr "Last opp bilde til"
+
+#: templates/upload_vid.html:30
+msgid "Video File"
+msgstr "Videofil"
+
+#: views.py:20 views.py:56 views.py:113 views.py:143 views.py:206 views.py:228
+#: views.py:256 views.py:291
 msgid "You must be logged in to see this page"
 msgstr "Du må være logget inn får å se siden"
 
-#: views.py:37
+#: views.py:41
 #, python-format
 msgid "Course with id %s not found"
 msgstr "Kurs med id %s er ikke funnet"
 
-#: views.py:40
+#: views.py:44
 msgid "Project id not given!"
 msgstr "Prosjekt id er ikke gitt!"
 
-#: views.py:64 views.py:152
+#: views.py:70 views.py:174
 #, python-format
 msgid "Course with id %s not found!"
 msgstr "Kurs med id %s er ikke funnet!"
 
-#: views.py:80
+#: views.py:86
 msgid "No slide id was given!"
 msgstr "Lysbilde med id var ikke gitt!"
 
-#: views.py:106
+#: views.py:128
 msgid "Can not create the project. The course code is not unique!"
 msgstr "Kan ikke lage prosjekt. Kurskoden må være unik!"
 
-#: views.py:144
+#: views.py:166
 #, python-format
 msgid "Could not create a new slide to course %s"
 msgstr "Kan ikke lage nytt lysbilde til kurs %s"
 
-#: views.py:155
+#: views.py:177
 msgid "No course id given. Can not create slide!"
 msgstr "Ingen kursid er gitt. Kan ikke lage slide!"
 
-#: views.py:194
+#: views.py:219
 #, python-format
 msgid "Could not find slide with id %s"
 msgstr "Kan ikke finne slide med id %s"
+
+#: views.py:273 views.py:308
+msgid "Upload failed!"
+msgstr "Opplasting feilet!"
+
+#: views.py:281 views.py:316
+msgid "No course id was given!"
+msgstr "Ingen kurside er gitt!"

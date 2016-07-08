@@ -1,0 +1,16 @@
+{
+    "builder":{
+	"deleterow":"Slett rad",
+	"texthere":"Tekst her",
+	"save":"Lagre",
+	"addimage":"Legg til bilde",
+	"addvideo":"Legg til video",
+	"addwell":"Legg til brønn",
+	"addquiz":"Lag quiz",
+	"add":"Legg til",
+	"createalternative":"Lag alternativ",
+	"enterquestion":"Skriv inn spørsmål",
+	"alternative":"Alternativ"
+    }
+
+}
