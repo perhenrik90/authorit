@@ -10,7 +10,9 @@
 	"add":"Legg til",
 	"createalternative":"Lag alternativ",
 	"enterquestion":"Skriv inn spørsmål",
-	"alternative":"Alternativ"
+	"alternative":"Alternativ",
+	"welltitle":"Tittel på brønn",
+	"welltext":"Brønntekst skrives her..."
     }
 
 }

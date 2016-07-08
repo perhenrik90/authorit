@@ -10,6 +10,8 @@
 	"add":"Add",
 	"createalternative":"Create alternative",
 	"enterquestion":"Enter question",
-	"alternative":"Alternative"
+	"alternative":"Alternative",
+	"welltitle":"Title for well",
+	"welltext":"Well text here..."
     }
 }

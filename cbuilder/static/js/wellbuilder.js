@@ -23,14 +23,17 @@ function insertWell()
     // append one instance of well with title
     function insertWellControllers()
     {
+	// div tag to group title and text
 	pair = document.createElement("div");
 	pair.className = "well_pair";
 	well_controllers.appendChild(pair);
 
 	input_name = document.createElement("input");
+	input_name.value = i18n.t("builder.welltitle");
 	pair.appendChild(input_name);
 	pair.appendChild(document.createElement("br"));
 	area = document.createElement("textarea");
+	area.value = i18n.t("builder.welltext");
 	pair.appendChild(area);
 	pair.appendChild(document.createElement("hr"));
     }
@@ -43,6 +46,7 @@ function insertWell()
 	wells = $(".well_pair");
 	html = "";
 	id = generateRandomID();
+	
 	if(wells.length == 1)
 	{
 	    well = wells[0];
@@ -61,6 +65,7 @@ function insertWell()
 	}
 
 	// add buttons
+	html += "<div class='btn-group-justified'>";	
 	for(i = 0; i < wells.length; i++)
 	{
 	    well = wells[i];
@@ -68,6 +73,7 @@ function insertWell()
 	    html += "<p class='btn btn-primary well-button' id='"+id_s+"'>";
 	    html += well.children[0].value + "</p>";
 	}
+	html +="</div>";
 
 	// add wells
 	for(i = 0; i < wells.length; i++)
@@ -79,6 +85,7 @@ function insertWell()
 	    html += well.children[2].value;
 	    html += "</div>";
 	}
+
 
 
 	selectedCol.innerHTML = html;
