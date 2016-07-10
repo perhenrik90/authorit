@@ -27,11 +27,19 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
       <div class="form-group">
-	<label for="username">{% blocktrans %}Username{% endblocktrans %}</label>
-	<input type="text" id="username" name="username"/><br/>
-	<label for="pass">{% blocktrans %}Password{% endblocktrans %}</label>
-	<input type="password" id="pass" name="pass"/><br/>
-	<input type="submit" value="{% blocktrans %}Login{% endblocktrans %}" class="btn btn-default"/>
+	<table>
+	  <tr>
+	    <td><label for="username">{% blocktrans %}Username{% endblocktrans %}</label></td>
+	    <td><input type="text" id="username" name="username"/></td>
+	  </tr>
+	  <tr>
+	    <td><label for="pass">{% blocktrans %}Password{% endblocktrans %}</label></td>
+	    <td><input type="password" id="pass" name="pass"/></td>
+	  </tr>
+	  <tr>
+	    <td><input type="submit" value="{% blocktrans %}Login{% endblocktrans %}" class="btn btn-default"/></td>
+	  </tr>
+	</table>
 	{% csrf_token %}
       </div>
     </div>
