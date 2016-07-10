@@ -12,6 +12,7 @@
 	"enterquestion":"Enter question",
 	"alternative":"Alternative",
 	"welltitle":"Title for well",
-	"welltext":"Well text here..."
+	"welltext":"Well text here...",
+	"delete":"Delete"
     }
 }

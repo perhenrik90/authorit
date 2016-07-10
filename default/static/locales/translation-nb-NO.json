@@ -12,7 +12,8 @@
 	"enterquestion":"Skriv inn spørsmål",
 	"alternative":"Alternativ",
 	"welltitle":"Tittel på brønn",
-	"welltext":"Brønntekst skrives her..."
+	"welltext":"Brønntekst skrives her...",
+	"delete":"Slett"
     }
 
 }

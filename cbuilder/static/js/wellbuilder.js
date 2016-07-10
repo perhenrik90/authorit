@@ -44,7 +44,7 @@ function insertWell()
     function addWell()
     {
 	wells = $(".well_pair");
-	html = "";
+	html = "<div class='well-column'";
 	id = generateRandomID();
 	
 	if(wells.length == 1)
@@ -61,6 +61,7 @@ function insertWell()
 	    // remove the popup screen
 	    document.body.removeChild($("#popup")[0]);
 	    saveColumn();
+	    html += "</div>";
 	    return;
 	}
 
@@ -86,8 +87,7 @@ function insertWell()
 	    html += "</div>";
 	}
 
-
-
+	html = "</html>";
 	selectedCol.innerHTML = html;
 	$("#html_form")[0].value = slide.innerHTML;
 	// remove the popup screen

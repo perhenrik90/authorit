@@ -7,7 +7,7 @@
 
 // selectedCol is defined by sitebuilder.js
 
-function insertQuiz()
+function insertQuiz(data)
 {
     // override popup from 
     popup = document.getElementById("popup");
@@ -23,13 +23,25 @@ function insertQuiz()
     
     question  = document.createElement("input");
     question.id = "question";
+
+    // if user is going to change the value
+    if(data.className == "quiz_column"){
+    	question.value = data.children[0].innerHTML;
+    }
     div.appendChild(question);
 
     alternatives = document.createElement("div");
     div.appendChild(alternatives);
-    
+
+    //remove alternative
+    function removeAlternative()
+    {
+    	alternatives.removeChild(this.parentNode);
+    }
+
+    // Create one alternative form row, and fill it with value
     var nAlternative = 1;
-    function createAlternative()
+    function createAlternative(value)
     {
 	alternative = document.createElement("div");
 	alternative.className = "alternative";
@@ -37,6 +49,8 @@ function insertQuiz()
 	
 	label = document.createElement("p");
 	label.innerHTML = i18n.t("builder.alternative")+" "+nAlternative;
+
+	
 	alternative.appendChild(label)
 	radio = document.createElement("input");
 	radio.type = "checkbox";
@@ -46,13 +60,34 @@ function insertQuiz()
 	alternative.appendChild(radio);
 	inn= document.createElement("input");
 	alternative.appendChild(inn);
+	if(typeof value != "object"){
+	    inn.value = value;
+	}
+
+	remove = document.createElement("p");
+	remove.className = "btn btn-danger";
+	remove.innerHTML = i18n.t("builder.delete");
+	remove.onclick = removeAlternative;
+	alternative.appendChild(remove);
+	
 	nAlternative ++;
     }
-    createAlternative();
-    createAlternative();
 
+    // if there are some data there, fill the form
+    if(data.className == "quiz_column")
+    {
+	for(var i = 2; i < data.children.length; i ++){
+    	    alternativ = data.children[i];
+    	    createAlternative(alternativ.innerHTML);
+	}
+    }
 
-
+    // if data do not exist, make two empty alternatives
+    if(nAlternative == 1)
+    {
+	createAlternative(i18n.t("builder.alternative")+" "+1);
+	createAlternative(i18n.t("builder.alternative")+" "+2);
+    }
     
     // add the quiz to the column and close
     function addQuiz()

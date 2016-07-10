@@ -115,6 +115,9 @@ function editColumn()
     popup.className = "popup";
     document.body.appendChild(popup);
 
+
+
+    
     // Save button
     save = document.createElement("div");
     save.className = "glyphicon glyphicon-save btn btn-primary";
@@ -193,6 +196,13 @@ function editColumn()
 		save_onsavecallback : "saveColumn"
 	      }
     tinymce.init(options);
+
+
+    if(col.children[0].className == "quiz_column"){
+	insertQuiz(col.children[0]);
+    }
+	
+    
 }
 
 
