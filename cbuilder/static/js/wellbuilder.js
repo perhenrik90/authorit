@@ -72,7 +72,6 @@ function insertWell(data)
 	    id_s = 'well'+id+i;
 	    well = wells[i];
 	    html += "<div class='well well-lg' id='"+id_s+"' style='display:none'>";
-	    
 	    html += tinymce.get(i+1).getContent();
 	    html += "</div>";
 	}

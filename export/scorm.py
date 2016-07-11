@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import codecs
+import re
 import zipfile
 
 from django.template import loader, Template, Context
@@ -51,7 +52,10 @@ class SCORM:
                 # setup main
                 temp = loader.get_template("scorm/slides.html")
                 f = codecs.open(self.path+"index.html","w", "utf-8")
-                f.write(temp.render(context))
+                rended = temp.render(context)
+                rended = re.sub("http://.*?/","",rended);
+                print rended
+                f.write(rended)
                 f.close()
                 z.write(self.path+"index.html", arcname="index.html")
 
