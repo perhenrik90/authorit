@@ -21,6 +21,7 @@ function insertWell(data)
     div.appendChild(well_controllers);
     
     // append one instance of well with title
+    nController = 0;
     function insertWellControllers()
     {
 	// div tag to group title and text
@@ -34,8 +35,13 @@ function insertWell(data)
 	pair.appendChild(document.createElement("br"));
 	area = document.createElement("textarea");
 	area.value = i18n.t("builder.welltext");
+	area.id = "builder"+nController;
+	
 	pair.appendChild(area);
 	pair.appendChild(document.createElement("hr"));
+
+	tinymce.init(options);
+	nController += 1;
     }
     insertWellControllers();
 
@@ -44,26 +50,9 @@ function insertWell(data)
     function addWell()
     {
 	wells = $(".well_pair");
-	html = "<div class='well-column'";
+	html = "<div class='well-column'>";
 	id = generateRandomID();
 	
-	if(wells.length == 1)
-	{
-	    well = wells[0];
-	    console.log(well);
-	    html += "<div class='well well-lg'>";
-	    html += well.children[2].value;
-	    html += "</div>";
-
-	    selectedCol.innerHTML = html;
-	    $("#html_form")[0].value = slide.innerHTML;
-
-	    // remove the popup screen
-	    document.body.removeChild($("#popup")[0]);
-	    saveColumn();
-	    html += "</div>";
-	    return;
-	}
 
 	// add buttons
 	html += "<div class='btn-group-justified'>";	
@@ -83,10 +72,11 @@ function insertWell(data)
 	    id_s = 'well'+id+i;
 	    well = wells[i];
 	    html += "<div class='well well-lg' id='"+id_s+"' style='display:none'>";
-	    html += well.children[2].value;
+	    
+	    html += tinymce.get(i+1).getContent();
 	    html += "</div>";
 	}
-
+	html += "</div>";
 	html += "</div>";
 	console.log(html);
 	selectedCol.innerHTML = html;
@@ -94,6 +84,7 @@ function insertWell(data)
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
 	saveColumn();
+
 
     }
 
