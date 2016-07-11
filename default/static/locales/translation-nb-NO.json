@@ -13,7 +13,9 @@
 	"alternative":"Alternativ",
 	"welltitle":"Tittel på brønn",
 	"welltext":"Brønntekst skrives her...",
-	"delete":"Slett"
+	"delete":"Slett",
+	"clearcolumn":"Fjern kolonne",
+	"newwell":"Ny brønn"  
     }
 
 }

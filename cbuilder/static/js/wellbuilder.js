@@ -89,14 +89,14 @@ function insertWell(data)
 
     addwell = document.createElement("p");
     addwell.className = "btn btn-primary";
-    addwell.innerHTML = "New well";
+    addwell.innerHTML = i18n.t("builder.newwell");
     addwell.onclick = insertWellControllers;
     div.appendChild(addwell);
     
 
     submit = document.createElement("p");
     submit.className = "btn btn-primary";
-    submit.innerHTML = "Add";
+    submit.innerHTML = i18n.t("builder.add");;
     submit.onclick = addWell;
     div.appendChild(submit);
 }

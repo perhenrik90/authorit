@@ -121,15 +121,32 @@ function insertQuiz(data)
     div.appendChild(document.createElement("hr"));
 
     add = document.createElement("p");
-    add.innerHTML = i18n.t("builder.add");
-    add.className = "btn btn-primary";
-    add.onclick = addQuiz;
-    div.appendChild(add);
-
-    add = document.createElement("p");
     add.innerHTML = i18n.t("builder.createalternative");
     add.className = "btn btn-primary";
     add.onclick = createAlternative;
+    div.appendChild(add);
+
+    function clearColumn()
+    {
+	selectedCol.innerHTML = i18n.t("builder.texthere");
+	$("#html_form")[0].value = slide.innerHTML;
+	document.body.removeChild($("#popup")[0]);
+	saveColumn();
+    }
+    
+    clear = document.createElement("p");
+    clear.innerHTML = i18n.t("builder.clearcolumn");
+    clear.className = "btn btn-danger";
+    clear.onclick = clearColumn;
+    div.appendChild(clear);    
+
+
+    
+    div.appendChild( document.createElement("br"));
+    add = document.createElement("p");
+    add.innerHTML = i18n.t("builder.add");
+    add.className = "btn btn-primary";
+    add.onclick = addQuiz;
     div.appendChild(add);
 }
 
