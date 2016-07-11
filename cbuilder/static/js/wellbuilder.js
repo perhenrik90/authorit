@@ -6,7 +6,7 @@
  ****************************************/
 
 // selectedCol is defined by sitebuilder.js
-function insertWell()
+function insertWell(data)
 {
     // override popup from 
     popup = document.getElementById("popup");
@@ -87,7 +87,8 @@ function insertWell()
 	    html += "</div>";
 	}
 
-	html = "</html>";
+	html += "</div>";
+	console.log(html);
 	selectedCol.innerHTML = html;
 	$("#html_form")[0].value = slide.innerHTML;
 	// remove the popup screen

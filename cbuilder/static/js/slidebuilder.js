@@ -198,9 +198,9 @@ function editColumn()
     tinymce.init(options);
 
 
-    if(col.children[0].className == "quiz_column"){
-	insertQuiz(col.children[0]);
-    }
+    // if(col.children[0].className == "quiz_column"){
+    // 	insertQuiz(col.children[0]);
+    // }
 	
     
 }
