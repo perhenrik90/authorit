@@ -6,6 +6,8 @@ import zipfile
 
 from django.template import loader, Template, Context
 from django.shortcuts import render, redirect
+from django.core import serializers
+
 from authorit import settings
 import sys
 
@@ -45,7 +47,7 @@ class SCORM:
                 c = {}
                 c["course"] = self.course
                 c["slides"] = self.slides
-                
+
                 context = Context(c)
                 z = zipfile.ZipFile(self.scorm_path,'w')
                 
@@ -54,7 +56,7 @@ class SCORM:
                 f = codecs.open(self.path+"index.html","w", "utf-8")
                 rended = temp.render(context)
                 rended = re.sub("http://.*?/","",rended);
-                print rended
+
                 f.write(rended)
                 f.close()
                 z.write(self.path+"index.html", arcname="index.html")
@@ -141,7 +143,26 @@ class SCORM:
                 for video in self.videos:
                         full_p = settings.MEDIA_ROOT+str(video.video)
                         z.write(full_p)
-                                
+
+                ######################################################
+                # Export authorit / django xml
+                # used to export courses to other authorit instances
+                ######################################################
+                        
+                # add django objects for exporting issues
+                course_xml = serializers.serialize("xml", [self.course])
+                f = open(self.path+"authorit_course.xml","w")
+                f.write(course_xml)
+                f.close()
+                z.write(self.path+"authorit_course.xml", arcname="authorit/authorit_course.xml")
+
+                slides_xml = serializers.serialize("xml", self.slides)
+                f = open(self.path+"authorit_slides.xml","w")
+                f.write(slides_xml)
+                f.close()
+                z.write(self.path+"authorit_slides.xml", arcname="authorit/authorit_slides.xml")                        
+
+                # close zip
                 z.close()
                 
 		return self.scorm_path
