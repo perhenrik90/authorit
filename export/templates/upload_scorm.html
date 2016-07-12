@@ -1,0 +1,57 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{% blocktrans %}Upload a project{% endblocktrans %}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <p>{% blocktrans %}Upload a SCORM zip created with an another authorit system.{% endblocktrans %}</p>
+  </div>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+	<label for="title">{% blocktrans %}Zip file{% endblocktrans %}</label>
+	<input class="form-control" id="code"/>
+
+      </div>  
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+	<label for="title">{% blocktrans %}Zip file{% endblocktrans %}</label>
+	<input class="form-control" id="file" name="zip" type="file"/>
+	<input name="pid" type="hidden" value="{{course.id}}"/>
+      </div>  
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-default">{% blocktrans %}Upload project{% endblocktrans %}</button>
+    </div>
+  </div>
+</form>
+{% endif %}
+{% endblock %}

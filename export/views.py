@@ -10,7 +10,7 @@ from authorit import settings
 from cbuilder.models import Course, Slide, Image, Video
 from export.models import Build
 
-from export.scorm import SCORM
+from export.scorm import SCORM_Export
 
 def preview(request, project):
 
@@ -47,7 +47,7 @@ def export_scorm(request):
         c["images"] = Image.objects.filter(course=course)
         c["videos"] = Video.objects.filter(course=course)
         
-        sco = SCORM(course, c["slides"], c["images"], c["videos"])
+        sco = SCORM_Export(course, c["slides"], c["images"], c["videos"])
         path = sco.export_scorm()
 
         build = Build(course=course, build_path=path)
@@ -58,5 +58,14 @@ def export_scorm(request):
 	response.write(open(path,"rb").read())
 
         response['X-Sendfile'] = smart_str(path)
-
         return response
+
+
+# import an SCORM zipfile and create a new course
+def import_scorm(request):
+
+    c = {}
+    
+    template = loader.get_template("upload_scorm.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))

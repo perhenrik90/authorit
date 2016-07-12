@@ -12,7 +12,7 @@ from authorit import settings
 import sys
 
 
-class SCORM:
+class SCORM_Export:
 
         # consctruct an exporter with a reference to a course
         def __init__(self, course, slides, images,videos):
@@ -166,8 +166,14 @@ class SCORM:
                 z.close()
                 
 		return self.scorm_path
-                #slides = render(temp)
-                # print(slides)
+
+
+
+def SCORM_Import(user, new_code, zipfile):
+
+        print("Import SCORM")
+
+                
 
 
                 
