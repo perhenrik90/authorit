@@ -169,9 +169,30 @@ class SCORM_Export:
 
 
 
-def SCORM_Import(user, new_code, zipfile):
+def SCORM_Import(user, new_code, ffile):
 
-        print("Import SCORM")
+        if not os.path.isdir(settings.MEDIA_ROOT+"tmpupload/"):
+                os.makedirs(settings.MEDIA_ROOT+"tmpupload/")
+        upload_path = settings.MEDIA_ROOT+"tmpupload/"
+        
+        z = zipfile.ZipFile(ffile)
+
+        # load course xml and create a new course instance
+        course_xml = str(z.read('authorit/authorit_course.xml'))
+        imported_course = None
+        for course in serializers.deserialize("xml", course_xml, ignorenonexistent=True):
+                course.object.code = new_code
+                course.object.id = None 
+                course.object.owner = user
+                course.object.save()
+                imported_course = course.object
+
+        # import the slides and them to the new course instance
+        slides_xml = str(z.read('authorit/authorit_slides.xml'))
+        for slide in serializers.deserialize("xml", slides_xml, ignorenonexistent=True):
+                slide.object.course = imported_course
+                slide.object.save()
+        
 
                 
 

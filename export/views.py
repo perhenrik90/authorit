@@ -10,7 +10,7 @@ from authorit import settings
 from cbuilder.models import Course, Slide, Image, Video
 from export.models import Build
 
-from export.scorm import SCORM_Export
+from export.scorm import SCORM_Export, SCORM_Import
 
 def preview(request, project):
 
@@ -65,6 +65,12 @@ def export_scorm(request):
 def import_scorm(request):
 
     c = {}
+
+    if 'code' in request.POST:
+        ffile = request.FILES["zip"]
+        code = request.POST["code"]
+        
+        SCORM_Import(request.user, code,ffile)
     
     template = loader.get_template("upload_scorm.html")
     context = RequestContext(request, c)
