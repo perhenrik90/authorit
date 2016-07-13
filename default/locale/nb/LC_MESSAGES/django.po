@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-08 21:38+0000\n"
+"POT-Creation-Date: 2016-07-13 19:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,15 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Oversikt"
 
-#: templates/login.html:20 templates/login.html:34
+#: templates/login.html:20 templates/login.html:40
 msgid "Login"
 msgstr "Logg inn"
 
-#: templates/login.html:30
+#: templates/login.html:32
 msgid "Username"
 msgstr "Brukernavn"
 
-#: templates/login.html:32
+#: templates/login.html:36
 msgid "Password"
 msgstr "Passord"
 
@@ -41,21 +41,26 @@ msgstr "Velkommen"
 msgid "Your projects"
 msgstr "Dine prosjekter"
 
-#: templates/overview.html:36
+#: templates/overview.html:27
+msgid "Create course"
+msgstr "Lag kurs"
+
+#: templates/overview.html:30
+#| msgid "Create course"
+msgid "Import course"
+msgstr "Importer kurs"
+
+#: templates/overview.html:44
 msgid "Edit"
 msgstr "Endre"
 
-#: templates/overview.html:38
+#: templates/overview.html:46
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: templates/overview.html:40
+#: templates/overview.html:48
 msgid "Export SCORM"
 msgstr "Eksporter SCORM"
-
-#: templates/overview.html:49
-msgid "Create course"
-msgstr "Lag kurs"
 
 #: views.py:29
 msgid "Your user is suspended."
