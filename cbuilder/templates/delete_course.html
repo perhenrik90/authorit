@@ -1,0 +1,42 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{% blocktrans %}Are your shure that you want to delete {% endblocktrans %} {{course.title}}?</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p>{% blocktrans %}Owner: {% endblocktrans %} {{course.owner.username}} | {{course.owner.first_name}} {{course.owner.last_name}}
+    <p>{% blocktrans %}Course created: {% endblocktrans %} {{course.created}}</p>
+    <p>{% blocktrans %}Number of slides: {% endblocktrans %} {{slides|length}}</p>
+  </div>
+
+  <div class="col-sm-6">
+    <p><b>{% blocktrans %}Description{% endblocktrans %}</b></p>
+    <p>{{course.description}}</p>
+  </div>
+</div>
+
+<form method="POST">
+  {% csrf_token %}
+<div class="row">
+  <div class="col-sm-12">
+    <input type="hidden" name="cid" value="{{course.id}}"/>
+    <input type="submit" name="confirm" class="btn btn-danger" value="{% blocktrans %}Yes{% endblocktrans %}"/>
+    <a href="{% url 'default.views.dashboard' %}" class="btn btn-primary">{% blocktrans %}No{% endblocktrans %}</a>
+  </div>
+</div>
+</form>
+
+{% endblock %}

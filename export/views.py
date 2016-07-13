@@ -5,14 +5,16 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Template, Context
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_str
 
 from authorit import settings
 from cbuilder.models import Course, Slide, Image, Video
 from export.models import Build
 
+import cbuilder.views
 from export.scorm import SCORM_Export, SCORM_Import
+
 
 def preview(request, project):
 
@@ -72,7 +74,8 @@ def import_scorm(request):
         ffile = request.FILES["zip"]
         code = request.POST["code"]
         
-        SCORM_Import(request.user, code,ffile)
+        new_course = SCORM_Import(request.user, code,ffile)
+        return HttpResponseRedirect(reverse(cbuilder.views.project)+"?pid="+str(new_course.id))
     
     template = loader.get_template("upload_scorm.html")
     context = RequestContext(request, c)

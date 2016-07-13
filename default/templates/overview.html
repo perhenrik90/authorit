@@ -29,6 +29,7 @@
     <a href="{% url 'export.views.import_scorm' %}" class="btn btn-primary">
       {% blocktrans %}Import course{% endblocktrans %}
     </a>
+
   </div>
 </div>
 <br/>
@@ -46,7 +47,13 @@
 	  {% blocktrans %}Preview{% endblocktrans %}</a></td>
       <td><a href="{% url 'export.views.export_scorm' %}?pid={{c.id}}" class="btn btn-default" target="_blank">
 	  {% blocktrans %}Export SCORM{% endblocktrans %}</a></td>
-
+      <td>
+	<form method="POST" action="{% url 'cbuilder.views.delete_course' %}">
+	  {% csrf_token %}
+	  <input type="hidden" value="{{c.id}}" name="cid"/>
+	  <input type="submit" value="{% blocktrans %}Delete{% endblocktrans %}" class="btn btn-danger"/>
+	</form>
+      </td>
     </tr>
       
     {% endfor %}

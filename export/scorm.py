@@ -217,7 +217,7 @@ def SCORM_Import(user, new_code, ffile):
                 slide.object.course = imported_course
                 slide.object.save()
         
-
+        return imported_course
                 
 
 

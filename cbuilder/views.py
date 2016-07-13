@@ -130,7 +130,32 @@ def create_course(request):
     
     template = loader.get_template("create_course.html")
     context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(context))	 
+
+
+def delete_course(request):
+    c = {}
+    
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+    if 'cid' not in request.POST:
+        c["message"] = _("Can not delete this course. Course not found!")
+
+    if 'cid' in request.POST and 'confirm' in request.POST:
+        course = Course.objects.get(id=request.POST['cid'])
+        course.delete()
+        return HttpResponseRedirect(reverse('default.views.dashboard'))
+        
+        
+    if 'cid' in request.POST:
+        c["course"] = Course.objects.get(id=request.POST['cid'])
+        c["slides"] = Slide.objects.filter(course=c["course"])
+    
+    template = loader.get_template("delete_course.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	 
     
 
 

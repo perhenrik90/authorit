@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^project$', views.project, name='project'),
     url(r'^editslide$', views.edit_slide, name='edit slide'),
     url(r'^create_course$', views.create_course, name='create course'),
+    url(r'^delete_course$', views.delete_course, name='delete course'),
     url(r'^createslide$', views.create_slide, name='create slide'),
     url(r'^saveslide$', views.save_slide, name='save slide'),
     url(r'^toglemenuslide$', views.toggle_menu_slide, name='togle menu slide'),
