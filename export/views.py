@@ -1,4 +1,6 @@
 # -*- coding: latin-1 -*-
+from io import StringIO
+
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
@@ -23,7 +25,7 @@ def preview(request, project):
     else:
 
         course = Course.objects.get(code=project)
-        print(course)
+
         c["course"] = course
         c["slides"] = Slide.objects.filter(course=course).order_by("number")
 

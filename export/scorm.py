@@ -3,14 +3,19 @@ import os
 import codecs
 import re
 import zipfile
+from io import StringIO
+from io import BytesIO
+from django.core.files import File
 
 from django.template import loader, Template, Context
 from django.shortcuts import render, redirect
 from django.core import serializers
+from django.core.files.base import ContentFile
 
 from authorit import settings
 import sys
 
+from cbuilder.models import Course, Slide, Image
 
 class SCORM_Export:
 
@@ -168,6 +173,9 @@ class SCORM_Export:
 		return self.scorm_path
 
 
+#
+# Import a SCORM packages exported with authorit
+#
 
 def SCORM_Import(user, new_code, ffile):
 
@@ -176,7 +184,7 @@ def SCORM_Import(user, new_code, ffile):
         upload_path = settings.MEDIA_ROOT+"tmpupload/"
         
         z = zipfile.ZipFile(ffile)
-
+        
         # load course xml and create a new course instance
         course_xml = str(z.read('authorit/authorit_course.xml'))
         imported_course = None
@@ -187,9 +195,25 @@ def SCORM_Import(user, new_code, ffile):
                 course.object.save()
                 imported_course = course.object
 
+        # import image mediafiles and store changes in a dictionary
+        old_new_path = {}
+        files = z.namelist()
+        for path in files:
+                if 'media/img/' in path:
+                        nimage = Image(img=File(z.open(path,'r')))
+                        nimage.course = imported_course
+                        nimage.save()
+                        old_new_path[path] = settings.MEDIA_URL+nimage.img.name
+
+        
         # import the slides and them to the new course instance
         slides_xml = str(z.read('authorit/authorit_slides.xml'))
         for slide in serializers.deserialize("xml", slides_xml, ignorenonexistent=True):
+
+                # for all slides, update new path for images based on dictionary
+                for old_path in old_new_path:
+                        slide.object.html = slide.object.html.replace(old_path, old_new_path[old_path])
+                                                                       
                 slide.object.course = imported_course
                 slide.object.save()
         
