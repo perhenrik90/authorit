@@ -31,6 +31,9 @@ function initSlideEngine()
     // updates the view 
     se.updateView = function()
     {
+	$('#nav-left').css("display","");
+	$('#nav-right').css("display","");
+	
 	for(var i = 0; i < se.slides.length; i ++)
 	{
 	    slide = se.slides[i];
@@ -41,6 +44,20 @@ function initSlideEngine()
 	    }
 	}
 
+	// Hide nextbutton if the user displays the last slide
+	if(se.index == se.slides.length-1)
+	{
+	    $('#nav-right').css("display","None");
+	}
+	// Hide left button if first slide is in display
+	if(se.index == 0)
+	{
+	    $('#nav-left').css("display","None");
+	}
+
+
+	
+	// Update progress bar
 	$("#course_progress_bar").css('width', (se.index/(se.slides.length-1)*100)+"%")
 	
     }
@@ -55,6 +72,8 @@ function initSlideEngine()
 	}
 	if(se.index == se.slides.length-1)
 	{
+
+	    
 	    // if tincan is enabeled
 	    if(useTincan)
 	    {
@@ -94,8 +113,8 @@ function initSlideEngine()
     // set next button inactive
     se.disableNextButton = function()
     {
-	nextbtn.className = "btn-disabled";
-	nextbtn.onclick = "";
+
+
     }
     
     // set next button active
@@ -104,8 +123,6 @@ function initSlideEngine()
 	nextbtn.className = "btn";
 	nextbtn.onclick = se.nextSlide;
     }
-
-
 
     // create navbar buttons
     navbar = document.getElementById("navBar");
