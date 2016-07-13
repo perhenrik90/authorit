@@ -17,6 +17,9 @@ function initSlideEngine()
     // updates the view 
     se.updateView = function()
     {
+	$('#nav-left').css("display","");
+	$('#nav-right').css("display","");
+
 	for(var i = 0; i < se.slides.length; i ++)
 	{
 	    slide = se.slides[i];
@@ -25,6 +28,17 @@ function initSlideEngine()
 	    {
 		slide.style.display = "";
 	    }
+	}
+
+	// Hide nextbutton if the user displays the last slide
+	if(se.index == se.slides.length-1)
+	{
+	    $('#nav-right').css("display","None");
+	}
+	// Hide left button if first slide is in display
+	if(se.index == 0)
+	{
+	    $('#nav-left').css("display","None");
 	}
 
 	$("#course_progress_bar").css('width', (se.index/(se.slides.length-1)*100)+"%")
