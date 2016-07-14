@@ -211,7 +211,8 @@ function tincanComplete()
     var tincan = setupTinCan()
     actor = getParameterByName("actor");
     actor = JSON.parse(actor);
-
+    course_code = $("#course_code")[0].value;
+    
     id = String( window.location );
     title = document.title;
     
@@ -219,7 +220,7 @@ function tincanComplete()
             verb:{id:"http://adlnet.gov/expapi/verbs/completed",
 		  display:{"en-EN":"Completed","nb":"Fullført"}
 		 },
-            object:{id:"act:authorit",
+            object:{id:"act:authorit:"+course_code,
                     definition:{name:{"en-US":title}},
                     description:{"en-US":"User has started the course: "+title}
                    },
@@ -234,7 +235,8 @@ function tincanStarted()
     var tincan = setupTinCan()
     actor = getParameterByName("actor");
     actor = JSON.parse(actor);
-
+    course_code = $("#course_code")[0].value;
+    
     id = String( window.location );
     title = document.title;
     
@@ -242,7 +244,7 @@ function tincanStarted()
             verb:{id:"http://adlnet.gov/expapi/verbs/started",
 		  display:{"en-EN":"Started","nb":"Startet"}
 		 },
-            object:{id:"act:authorit",
+            object:{id:"act:authorit:"+course_code,
                     definition:{name:{"en-US":title}},
                     description:{"en-US":"User has started the course: "+title}
                    },

@@ -16,10 +16,10 @@ class Course(models.Model):
 
 class Slide(models.Model):
 
-    title = models.CharField(max_length=26)
+    title = models.CharField(max_length=80)
     modified = models.DateTimeField(auto_now=True)
 
-    html = models.CharField(max_length=1500)
+    html = models.CharField(max_length=5000)
     course = models.ForeignKey(Course)
 
     number = models.IntegerField()
