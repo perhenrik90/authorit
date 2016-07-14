@@ -142,13 +142,15 @@ class SCORM_Export:
                 # add images
                 for img in self.images:
                         full_p = settings.MEDIA_ROOT+str(img.img)
-                        z.write(full_p)
+                        relative = 'media/'+img.img.name
+                        z.write(full_p, arcname=relative)
 
                 # add videos
                 for video in self.videos:
-                        full_p = settings.MEDIA_ROOT+str(video.video)
-                        z.write(full_p)
-
+                        full_p = settings.MEDIA_ROOT+str(img.img)
+                        relative = 'media/'+img.img.name
+                        z.write(full_p, arcname=relative)
+                        
                 ######################################################
                 # Export authorit / django xml
                 # used to export courses to other authorit instances
