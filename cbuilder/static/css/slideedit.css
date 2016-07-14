@@ -28,4 +28,12 @@
 {
     border:2px solid red;
 }
-	      
+
+.displayImage
+{
+    max-width:"200px";
+    max-height:"270px";
+    width:auto;
+    height:auto;
+    margin:10px;
+}

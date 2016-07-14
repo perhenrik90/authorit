@@ -44,6 +44,7 @@
 <div class="row">
 
   <div class="col-sm-9">
+    {% if slides %}
     <table class="table">
       {% for s in slides %}
       <tr>
@@ -98,11 +99,16 @@
       </tr>
       {% endfor %}
     </table>
+    {% else %}
+    <h2>{% blocktrans %}Your slides will display in a list here!{% endblocktrans %}</h2>
+    <p>{% blocktrans %}There are no slides in this course.{% endblocktrans %}
+    <a href="{% url 'cbuilder.views.create_slide' %}?pid={{course.id}}">{% blocktrans %}Click here to create one.{% endblocktrans %}</a></p>
+    {% endif %}
   </div>
-
-    <div class="col-sm-3">
+  
+  <div class="col-sm-3">
     {% for image in images %}
-      <img src="/media/{{image.img}}" style="width:100px"/>
+    <img src="/media/{{image.img}}" style="width:100px"/>
     {% endfor %}
   </div>
 </div>

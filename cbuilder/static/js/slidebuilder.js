@@ -10,9 +10,9 @@ var selectedCol = null;
 options = { selector: 'textarea',
 	    height: 500,
 	    plugins: [
-		'advlist autolink lists link image charmap print preview anchor',
+		'advlist autolink lists link print preview anchor',
 		'searchreplace visualblocks code fullscreen',
-		'insertdatetime media table contextmenu paste code', 'save'
+		'insertdatetime table contextmenu paste code', 'save'
 	    ],
 	    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 	    content_css: [
@@ -219,6 +219,22 @@ function insertImage()
     div = document.getElementById("popup");
     div.innerHTML = "";
 
+    close = document.createElement("div");
+    close.className = "btn btn-primary glyphicon glyphicon-remove";
+    close.title = i18n.t("builder.close");
+    close.onclick = function(e){
+	document.body.removeChild($("#popup")[0]);
+    }
+    div.appendChild(close);
+    
+    carpet = document.createElement("div");
+    carpet.className = "carpet";
+    div.appendChild(carpet);
+
+    info = document.createElement("p");
+    info.innerHTML = i18n.t("builder.clickonimage");
+    carpet.appendChild(info);
+    
     images_path = getImagePaths();
 
     // add image and close
@@ -233,10 +249,12 @@ function insertImage()
     for(i = 0; i < images_path.length; i ++)
     {
 	img = document.createElement("img");
+	img.className = "displayImage";
 	img.style.width = "100px";
+	img.style.height = "auto";
 	img.src = images_path[i];
 	img.onclick = selectImage;
-	div.appendChild(img);
+	carpet.appendChild(img);
     }
 
 
@@ -248,6 +266,19 @@ function insertVideo()
 
     div = document.getElementById("popup");
     div.innerHTML = "";
+
+    close = document.createElement("div");
+    close.className = "btn btn-primary glyphicon glyphicon-remove";
+    close.title = i18n.t("builder.close");
+    close.onclick = function(e){
+	document.body.removeChild($("#popup")[0]);
+    }
+    div.appendChild(close);
+    
+    carpet = document.createElement("div");
+    carpet.className = "carpet";
+    div.appendChild(carpet);
+    
 
     video_path = getVideoPaths();
 
@@ -272,7 +303,7 @@ function insertVideo()
 	video.type = "video/ogg";
 	video.src = video_path[i];
 	video.onclick = selectVideo;
-	div.appendChild(video);
+	carpet.appendChild(video);
     }
 
 

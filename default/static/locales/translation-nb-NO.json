@@ -1,21 +1,23 @@
 {
     "builder":{
-	"deleterow":"Slett rad",
-	"texthere":"Tekst her",
-	"save":"Lagre",
+	"add":"Legg til",
 	"addimage":"Legg til bilde",
+	"addquiz":"Lag quiz",
 	"addvideo":"Legg til video",
 	"addwell":"Legg til brønn",
-	"addquiz":"Lag quiz",
-	"add":"Legg til",
-	"createalternative":"Lag alternativ",
-	"enterquestion":"Skriv inn spørsmål",
 	"alternative":"Alternativ",
-	"welltitle":"Tittel på brønn",
-	"welltext":"Brønntekst skrives her...",
-	"delete":"Slett",
 	"clearcolumn":"Fjern kolonne",
-	"newwell":"Ny brønn"  
+	"clickonimage":"Klikk på bilde du ønsker å legge til.",
+	"close":"Lukk"
+	"createalternative":"Lag alternativ",
+	"delete":"Slett",
+	"deleterow":"Slett rad",
+	"enterquestion":"Skriv inn spørsmål",
+	"newwell":"Ny brønn",
+	"save":"Lagre",
+	"texthere":"Tekst her",
+	"welltext":"Brønntekst skrives her...",
+	"welltitle":"Tittel på brønn",
     }
 
 }

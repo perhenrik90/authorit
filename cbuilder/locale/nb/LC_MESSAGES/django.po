@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-13 20:21+0000\n"
+"POT-Creation-Date: 2016-07-14 15:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,11 +55,11 @@ msgstr "Lag slide for"
 
 #: templates/delete_course.html:15
 msgid "Are your shure that you want to delete "
-msgstr ""
+msgstr "Er du sikker på at du vil slette "
 
 #: templates/delete_course.html:20
 msgid "Owner: "
-msgstr ""
+msgstr "Eier: "
 
 #: templates/delete_course.html:21
 msgid "Course created: "
@@ -126,29 +126,41 @@ msgstr "Last opp video"
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: templates/project.html:52
+#: templates/project.html:53
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/project.html:60
+#: templates/project.html:61
 msgid "Remove from the menu"
 msgstr "Fjern fra meny"
 
-#: templates/project.html:63
+#: templates/project.html:64
 msgid "Add to menu"
 msgstr "Legg til meny"
 
-#: templates/project.html:73
+#: templates/project.html:74
 msgid "Delete"
 msgstr "Slett"
 
-#: templates/project.html:83
+#: templates/project.html:84
 msgid "Up"
 msgstr "Opp"
 
-#: templates/project.html:93
+#: templates/project.html:94
 msgid "Down"
 msgstr "Ned"
+
+#: templates/project.html:103
+msgid "Your slides will display in a list here!"
+msgstr "Dine lysbilder vil vises i en liste her!"
+
+#: templates/project.html:104
+msgid "There are no slides in this course."
+msgstr "Kurset har ingen lysbilder."
+
+#: templates/project.html:105
+msgid "Click here to create one."
+msgstr "Klikk her for å første lysbildet."
 
 #: templates/upload_img.html:22
 msgid "Upload image to"
