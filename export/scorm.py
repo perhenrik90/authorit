@@ -213,7 +213,9 @@ def SCORM_Import(user, new_code, ffile):
                 # for all slides, update new path for images based on dictionary
                 for old_path in old_new_path:
                         slide.object.html = slide.object.html.replace(old_path, old_new_path[old_path])
-                                                                       
+
+                # clear id
+                slide.object.id = None
                 slide.object.course = imported_course
                 slide.object.save()
         
