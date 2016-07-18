@@ -6,7 +6,6 @@
  *********************************/
 
 // selectedCol is defined by sitebuilder.js
-
 function insertQuiz(data)
 {
     // override popup from 

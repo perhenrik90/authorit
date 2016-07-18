@@ -21,7 +21,7 @@ options = { selector: 'textarea',
 	    ],
 	    theme_advanced_buttons3_add : "save",
 	    save_enablewhendirty : false,
-	    save_onsavecallback : "saveColumn"
+	    save_onsavecallback : "saveColumn",
 	  }
 
 
@@ -138,9 +138,6 @@ function editColumn()
     popup.id = "popup";
     popup.className = "popup";
     document.body.appendChild(popup);
-
-
-
     
     // Save button
     save = document.createElement("div");
@@ -203,12 +200,23 @@ function editColumn()
     tarea.innerHTML = col.innerHTML;
     popup.appendChild(tarea);
   
-    tinymce.init(options);
 
 
-    if(col.children[0].className == "quiz_column"){
-    	insertQuiz(col.children[0]);
+    // if columns is of another type
+    try
+    {
+	if(col.children[0].className == "quiz_column"){
+    	    insertQuiz(col.children[0]);
+	}
+	if(col.children[0].className == "well-column"){
+    	    insertWell(col.children[0]);
+	}
     }
+    catch(e)
+    {
+
+    }
+    tinymce.init(options);
 }
 
 
