@@ -90,6 +90,34 @@ def edit_slide(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
+
+def edit_slide_title(request):
+    c = {}
+
+
+    if 'title' in request.POST:
+        sid = request.POST["sid"]
+        title = request.POST["title"]
+
+        slide = Slide.objects.get(id=sid)
+        slide.title = title
+        slide.save()
+
+        return HttpResponseRedirect(reverse(project)+"?pid="+str(slide.course.id))
+    
+    if 'sid' not in request.GET:
+        c["message"] = _("Slide id is not given!")
+        template = loader.get_template("edit_slide_title.html")
+        context = RequestContext(request, c)
+        return HttpResponse(template.render(context))	
+
+    sid = request.GET["sid"]
+    c["slide"] = Slide.objects.get(id=sid)
+          
+    template = loader.get_template("edit_slide_title.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
+
 #
 # Toggle title on / of in menu
 #

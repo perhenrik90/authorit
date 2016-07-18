@@ -8,7 +8,7 @@
 	"alternative":"Alternative",
 	"clearcolumn":"Clear column",
 	"clickonimage":"Click on the image you want to add.",
-	"close":"Close"
+	"close":"Close",
 	"createalternative":"Create alternative",
 	"delete":"Delete",
 	"deleterow":"Delete Row",
@@ -17,6 +17,6 @@
 	"save":"Save",
 	"texthere":"Text here",
 	"welltext":"Well text here...",
-	"welltitle":"Title for well",
+	"welltitle":"Title for well"
     }
 }

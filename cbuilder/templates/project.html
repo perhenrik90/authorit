@@ -48,7 +48,7 @@
     <table class="table">
       {% for s in slides %}
       <tr>
-	<td>{{s.title}}</td>
+	<td><a href="{% url 'cbuilder.views.edit_slide_title' %}?sid={{s.id}}">{{s.title}}</a></td>
 	<td><a href="{% url 'cbuilder.views.edit_slide' %}?sid={{s.id}}" class="btn btn-primary">
 	    {% blocktrans %}Edit{% endblocktrans %}</a></td>
 

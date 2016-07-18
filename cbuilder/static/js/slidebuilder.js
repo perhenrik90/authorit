@@ -225,7 +225,13 @@ function insertImage()
     close.onclick = function(e){
 	document.body.removeChild($("#popup")[0]);
     }
-    div.appendChild(close);
+
+    try{
+	div.appendChild(close);
+    }
+    catch(e){
+	console.log("Can not append close button to the view");
+    }
     
     carpet = document.createElement("div");
     carpet.className = "carpet";
