@@ -10,9 +10,9 @@ var selectedCol = null;
 options = { selector: 'textarea',
 	    height: 500,
 	    plugins: [
-		'advlist autolink lists link image charmap print preview anchor',
+		'advlist autolink lists link print preview anchor',
 		'searchreplace visualblocks code fullscreen',
-		'insertdatetime media table contextmenu paste code', 'save'
+		'insertdatetime table contextmenu paste code', 'save'
 	    ],
 	    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 	    content_css: [
@@ -21,7 +21,7 @@ options = { selector: 'textarea',
 	    ],
 	    theme_advanced_buttons3_add : "save",
 	    save_enablewhendirty : false,
-	    save_onsavecallback : "saveColumn"
+	    save_onsavecallback : "saveColumn",
 	  }
 
 
@@ -138,9 +138,6 @@ function editColumn()
     popup.id = "popup";
     popup.className = "popup";
     document.body.appendChild(popup);
-
-
-
     
     // Save button
     save = document.createElement("div");
@@ -203,12 +200,23 @@ function editColumn()
     tarea.innerHTML = col.innerHTML;
     popup.appendChild(tarea);
   
-    tinymce.init(options);
 
 
-    if(col.children[0].className == "quiz_column"){
-    	insertQuiz(col.children[0]);
+    // if columns is of another type
+    try
+    {
+	if(col.children[0].className == "quiz_column"){
+    	    insertQuiz(col.children[0]);
+	}
+	if(col.children[0].className == "well-column"){
+    	    insertWell(col.children[0]);
+	}
     }
+    catch(e)
+    {
+
+    }
+    tinymce.init(options);
 }
 
 
@@ -219,6 +227,28 @@ function insertImage()
     div = document.getElementById("popup");
     div.innerHTML = "";
 
+    close = document.createElement("div");
+    close.className = "btn btn-primary glyphicon glyphicon-remove";
+    close.title = i18n.t("builder.close");
+    close.onclick = function(e){
+	document.body.removeChild($("#popup")[0]);
+    }
+
+    try{
+	div.appendChild(close);
+    }
+    catch(e){
+	console.log("Can not append close button to the view");
+    }
+    
+    carpet = document.createElement("div");
+    carpet.className = "carpet";
+    div.appendChild(carpet);
+
+    info = document.createElement("p");
+    info.innerHTML = i18n.t("builder.clickonimage");
+    carpet.appendChild(info);
+    
     images_path = getImagePaths();
 
     // add image and close
@@ -233,10 +263,12 @@ function insertImage()
     for(i = 0; i < images_path.length; i ++)
     {
 	img = document.createElement("img");
+	img.className = "displayImage";
 	img.style.width = "100px";
+	img.style.height = "auto";
 	img.src = images_path[i];
 	img.onclick = selectImage;
-	div.appendChild(img);
+	carpet.appendChild(img);
     }
 
 
@@ -248,6 +280,19 @@ function insertVideo()
 
     div = document.getElementById("popup");
     div.innerHTML = "";
+
+    close = document.createElement("div");
+    close.className = "btn btn-primary glyphicon glyphicon-remove";
+    close.title = i18n.t("builder.close");
+    close.onclick = function(e){
+	document.body.removeChild($("#popup")[0]);
+    }
+    div.appendChild(close);
+    
+    carpet = document.createElement("div");
+    carpet.className = "carpet";
+    div.appendChild(carpet);
+    
 
     video_path = getVideoPaths();
 
@@ -272,7 +317,7 @@ function insertVideo()
 	video.type = "video/ogg";
 	video.src = video_path[i];
 	video.onclick = selectVideo;
-	div.appendChild(video);
+	carpet.appendChild(video);
     }
 
 

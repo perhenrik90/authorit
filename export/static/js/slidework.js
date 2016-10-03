@@ -228,18 +228,22 @@ function setupTinCan()
 function tincanComplete()
 {
     var tincan = setupTinCan()
+
+    // get actor object form url
     actor = getParameterByName("actor");
     actor = JSON.parse(actor);
     course_code = $("#course_code")[0].value;
-    
-    id = String( window.location );
+
+    // set up the id (url) to this course
+    act_id = "http://"+window.location.hostname+window.location.pathname
     title = document.title;
-    
+
+    // build the statement
     stm = { actor:actor,
             verb:{id:"http://adlnet.gov/expapi/verbs/completed",
 		  display:{"en-EN":"Completed","nb":"Fullført"}
 		 },
-            object:{id:"act:authorit:"+course_code,
+            object:{id:act_id,
                     definition:{name:{"en-US":title}},
                     description:{"en-US":"User has started the course: "+title}
                    },
@@ -255,15 +259,16 @@ function tincanStarted()
     actor = getParameterByName("actor");
     actor = JSON.parse(actor);
     course_code = $("#course_code")[0].value;
-    
-    id = String( window.location );
+
+    act_id = "http://"+window.location.hostname+window.location.pathname
+    console.log(act_id);
     title = document.title;
     
     stm = { actor:actor,
             verb:{id:"http://adlnet.gov/expapi/verbs/started",
 		  display:{"en-EN":"Started","nb":"Startet"}
 		 },
-            object:{id:"act:authorit:"+course_code,
+            object:{id:act_id,
                     definition:{name:{"en-US":title}},
                     description:{"en-US":"User has started the course: "+title}
                    },

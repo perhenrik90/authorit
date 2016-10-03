@@ -8,6 +8,8 @@
 // selectedCol is defined by sitebuilder.js
 function insertWell(data)
 {
+    var lData = false;
+    
     // override popup from 
     popup = document.getElementById("popup");
     popup.innerHTML = "";
@@ -19,31 +21,44 @@ function insertWell(data)
     well_controllers = document.createElement("div");
     well_controllers.className = "well_controllers";
     div.appendChild(well_controllers);
+
+    if(data.className == "well-column")
+    {
+	lData = true;
+    }
     
     // append one instance of well with title
     nController = 0;
-    function insertWellControllers()
+    function insertWellControllers(title, value)
     {
+	if(lData == false){
+	    title = i18n.t("builder.welltitle");
+	    value = i18n.t("builder.welltext");
+	}
+	    
 	// div tag to group title and text
 	pair = document.createElement("div");
 	pair.className = "well_pair";
 	well_controllers.appendChild(pair);
 
 	input_name = document.createElement("input");
-	input_name.value = i18n.t("builder.welltitle");
+	input_name.value = title;
 	pair.appendChild(input_name);
 	pair.appendChild(document.createElement("br"));
 	area = document.createElement("textarea");
-	area.value = i18n.t("builder.welltext");
+	area.value = value;
 	area.id = "builder"+nController;
 	
 	pair.appendChild(area);
 	pair.appendChild(document.createElement("hr"));
 
-	tinymce.init(options);
+	if(lData == false){
+	    tinymce.init(options);
+	}
+	
 	nController += 1;
     }
-    insertWellControllers();
+
 
 
     // add the well to the column
@@ -72,7 +87,7 @@ function insertWell(data)
 	    id_s = 'well'+id+i;
 	    well = wells[i];
 	    html += "<div class='well well-lg' id='"+id_s+"' style='display:none'>";
-	    html += tinymce.get(i+1).getContent();
+	    html += tinymce.get("builder"+i).getContent();
 	    html += "</div>";
 	}
 	html += "</div>";
@@ -83,8 +98,23 @@ function insertWell(data)
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
 	saveColumn();
+    }
 
+    // load data if there are some data given
+    if(lData){
+	var btn_grp = data.children[0];
+	for(i = 0; i < btn_grp.children.length; i++)
+	{
+	    var btnid = btn_grp.children[i].id;
+	    insertWellControllers( $("#"+btnid)[0].innerHTML,
+				   $("#well"+btnid)[0].innerHTML);
 
+	}
+	lData = false;
+    }
+    else{
+	insertWellControllers(i18n.t("builder.welltitle"),
+			      i18n.t("builder.welltext"));
     }
 
     addwell = document.createElement("p");
@@ -92,7 +122,6 @@ function insertWell(data)
     addwell.innerHTML = i18n.t("builder.newwell");
     addwell.onclick = insertWellControllers;
     div.appendChild(addwell);
-    
 
     submit = document.createElement("p");
     submit.className = "btn btn-primary";

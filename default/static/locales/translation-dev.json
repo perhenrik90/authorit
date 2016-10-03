@@ -1,20 +1,22 @@
 {
     "builder":{
-	"deleterow":"Delete Row",
-	"texthere":"Text here",
-	"save":"Save",
+	"add":"Add",
 	"addimage":"Add Image",
+	"addquiz":"Add Quiz",
 	"addvideo":"Add Video",
 	"addwell":"Add Well",
-	"addquiz":"Add Quiz",
-	"add":"Add",
-	"createalternative":"Create alternative",
-	"enterquestion":"Enter question",
 	"alternative":"Alternative",
-	"welltitle":"Title for well",
-	"welltext":"Well text here...",
-	"delete":"Delete",
 	"clearcolumn":"Clear column",
-	"newwell":"New well"
+	"clickonimage":"Click on the image you want to add.",
+	"close":"Close",
+	"createalternative":"Create alternative",
+	"delete":"Delete",
+	"deleterow":"Delete Row",
+	"enterquestion":"Enter question",
+	"newwell":"New well",
+	"save":"Save",
+	"texthere":"Text here",
+	"welltext":"Well text here...",
+	"welltitle":"Title for well"
     }
 }
