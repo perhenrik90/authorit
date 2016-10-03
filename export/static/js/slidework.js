@@ -124,6 +124,23 @@ function initSlideEngine()
 	nextbtn.onclick = se.nextSlide;
     }
 
+    // check if auto-mode is turned on
+    if(window.location.search.indexOf("automode=true")>0)
+    {
+	function autoUpdate()
+	{
+	    if(se.index == se.slides.length-1)
+	    {
+		window.location = window.location;
+	    }
+	    else
+	    {
+		se.nextSlide();		
+	    }
+	}
+	setInterval(autoUpdate, 60000);
+    }
+
     // create navbar buttons
     navbar = document.getElementById("navBar");
     
@@ -205,6 +222,8 @@ function setupTinCan()
     );
     return tincan;
 }
+
+
 
 function tincanComplete()
 {
