@@ -1,0 +1,44 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<div class="row">
+  <form method="POST">
+    <div class="col-sm-12">
+      <input name="pid" value="{{course.id}}" type="hidden"/>
+      {% csrf_token %}
+      <label for="title">{% blocktrans %}Title{% endblocktrans %}</label>
+      <input id="title" name="title" value="{{course.title}}"/><br/>
+
+      <label for="code">{% blocktrans %}Code{% endblocktrans %}</label>
+      <input id="code" name="code" value="{{course.code}}"/><br/>
+
+      <label for="owner">{% blocktrans %}Owner{% endblocktrans %}</label>
+      <input id="owner" name="owner" value="{{course.owner}}"/><br/>
+
+      <label for="desc">{% blocktrans %}Description{% endblocktrans %}</label>
+      <input id="desc" name="desc" value="{{course.description}}"/><br/>
+
+      <input type="submit" class="btn btn-primary" value="{% blocktrans %}Update{% endblocktrans %}"/>
+  </div>
+  </form>
+</div>
+
+
+{% endif %}
+{% endblock %}

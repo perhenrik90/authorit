@@ -42,7 +42,9 @@
     <tr>
       <td>{{c.title}}</td>
       <td><a href="{% url 'cbuilder.views.project' %}?pid={{c.id}}" class="btn btn-default">
-	  {% blocktrans %}Edit{% endblocktrans %}</a></td>
+	  {% blocktrans %}Edit Slides{% endblocktrans %}</a></td>
+      <td><a href="{% url 'cbuilder.views.edit_project' %}?pid={{c.id}}" class="btn btn-default">
+	  {% blocktrans %}Details{% endblocktrans %}</a></td>
       <td><a href="{% url 'export.views.preview' c.code %}" class="btn btn-default" target="_blank">
 	  {% blocktrans %}Preview{% endblocktrans %}</a></td>
       <td><a href="{% url 'export.views.export_scorm' %}?pid={{c.id}}" class="btn btn-default" target="_blank">

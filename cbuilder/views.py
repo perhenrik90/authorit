@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader, Template, Context
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_text
+from django.contrib.auth.models import User
 
 from default.views import login_view
 from cbuilder.models import Course, Slide,Image, Video
@@ -46,6 +47,40 @@ def project(request):
     template = loader.get_template("project.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
+
+
+#
+# View for edit project details
+#
+def edit_project(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+    if request.method == "POST":
+        pid = request.POST["pid"]
+        title = request.POST["title"]
+        code = request.POST["code"]
+        owner = request.POST["owner"]
+        desc = request.POST["desc"]
+
+        course = Course.objects.get(id=pid)
+        course.title = title
+        course.code = code
+        course.owner = User.objects.get(username=owner)
+        course.description = desc
+        course.save()
+        return HttpResponseRedirect(reverse(project)+"?pid="+str(course.id))
+        
+        
+    if 'pid' in request.GET:
+        c["course"] = Course.objects.get(id=request.GET["pid"])
+    
+    template = loader.get_template("edit_project.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
+
 
 #
 # View for editing slides

@@ -7,6 +7,7 @@ subpath = "course/"
 
 urlpatterns = [
     url(r'^project$', views.project, name='project'),
+    url(r'^edit_project$', views.edit_project, name='edit project'),
     url(r'^editslide$', views.edit_slide, name='edit slide'),
     url(r'^editslidetitle$', views.edit_slide_title, name='edit slide title'),
     url(r'^create_course$', views.create_course, name='create course'),

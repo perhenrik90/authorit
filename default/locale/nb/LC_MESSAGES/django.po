@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-13 19:20+0000\n"
+"POT-Creation-Date: 2016-10-14 08:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Oversikt"
 
-#: templates/login.html:20 templates/login.html:40
+#: templates/login.html:20 templates/login.html.py:40
 msgid "Login"
 msgstr "Logg inn"
 
@@ -46,21 +46,28 @@ msgid "Create course"
 msgstr "Lag kurs"
 
 #: templates/overview.html:30
-#| msgid "Create course"
 msgid "Import course"
 msgstr "Importer kurs"
 
-#: templates/overview.html:44
-msgid "Edit"
-msgstr "Endre"
+#: templates/overview.html:45
+msgid "Edit Slides"
+msgstr "Endre innhold"
 
-#: templates/overview.html:46
+#: templates/overview.html:47
+msgid "Details"
+msgstr "Detaljer"
+
+#: templates/overview.html:49
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: templates/overview.html:48
+#: templates/overview.html:51
 msgid "Export SCORM"
 msgstr "Eksporter SCORM"
+
+#: templates/overview.html:56
+msgid "Delete"
+msgstr "Slett"
 
 #: views.py:29
 msgid "Your user is suspended."
@@ -69,3 +76,6 @@ msgstr "Din bruker er suspendert."
 #: views.py:45
 msgid "You must be logged in to see this page"
 msgstr "Du må være logget inn for å se denne siden"
+
+#~ msgid "Edit"
+#~ msgstr "Endre"

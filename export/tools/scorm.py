@@ -17,4 +17,4 @@ class SCORM:
                 c["course"] = course
                 temp = loader.get_template("scorm/slides.html")
                 slides = render(temp)
-                print(slides)
+
