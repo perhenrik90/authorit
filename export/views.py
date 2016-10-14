@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 from io import StringIO
 
 from django.shortcuts import render, redirect
