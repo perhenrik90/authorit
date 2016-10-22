@@ -95,9 +95,11 @@ function insertWell(data)
 	console.log(html);
 	selectedCol.innerHTML = html;
 	$("#html_form")[0].value = slide.innerHTML;
+
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
-	saveColumn();
+	//saveColumn();
+	saveSlide();
     }
 
     // load data if there are some data given

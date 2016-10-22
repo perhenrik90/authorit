@@ -7,6 +7,8 @@
 <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 <script src="{% static 'js/quizbuilder.js' %}"></script>
 <script src="{% static 'js/wellbuilder.js' %}"></script>
+
+<!-- Dynamic JavaScript functions -->
 <script>
   function getImagePaths()
   {
@@ -24,6 +26,11 @@
   l.push("/media/{{video.video}}");
   {% endfor %}
   return l;
+  }
+  function saveSlide()
+  {
+  var form = document.getElementById("saveForm");
+  form.submit();
   }
 </script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
@@ -58,7 +65,7 @@
   </ul>
 </li>
 <li>
-  <form method="post" action="{% url 'cbuilder.views.save_slide' %}">
+  <form id="saveForm" method="post" action="{% url 'cbuilder.views.save_slide' %}">
     <p class="navbar-btn">
       <input class="btn btn-default" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/></p>
     <input name="sid" type="hidden" value="{{slide.id}}"/>

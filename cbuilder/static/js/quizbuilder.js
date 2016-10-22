@@ -114,7 +114,8 @@ function insertQuiz(data)
 	$("#html_form")[0].value = slide.innerHTML;
 	// remove the popup screen
 	document.body.removeChild($("#popup")[0]);
-	saveColumn();
+	//saveColumn();
+	saveSlide();
     }
     
     div.appendChild(document.createElement("hr"));

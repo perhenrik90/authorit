@@ -123,6 +123,7 @@ function saveColumn()
     slide = $("#slide")[0];
     
     $("#html_form")[0].value = slide.innerHTML;
+    saveSlide();
 }
 
 
@@ -258,6 +259,7 @@ function insertImage()
 	selectedCol.innerHTML = "<img src='"+this.src+"' width='100%'></img>"
 	$("#html_form")[0].value = slide.innerHTML;
 	document.body.removeChild($("#popup")[0]);
+	saveSlide();
     }
     
     for(i = 0; i < images_path.length; i ++)
