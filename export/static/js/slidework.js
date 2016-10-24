@@ -15,6 +15,7 @@ function initSlideEngine()
 {
     var se = new Object(); // define a slide engine
     var useTincan = false;
+    var automode = false;
     
     // data objects / models
     se.slides = document.getElementsByClassName("slide");
@@ -27,13 +28,18 @@ function initSlideEngine()
 	console.log("Tincan / xAPI is turned on.");
 	tincanStarted();
     }
-    
+   
     // updates the view 
     se.updateView = function()
     {
-	$('#nav-left').css("display","");
-	$('#nav-right').css("display","");
-	
+	// if not automatic mode, show next and prev buttons
+	if(! automode)
+	{
+	    $('#nav-left').css("display","");
+	    $('#nav-right').css("display","");
+	}
+
+	// loop through all slides and hide them and show the slide indexed
 	for(var i = 0; i < se.slides.length; i ++)
 	{
 	    slide = se.slides[i];
@@ -49,6 +55,7 @@ function initSlideEngine()
 	{
 	    $('#nav-right').css("display","None");
 	}
+	
 	// Hide left button if first slide is in display
 	if(se.index == 0)
 	{
@@ -127,6 +134,12 @@ function initSlideEngine()
     // check if auto-mode is turned on
     if(window.location.search.indexOf("automode=true")>0)
     {
+	// hide next and preveus buttons
+	automode = true;
+	$("#nav-left").css("display","none");
+	$("#nav-right").css("display","none");
+	
+	// auto slide function
 	function autoUpdate()
 	{
 	    if(se.index == se.slides.length-1)
