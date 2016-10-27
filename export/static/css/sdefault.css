@@ -8,10 +8,15 @@
 .slide
 {
     margin:25px;
+
+
+
 }
 #slides
 {
-    margin-bottom:120px;
+    display: table;
+
+
 }
 
 
