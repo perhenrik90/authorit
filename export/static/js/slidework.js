@@ -138,6 +138,7 @@ function initSlideEngine()
 	automode = true;
 	$("#nav-left").css("display","none");
 	$("#nav-right").css("display","none");
+	$("#navbar-header").css("display","none");
 	
 	// auto slide function
 	function autoUpdate()
