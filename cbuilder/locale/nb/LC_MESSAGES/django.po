@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 08:44+0000\n"
+"POT-Creation-Date: 2016-10-28 08:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,6 @@ msgid "Code"
 msgstr "Kode"
 
 #: templates/edit_project.html:31
-#| msgid "Owner: "
 msgid "Owner"
 msgstr "Eier"
 
@@ -91,39 +90,39 @@ msgstr "Eier"
 msgid "Update"
 msgstr "Oppdater"
 
-#: templates/edit_slide.html:45
+#: templates/edit_slide.html:52
 msgid "Course"
 msgstr "Kurs"
 
-#: templates/edit_slide.html:49
+#: templates/edit_slide.html:56
 msgid "Add row"
 msgstr "Lag rad"
 
-#: templates/edit_slide.html:52
+#: templates/edit_slide.html:59
 msgid "Single row"
 msgstr "Enslig rad"
 
-#: templates/edit_slide.html:53
+#: templates/edit_slide.html:60
 msgid "Double row"
 msgstr "Dobbel rad"
 
-#: templates/edit_slide.html:54
+#: templates/edit_slide.html:61
 msgid "Tripple row"
 msgstr "Trippel rad"
 
-#: templates/edit_slide.html:55
+#: templates/edit_slide.html:62
 msgid "Four row"
 msgstr "Fire rader"
 
-#: templates/edit_slide.html:56
+#: templates/edit_slide.html:63
 msgid "Small - Big"
 msgstr "Liten - Stor"
 
-#: templates/edit_slide.html:57
+#: templates/edit_slide.html:64
 msgid "Big - Small"
 msgstr "Stor - Liten"
 
-#: templates/edit_slide.html:63
+#: templates/edit_slide.html:70
 msgid "Save"
 msgstr "Lagre"
 
@@ -144,43 +143,47 @@ msgstr "Last opp bilde"
 msgid "Upload video"
 msgstr "Last opp video"
 
-#: templates/project.html:39
+#: templates/project.html:41 templates/project.html.py:45
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: templates/project.html:53
+#: templates/project.html:47
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: templates/project.html:65
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/project.html:61
+#: templates/project.html:73
 msgid "Remove from the menu"
 msgstr "Fjern fra meny"
 
-#: templates/project.html:64
+#: templates/project.html:76
 msgid "Add to menu"
 msgstr "Legg til meny"
 
-#: templates/project.html:74
+#: templates/project.html:86
 msgid "Delete"
 msgstr "Slett"
 
-#: templates/project.html:84
+#: templates/project.html:96
 msgid "Up"
 msgstr "Opp"
 
-#: templates/project.html:94
+#: templates/project.html:106
 msgid "Down"
 msgstr "Ned"
 
-#: templates/project.html:103
+#: templates/project.html:115
 msgid "Your slides will display in a list here!"
 msgstr "Dine lysbilder vil vises i en liste her!"
 
-#: templates/project.html:104
+#: templates/project.html:116
 msgid "There are no slides in this course."
 msgstr "Kurset har ingen lysbilder."
 
-#: templates/project.html:105
+#: templates/project.html:117
 msgid "Click here to create one."
 msgstr "Klikk her for å første lysbildet."
 

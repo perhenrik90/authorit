@@ -27,17 +27,29 @@
 <!-- button row for manipulating slides -->
 <div class="row">
   <div class="col-sm-12">
-    <div class="btn-group btn-group-lg">
+    
       <a class="btn btn-primary" href="{% url 'cbuilder.views.create_slide' %}?pid={{course.id}}">
 	{% blocktrans %}Create slide{% endblocktrans %}
       </a>
       <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_image' %}?pid={{course.id}}">
 	{% blocktrans %}Upload image{% endblocktrans %}</a>
-            <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_video' %}?pid={{course.id}}">
-	      {% blocktrans %}Upload video{% endblocktrans %}</a>
-	    <a href="{% url 'export.views.preview' course.code %}" class="btn btn-primary" target="_blank">
-	      {% blocktrans %}Preview{% endblocktrans %}</a>
-    </div>
+      <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_video' %}?pid={{course.id}}">
+	{% blocktrans %}Upload video{% endblocktrans %}</a>
+
+      <span class="dropdown">
+	<button class="btn btn-primary dropdown-toggle" type="button"
+		data-toggle="dropdown">{% blocktrans %}Preview{% endblocktrans %}
+	  <span class="caret"></span></button>
+	<ul class="dropdown-menu">
+	  <li><a href="{% url 'export.views.preview' course.code %}"  target="_blank">
+	      {% blocktrans %}Preview{% endblocktrans %}</a></li>
+	  <li><a href="{% url 'export.views.preview' course.code %}?automode=true"  target="_blank">
+	      {% blocktrans %}Automatic{% endblocktrans %}</a></li>
+	</ul>
+      </span>
+	    
+	    
+
   </div>
 </div>
 <br/>
