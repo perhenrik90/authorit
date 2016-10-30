@@ -338,6 +338,9 @@ def swap_slide(request):
     return HttpResponseRedirect(reverse('default.views.dashboard'))
 
 
+#
+# Image views
+#
 def upload_image(request):
     c = {}
     if not request.user.is_authenticated():
@@ -369,6 +372,36 @@ def upload_image(request):
         c["message"] = _("No course id was given!")
             
     template = loader.get_template("upload_img.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
+
+
+def edit_image(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
+
+    if request.method == "POST":
+        image = Image.objects.get(id=request.POST["id"])
+        
+        if 'delete' in request.POST:
+            image.img.delete(save=True)
+            image.delete()
+            
+        else:
+            image.description = request.POST["description"]
+            image.save()
+            
+        return redirect( reverse( project)+"?pid="+str(image.course.id))
+    
+    if 'id' not in request.GET:
+        c["message"] = _("Image id not given.")
+
+    image = Image.objects.get( id= request.GET["id"] )
+    c["image"] = image
+    
+    template = loader.get_template("edit_img.html")
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 

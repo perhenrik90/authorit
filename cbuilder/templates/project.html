@@ -120,7 +120,9 @@
   
   <div class="col-sm-3">
     {% for image in images %}
-    <img src="/media/{{image.img}}" style="width:100px"/>
+    <a href="{% url 'cbuilder.views.edit_image' %}?id={{image.id}}">
+      <img src="/media/{{image.img}}" alt="{{image.description}}" style="width:100px"/>
+    </a>
     {% endfor %}
   </div>
 </div>
