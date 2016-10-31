@@ -9,7 +9,7 @@ from django.utils.encoding import smart_text
 from django.contrib.auth.models import User
 
 from default.views import login_view
-from cbuilder.models import Course, Slide,Image, Video
+from cbuilder.models import Course, Slide,Image, Video, CustomTheme
 
 #
 # View a project
@@ -65,17 +65,26 @@ def edit_project(request):
         owner = request.POST["owner"]
         desc = request.POST["desc"]
 
+        
         course = Course.objects.get(id=pid)
         course.title = title
         course.code = code
         course.owner = User.objects.get(username=owner)
         course.description = desc
+        course.theme = None
+        
+        if request.POST["theme"] != 'none':
+            theme = CustomTheme.objects.get(id=request.POST["theme"])
+            course.theme = theme
+            
         course.save()
         return HttpResponseRedirect(reverse(project)+"?pid="+str(course.id))
         
         
     if 'pid' in request.GET:
         c["course"] = Course.objects.get(id=request.GET["pid"])
+
+    c["themes"] = CustomTheme.objects.all()
     
     template = loader.get_template("edit_project.html")
     context = RequestContext(request, c)

@@ -6,7 +6,6 @@ class CustomTheme(models.Model):
     title = models.CharField(max_length=80)
     created = models.DateTimeField(auto_now_add=True)
     css = models.FileField(upload_to="css/%Y")
-
     
     def __unicode__(self):
         return self.title

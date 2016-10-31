@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-30 13:35+0000\n"
+"POT-Creation-Date: 2016-10-31 19:18+0000\n"
 "PO-Revision-Date: 2016-10-30 13:35+0000\n"
 "Last-Translator: Per-Henrik Kvalnes <perhenrik.kvalnes@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgid "coursecode here"
 msgstr "kurskode her"
 
 #: templates/create_course.html:28 templates/create_course.html.py:29
-#: templates/delete_course.html:26 templates/edit_project.html:34
+#: templates/delete_course.html:26 templates/edit_project.html:43
 #: templates/upload_img.html:34 templates/upload_vid.html:34
 msgid "Description"
 msgstr "Beskrivelse"
@@ -79,7 +79,6 @@ msgid "No"
 msgstr "Nei"
 
 #: templates/edit_img.html:25
-#| msgid "Upload image"
 msgid "Edit image"
 msgstr "Endre bilde"
 
@@ -91,7 +90,7 @@ msgstr "Slett"
 msgid "Your image will be deleted from the project"
 msgstr "Ditt bilde vil bli slettet fra prosjektet"
 
-#: templates/edit_img.html:56 templates/edit_project.html:37
+#: templates/edit_img.html:56 templates/edit_project.html:46
 msgid "Update"
 msgstr "Oppdater"
 
@@ -100,42 +99,46 @@ msgid "Code"
 msgstr "Kode"
 
 #: templates/edit_project.html:31
+msgid "Theme"
+msgstr "Tema"
+
+#: templates/edit_project.html:40
 msgid "Owner"
 msgstr "Eier"
 
-#: templates/edit_slide.html:52
+#: templates/edit_slide.html:57
 msgid "Course"
 msgstr "Kurs"
 
-#: templates/edit_slide.html:56
+#: templates/edit_slide.html:61
 msgid "Add row"
 msgstr "Lag rad"
 
-#: templates/edit_slide.html:59
+#: templates/edit_slide.html:64
 msgid "Single row"
 msgstr "Enslig rad"
 
-#: templates/edit_slide.html:60
+#: templates/edit_slide.html:65
 msgid "Double row"
 msgstr "Dobbel rad"
 
-#: templates/edit_slide.html:61
+#: templates/edit_slide.html:66
 msgid "Tripple row"
 msgstr "Trippel rad"
 
-#: templates/edit_slide.html:62
+#: templates/edit_slide.html:67
 msgid "Four row"
 msgstr "Fire rader"
 
-#: templates/edit_slide.html:63
+#: templates/edit_slide.html:68
 msgid "Small - Big"
 msgstr "Liten - Stor"
 
-#: templates/edit_slide.html:64
+#: templates/edit_slide.html:69
 msgid "Big - Small"
 msgstr "Stor - Liten"
 
-#: templates/edit_slide.html:70
+#: templates/edit_slide.html:75
 msgid "Save"
 msgstr "Lagre"
 
@@ -212,8 +215,8 @@ msgstr "Last opp bilde til"
 msgid "Video File"
 msgstr "Videofil"
 
-#: views.py:21 views.py:58 views.py:91 views.py:176 views.py:203 views.py:231
-#: views.py:294 views.py:316 views.py:347 views.py:382 views.py:412
+#: views.py:21 views.py:58 views.py:100 views.py:185 views.py:212 views.py:240
+#: views.py:303 views.py:325 views.py:356 views.py:391 views.py:421
 msgid "You must be logged in to see this page"
 msgstr "Du må være logget inn får å se siden"
 
@@ -226,50 +229,49 @@ msgstr "Kurs med id %s er ikke funnet"
 msgid "Project id not given!"
 msgstr "Prosjekt id er ikke gitt!"
 
-#: views.py:105 views.py:262
+#: views.py:114 views.py:271
 #, python-format
 msgid "Course with id %s not found!"
 msgstr "Kurs med id %s er ikke funnet!"
 
-#: views.py:121
+#: views.py:130
 msgid "No slide id was given!"
 msgstr "Lysbilde med id var ikke gitt!"
 
-#: views.py:144
+#: views.py:153
 msgid "Slide id is not given!"
 msgstr "Lysbildeident er ikke gitt!"
 
-#: views.py:191
+#: views.py:200
 msgid "Can not create the project. The course code is not unique!"
 msgstr "Kan ikke lage prosjekt. Kurskoden må være unik!"
 
-#: views.py:207
+#: views.py:216
 msgid "Can not delete this course. Course not found!"
 msgstr "Kan ikke slette dette kurest. Kurs ikke funnet!"
 
-#: views.py:254
+#: views.py:263
 #, python-format
 msgid "Could not create a new slide to course %s"
 msgstr "Kan ikke lage nytt lysbilde til kurs %s"
 
-#: views.py:265
+#: views.py:274
 msgid "No course id given. Can not create slide!"
 msgstr "Ingen kursid er gitt. Kan ikke lage slide!"
 
-#: views.py:307
+#: views.py:316
 #, python-format
 msgid "Could not find slide with id %s"
 msgstr "Kan ikke finne slide med id %s"
 
-#: views.py:364 views.py:429
+#: views.py:373 views.py:438
 msgid "Upload failed!"
 msgstr "Opplasting feilet!"
 
-#: views.py:372 views.py:437
+#: views.py:381 views.py:446
 msgid "No course id was given!"
 msgstr "Ingen kurside er gitt!"
 
-#: views.py:399
-#| msgid "Project id not given!"
+#: views.py:408
 msgid "Image id not given."
 msgstr "Bilde id er ikke gitt!"
