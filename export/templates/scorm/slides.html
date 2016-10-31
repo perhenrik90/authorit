@@ -12,9 +12,9 @@
 <!-- init bootstrap -->
 <link rel="stylesheet" type="text/css" href="bootstrap.css"/>
 <link rel="stylesheet" href="sdefault.css" type="text/css"></link>
-
-
-
+{% if 'course.theme' %}
+   <link href="media/{{course.theme.css}}" type="text/css" rel="stylesheet"></link>
+{% endif %}
 
 <title>{{course.title}}</title>
 </head>

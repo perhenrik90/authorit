@@ -150,6 +150,12 @@ class SCORM_Export:
                         full_p = settings.MEDIA_ROOT+str(img.img)
                         relative = 'media/'+img.img.name
                         z.write(full_p, arcname=relative)
+
+                # add custom css
+                if self.course.theme:
+                        full_p = settings.MEDIA_ROOT+str(self.course.theme.css)
+                        relative = 'media/'+self.course.theme.css.name
+                        z.write(full_p, arcname=relative)
                         
                 ######################################################
                 # Export authorit / django xml

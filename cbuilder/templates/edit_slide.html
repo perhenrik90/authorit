@@ -35,6 +35,11 @@
 </script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
 
+{% if 'slide.course.theme' %}
+   <link href="/media/{{slide.course.theme.css}}" type="text/css" rel="stylesheet"></link>
+{% endif %}
+
+
 <style>
   .nav_button
   {
