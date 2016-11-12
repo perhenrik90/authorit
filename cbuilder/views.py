@@ -178,7 +178,9 @@ def toggle_menu_slide(request):
 
     return HttpResponseRedirect(reverse(project)+"?pid="+str(slide.course.id))
 
-
+#
+# Create a new course
+#
 def create_course(request):
     c = {}
     if not request.user.is_authenticated():
@@ -204,7 +206,9 @@ def create_course(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	 
 
-
+#
+# Delete a course
+#
 def delete_course(request):
     c = {}
     
@@ -317,7 +321,9 @@ def delete_slide(request):
             
     return HttpResponseRedirect(reverse('default.views.dashboard'))
 
-
+#
+# Swap two slides in order
+#
 def swap_slide(request):
 
     c = {}
@@ -384,7 +390,9 @@ def upload_image(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
-
+#
+# Edit image details
+#
 def edit_image(request):
     c = {}
     if not request.user.is_authenticated():
@@ -414,7 +422,9 @@ def edit_image(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(context))	
 
-
+#
+# Upload a video file
+#
 def upload_video(request):
     c = {}
     if not request.user.is_authenticated():

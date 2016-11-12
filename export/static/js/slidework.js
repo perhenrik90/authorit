@@ -238,7 +238,9 @@ function setupTinCan()
 }
 
 
-
+//
+// Called when TinCan is enabeled and course is completed
+//
 function tincanComplete()
 {
     var tincan = setupTinCan()
@@ -265,8 +267,9 @@ function tincanComplete()
     tincan.sendStatement(stm);
 }
 
-
-
+//
+// Called when TinCan is enabeled and couse is started
+//
 function tincanStarted()
 {
     var tincan = setupTinCan()
