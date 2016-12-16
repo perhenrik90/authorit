@@ -1,6 +1,6 @@
 AuthorIT
 ========
-NB! Still in early development and has many bugs...
+NB! Still in early development and some bugs...
 
 Webapp for createing e-learning SCORM content.
 Based on Python Django.
