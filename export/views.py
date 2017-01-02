@@ -52,6 +52,7 @@ def search_projects(request):
     if('q' in request.GET):
         query = request.GET["q"]
         c["courses"] = Course.objects.filter(title__icontains=query)
+
     
     return HttpResponse(template.render(context))
 
