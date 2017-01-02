@@ -15,7 +15,9 @@ from export.models import Build
 import cbuilder.views
 from export.scorm import SCORM_Export, SCORM_Import
 
-
+#
+# Preview a project
+#
 def preview(request, project):
 
     c = {}
@@ -34,6 +36,23 @@ def preview(request, project):
 
     template = loader.get_template("slides.html")
     context = RequestContext(request, c)
+    return HttpResponse(template.render(context))
+
+
+
+#
+# Search in projects (as staff)
+#
+def search_projects(request):
+    c = {}
+
+    template = loader.get_template("search_project.html")
+    context = RequestContext(request, c)
+
+    if('q' in request.GET):
+        query = request.GET["q"]
+        c["courses"] = Course.objects.filter(title__icontains=query)
+    
     return HttpResponse(template.render(context))
 
 
