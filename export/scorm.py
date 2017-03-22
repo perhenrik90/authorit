@@ -234,6 +234,10 @@ def SCORM_Import(user, new_code, ffile):
                 for old_path in old_new_path:
                         slide.object.html = slide.object.html.replace(old_path, old_new_path[old_path])
 
+                # replace absolute url with server relative
+                slide.object.html = re.sub("https://.*/media","/media/",slide.object.html)
+                slide.object.html = re.sub("http://.*/media","/media/",slide.object.html)
+                
                 # clear id
                 slide.object.id = None
                 slide.object.course = imported_course
