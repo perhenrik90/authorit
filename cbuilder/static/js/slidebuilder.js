@@ -179,6 +179,15 @@ function editColumn()
     add_vid.onclick = insertQuiz;
     add_vid.title = i18n.t("builder.addquiz");
     popup.appendChild(add_vid);
+
+    // add link
+    add_vid = document.createElement("div");
+    add_vid.className = "glyphicon glyphicon glyphicon-link btn btn-primary";
+    add_vid.innerHTML = "";
+    add_vid.onclick = insertLink;
+    add_vid.title = i18n.t("builder.addlink");
+    popup.appendChild(add_vid);
+    
     
     // Delete row button
     delete_row = document.createElement("div");

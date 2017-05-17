@@ -140,8 +140,6 @@ function insertQuiz(data)
     clear.onclick = clearColumn;
     div.appendChild(clear);    
 
-
-    
     div.appendChild( document.createElement("br"));
     add = document.createElement("p");
     add.innerHTML = i18n.t("builder.add");
