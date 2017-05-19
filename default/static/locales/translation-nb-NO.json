@@ -1,5 +1,10 @@
 {
     "builder":{
+	"enterlink":"Legg til lenke",
+	"link_name":"Lenke navn",
+	"url":"URL",
+	"width":"Vindu bredde",
+	"height":"Vindu høyde",
 	"add":"Legg til",
 	"addimage":"Legg til bilde",
 	"addquiz":"Lag quiz",
