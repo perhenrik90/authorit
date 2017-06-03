@@ -5,21 +5,41 @@
  * @author Per-Henrik Kvalnes
  ***********************************************/
 
+
+// used for configuration
+CONF = {'manual_registration':false, 'siteurl':window.location, "projectname":'Test'}
+
+
 // setup for all divtags with classname 'slide' 
 function initSlideEngine()
 {
     var se = new Object(); // define a slide engine
-
+    var useTincan = false;
+    var automode = false;
+    
     // data objects / models
     se.slides = document.getElementsByClassName("slide");
     se.index = 0;
 
+    // check if TinCan is used (uses tincan-min.js)
+    if(window.location.search.indexOf("tincan=true")>0)
+    {
+	useTincan = true;
+	console.log("Tincan / xAPI is turned on.");
+	tincanStarted();
+    }
+   
     // updates the view 
     se.updateView = function()
     {
-	$('#nav-left').css("display","");
-	$('#nav-right').css("display","");
+	// if not automatic mode, show next and prev buttons
+	if(! automode)
+	{
+	    $('#nav-left').css("display","");
+	    $('#nav-right').css("display","");
+	}
 
+	// loop through all slides and hide them and show the slide indexed
 	for(var i = 0; i < se.slides.length; i ++)
 	{
 	    slide = se.slides[i];
@@ -28,19 +48,34 @@ function initSlideEngine()
 	    {
 		slide.style.display = "";
 	    }
+	    
+	    menu_element = document.getElementById(i);
+	    if(menu_element){
+		menu_element.style = "";
+	    }
 	}
-
+	
+	var activeMenu = document.getElementById(se.index);
+	if(activeMenu){
+	    activeMenu.style.fontWeight = "bold";
+	}
+	console.log(activeMenu);
+	
 	// Hide nextbutton if the user displays the last slide
 	if(se.index == se.slides.length-1)
 	{
 	    $('#nav-right').css("display","None");
 	}
+	
 	// Hide left button if first slide is in display
 	if(se.index == 0)
 	{
 	    $('#nav-left').css("display","None");
 	}
 
+
+	
+	// Update progress bar
 	$("#course_progress_bar").css('width', (se.index/(se.slides.length-1)*100)+"%")
 	
     }
@@ -55,7 +90,13 @@ function initSlideEngine()
 	}
 	if(se.index == se.slides.length-1)
 	{
-		setCourseComplete();
+
+	    
+	    // if tincan is enabeled
+	    if(useTincan)
+	    {
+		tincanComplete();
+	    }
 	}
 
 	se.updateView();
@@ -90,8 +131,8 @@ function initSlideEngine()
     // set next button inactive
     se.disableNextButton = function()
     {
-	nextbtn.className = "btn-disabled";
-	nextbtn.onclick = "";
+
+
     }
     
     // set next button active
@@ -101,7 +142,29 @@ function initSlideEngine()
 	nextbtn.onclick = se.nextSlide;
     }
 
-
+    // check if auto-mode is turned on
+    if(window.location.search.indexOf("automode=true")>0)
+    {
+	// hide next and preveus buttons
+	automode = true;
+	$("#nav-left").css("display","none");
+	$("#nav-right").css("display","none");
+	$("#navbar-header").css("display","none");
+	
+	// auto slide function
+	function autoUpdate()
+	{
+	    if(se.index == se.slides.length-1)
+	    {
+		window.location = window.location;
+	    }
+	    else
+	    {
+		se.nextSlide();		
+	    }
+	}
+	setInterval(autoUpdate, 60000);
+    }
 
     // create navbar buttons
     navbar = document.getElementById("navBar");
@@ -117,9 +180,15 @@ function initSlideEngine()
     pbar.id = "course_progress_bar";
 
 
-    SCORMInit();
-
-
+    // init reporting tools 
+    // if(CONF['type'] == "scorm1.2")
+    // {
+    // 	SCORMInit();
+    // }
+    // if(CONF['type'] == "tincan")
+    // {
+    // 	TinCanInit();
+    // }
 
     // setup keybindings fo the document
     document.onkeydown = function(e)
@@ -143,155 +212,95 @@ function initSlideEngine()
 }
 
 
-function setCourseComplete()
+
+
+
+/******************************************
+ * Tin Can functions 
+ ******************************************/
+
+// initialice tincan
+function setupTinCan()
 {
+    // get the parameters from url
+    endpoint = getParameterByName("endpoint");
 
-    SCORMComplete()
- 
-}
+    // split the auth token based on base64
+    auth = getParameterByName("auth");
+    auth = auth.replace("Basic ","");
+    auth = window.atob(auth);
+    username = auth.split(":")[0].replace(" ","");
+    password = auth.split(":")[1].replace(" ","");
 
-
-
-
-// SCORM tools
-// Uses the Scorm Libary
-function SCORMInit()
-{
-	s = pipwerks.SCORM.init()	
-        pipwerks.SCORM.set('cmi.core.lesson_status', 'incomplete')
-        pipwerks.SCORM.save()
-	if(!s){alert("Could not connect to the LMS!")}
-}
-
-function SCORMComplete()
-{
-	s = pipwerks.SCORM.set('cmi.core.lesson_status', 'completed')
-        pipwerks.SCORM.save()
-	if(!s){alert('Could not set the course to completed!');}
-	//SCORMQuit();
-}
-
-function SCORMQuit()
-{
-	pipwerks.SCORM.quit()
-}
-
-/******************
- * Tin Can tools
- *******************/
-
-// retruns an tincan object
-function initTinCan()
-{
-	if(CONF["manual_registration"] == true)
-	{
+    // create an tincan instance
     var tincan = new TinCan (
-    {
-        recordStores: [
-            {
-                endpoint: CONF["endpoint"],
-                username: CONF["tcusername"],
-                password: CONF["tcpassword"],
-                allowFail: false
-            }
-        ]
-    }
-    );
-    return tincan
-	}
-
-	/** if LRS data is given by parameter **/
-	var endpoint_str = getParameterByName("endpoint");
-   	var auth_str = getParameterByName("auth");
-   	console.log(auth_str);
-	var tincan = new TinCan (
-    {
+	{
             recordStores: [
-            {
-                endpoint:endpoint_str,
-                auth: auth_str,
-                allowFail: false
-            }
-        ]
-    }
+		{
+                    endpoint: endpoint,
+                    username: username,
+                    password: password,
+                    allowFail: false
+		}
+            ]
+	}
     );
-    return tincan
+    return tincan;
 }
 
-// Calls when the users starts the project
-function TinCanInit()
+
+//
+// Called when TinCan is enabeled and course is completed
+//
+function tincanComplete()
 {
-	var actor_obj = null;
+    var tincan = setupTinCan()
 
-	/** enter name manualy **/
-    if(CONF["manual_registration"])
-    {
-		CONF["name"] = getParameterByName("name");
-		CONF["email"] = getParameterByName("email");
+    // get actor object form url
+    actor = getParameterByName("actor");
+    actor = JSON.parse(actor);
+    course_code = $("#course_code")[0].value;
 
-		actor_obj = {
-			mbox:CONF["email"],
-			name:CONF["name"]
-	 	   }
-    }
-    /** if not , get the parameters form the url **/
-	else
-	{
-		actor_obj = JSON.parse(getParameterByName("actor"));
-		console.log(actor_obj);
-	}
+    // set up the id (url) to this course
+    act_id = "http://"+window.location.hostname+window.location.pathname
+    title = document.title;
 
-    tc = initTinCan();
-    tc.sendStatement(
-	{
-		actor:actor_obj,
-	    verb:{
-		id:"http://adlnet.gov/expapi/verbs/initialized",
-	    "display":{"en-US":"Initialized","nb":"Startet"}},
-	    target:{id:CONF["siteurl"],"definition":
-		   {name:{"en-US":CONF["projectname"],
-			  "nb":CONF["projectname"]}}}
-	}
-    );
+    // build the statement
+    stm = { actor:actor,
+            verb:{id:"http://adlnet.gov/expapi/verbs/completed",
+		  display:{"en-EN":"Completed","nb":"Fullført"}
+		 },
+            object:{id:act_id,
+                    definition:{name:{"en-US":title}},
+                    description:{"en-US":"User has started the course: "+title}
+                   },
+          };
+    tincan.sendStatement(stm);
 }
 
-
-// Calls when projects is complete and tincan option is set
-var isSetComplete = false;
-function TinCanComplete()
+//
+// Called when TinCan is enabeled and couse is started
+//
+function tincanStarted()
 {
-    if(isSetComplete){return;}
+    var tincan = setupTinCan()
+    actor = getParameterByName("actor");
+    actor = JSON.parse(actor);
+    course_code = $("#course_code")[0].value;
 
-	var actor_obj = null;
-	if(CONF["manual_registration"])
-    {
-		CONF["name"] = getParameterByName("name");
-		CONF["email"] = getParameterByName("email");
-
-		actor_obj = {
-			mbox:CONF["email"],
-			name:CONF["name"]
-	 	   }
-    }
-    /** if not , get the parameters form the url **/
-	else
-	{
-		actor_obj = JSON.parse(getParameterByName("actor"));
-		console.log(actor_obj);
-	}
-
-    tc = initTinCan();
-    tc.sendStatement(
-	{
-	    actor:actor_obj,
-	    verb:{
-		id:"http://adlnet.gov/expapi/verbs/completed",
-	    "display":{"en-US":"Completed","nb":"Fullforte"}},
-	    target:{id:CONF["siteurl"],"definition":
-		   {name:{"en-US":CONF["projectname"],
-			  "nb":CONF["projectname"]}}}
-	}
-    );
-    isSetComplete = true;
-    return se;
+    act_id = "http://"+window.location.hostname+window.location.pathname
+    console.log(act_id);
+    title = document.title;
+    
+    stm = { actor:actor,
+            verb:{id:"http://adlnet.gov/expapi/verbs/started",
+		  display:{"en-EN":"Started","nb":"Startet"}
+		 },
+            object:{id:act_id,
+                    definition:{name:{"en-US":title}},
+                    description:{"en-US":"User has started the course: "+title}
+                   },
+          };
+    tincan.sendStatement(stm);
 }
+

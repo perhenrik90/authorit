@@ -48,8 +48,19 @@ function initSlideEngine()
 	    {
 		slide.style.display = "";
 	    }
+	    
+	    menu_element = document.getElementById(i);
+	    if(menu_element){
+		menu_element.style = "";
+	    }
 	}
-
+	
+	var activeMenu = document.getElementById(se.index);
+	if(activeMenu){
+	    activeMenu.style.fontWeight = "bold";
+	}
+	console.log(activeMenu);
+	
 	// Hide nextbutton if the user displays the last slide
 	if(se.index == se.slides.length-1)
 	{

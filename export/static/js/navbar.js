@@ -11,7 +11,7 @@ function initNavBar(se)
     // data objects / models / got from slideengine.js (!)
 
     se.slides = document.getElementsByClassName("slide");
-    nav = document.getElementById("navbar");
+    nav = document.getElementById("menu");
     fluid = document.createElement("div");
     fluid.className = "container-fluid";
     nav.appendChild(fluid);
@@ -38,6 +38,7 @@ function initNavBar(se)
 	    a.innerHTML = obj.title;
 	    a.onclick = se.setSlideByTitle;
 	    menu.appendChild(li);
+	    menu.appendChild(document.createElement("br"));
 	}
     }
 }
