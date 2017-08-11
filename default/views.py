@@ -33,7 +33,7 @@ def login_view(request):
         
     template = loader.get_template('login.html')
     context = RequestContext(request, c)
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(c, request))
 
 #
 # The users dashboard
@@ -49,4 +49,4 @@ def dashboard(request):
     
     template = loader.get_template("overview.html")
     context = RequestContext(request, c)
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(c, request))

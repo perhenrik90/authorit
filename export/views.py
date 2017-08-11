@@ -33,8 +33,7 @@ def preview(request, project):
 
 
     template = loader.get_template("slides.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(c, request))
 
 
 #
@@ -78,5 +77,4 @@ def import_scorm(request):
         return HttpResponseRedirect(reverse(cbuilder.views.project)+"?pid="+str(new_course.id))
     
     template = loader.get_template("upload_scorm.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(c,request))

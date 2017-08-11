@@ -28,14 +28,14 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="btn-group btn-group-lg">
-      <a class="btn btn-primary" href="{% url 'cbuilder.views.create_slide' %}?pid={{course.id}}">
+      <a class="btn btn-primary" href="{% url 'create slide' %}?pid={{course.id}}">
 	{% blocktrans %}Create slide{% endblocktrans %}
       </a>
-      <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_image' %}?pid={{course.id}}">
+      <a class="btn btn-primary" href="{% url 'upload image' %}?pid={{course.id}}">
 	{% blocktrans %}Upload image{% endblocktrans %}</a>
-            <a class="btn btn-primary" href="{% url 'cbuilder.views.upload_video' %}?pid={{course.id}}">
+            <a class="btn btn-primary" href="{% url 'upload video' %}?pid={{course.id}}">
 	      {% blocktrans %}Upload video{% endblocktrans %}</a>
-	    <a href="{% url 'export.views.preview' course.code %}" class="btn btn-primary" target="_blank">
+	    <a href="{% url 'preview' course.code %}" class="btn btn-primary" target="_blank">
 	      {% blocktrans %}Preview{% endblocktrans %}</a>
     </div>
   </div>
@@ -48,13 +48,13 @@
     <table class="table">
       {% for s in slides %}
       <tr>
-	<td><a href="{% url 'cbuilder.views.edit_slide_title' %}?sid={{s.id}}">{{s.title}}</a></td>
-	<td><a href="{% url 'cbuilder.views.edit_slide' %}?sid={{s.id}}" class="btn btn-primary">
+	<td><a href="{% url 'edit slide title' %}?sid={{s.id}}">{{s.title}}</a></td>
+	<td><a href="{% url 'edit slide' %}?sid={{s.id}}" class="btn btn-primary">
 	    {% blocktrans %}Edit{% endblocktrans %}</a></td>
 
 	<!-- add to menu -->
 	<td>
-	  <form method="POST" action="{% url 'cbuilder.views.toggle_menu_slide' %}">
+	  <form method="POST" action="{% url 'togle menu slide' %}">
 	    {% csrf_token %}
 	    <input type="hidden" name="sid" value="{{s.id}}"/>
 	  {% if s.inMenu %}
@@ -69,7 +69,7 @@
 	
 	<!-- delete -->
 	<td>
-	  <form action="{% url 'cbuilder.views.delete_slide' %}" method="POST">
+	  <form action="{% url 'delete slide' %}" method="POST">
 	    <input type="hidden" name="sid" value="{{s.id}}"/>
 	    <input type="submit" class="btn btn-danger" value="{% blocktrans %}Delete{% endblocktrans %}"/>
 	    {% csrf_token %}
@@ -77,7 +77,7 @@
 	</td>
 	<td>
 	  {% if s.prevSlide %}
-	  <form action="{% url 'cbuilder.views.swap_slide' %}" method="POST">
+	  <form action="{% url 'swap slide' %}" method="POST">
 	    <input value="{{s.id}}" name="sid1" type="hidden"/>
 	    <input value="{{s.prevSlide.id}}" name="sid2" type="hidden"/>
 	    {% csrf_token %}
@@ -87,7 +87,7 @@
 	</td>
 		<td>
 	  {% if s.nextSlide %}
-	  <form action="{% url 'cbuilder.views.swap_slide' %}" method="POST">
+	  <form action="{% url 'swap slide' %}" method="POST">
 	    <input value="{{s.id}}" name="sid1" type="hidden"/>
 	    <input value="{{s.nextSlide.id}}" name="sid2" type="hidden"/>
 	    {% csrf_token %}
@@ -102,7 +102,7 @@
     {% else %}
     <h2>{% blocktrans %}Your slides will display in a list here!{% endblocktrans %}</h2>
     <p>{% blocktrans %}There are no slides in this course.{% endblocktrans %}
-    <a href="{% url 'cbuilder.views.create_slide' %}?pid={{course.id}}">{% blocktrans %}Click here to create one.{% endblocktrans %}</a></p>
+    <a href="{% url 'create slide' %}?pid={{course.id}}">{% blocktrans %}Click here to create one.{% endblocktrans %}</a></p>
     {% endif %}
   </div>
   

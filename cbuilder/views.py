@@ -45,8 +45,7 @@ def project(request):
         c["message"] = _("Project id not given!")
         
     template = loader.get_template("project.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
 
 
 #
@@ -71,15 +70,14 @@ def edit_project(request):
         course.owner = User.objects.get(username=owner)
         course.description = desc
         course.save()
-        return HttpResponseRedirect(reverse(project)+"?pid="+str(course.id))
+        return HttpResponseRedirect(reverse('project')+"?pid="+str(course.id))
         
         
     if 'pid' in request.GET:
         c["course"] = Course.objects.get(id=request.GET["pid"])
     
     template = loader.get_template("edit_project.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
 
 
 #
@@ -119,11 +117,9 @@ def edit_slide(request):
 
     else:
         c["message"] = _("No slide id was given!")
-
     
     template = loader.get_template("edit_slide.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c, request))	
 
 
 def edit_slide_title(request):
@@ -138,7 +134,7 @@ def edit_slide_title(request):
         slide.title = title
         slide.save()
 
-        return HttpResponseRedirect(reverse(project)+"?pid="+str(slide.course.id))
+        return HttpResponseRedirect(reverse('project')+"?pid="+str(slide.course.id))
     
     if 'sid' not in request.GET:
         c["message"] = _("Slide id is not given!")
@@ -150,8 +146,7 @@ def edit_slide_title(request):
     c["slide"] = Slide.objects.get(id=sid)
           
     template = loader.get_template("edit_slide_title.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
 
 #
 # Toggle title on / of in menu
@@ -167,7 +162,7 @@ def toggle_menu_slide(request):
 
         slide.save()
 
-    return HttpResponseRedirect(reverse(project)+"?pid="+str(slide.course.id))
+    return HttpResponseRedirect(reverse('project')+"?pid="+str(slide.course.id))
 
 
 def create_course(request):
@@ -193,7 +188,7 @@ def create_course(request):
     
     template = loader.get_template("create_course.html")
     context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	 
+    return HttpResponse(template.render(c,request))	 
 
 
 def delete_course(request):
@@ -209,7 +204,7 @@ def delete_course(request):
     if 'cid' in request.POST and 'confirm' in request.POST:
         course = Course.objects.get(id=request.POST['cid'])
         course.delete()
-        return HttpResponseRedirect(reverse('default.views.dashboard'))
+        return HttpResponseRedirect(reverse('dashboard'))
         
         
     if 'cid' in request.POST:
@@ -217,8 +212,7 @@ def delete_course(request):
         c["slides"] = Slide.objects.filter(course=c["course"])
     
     template = loader.get_template("delete_course.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	 
+    return HttpResponse(template.render(c,request))	 
     
 
 
@@ -248,7 +242,7 @@ def create_slide(request):
             slide.save()
 
             # send the user to edit slide
-            return HttpResponseRedirect(reverse('cbuilder.views.edit_slide')+"?sid=%s" % slide.id)            
+            return HttpResponseRedirect(reverse('edit_slide')+"?sid=%s" % slide.id)            
 
         except Exception:
             c["message"] = _("Could not create a new slide to course %s" %course.title)
@@ -265,8 +259,7 @@ def create_slide(request):
         c["message"] = _("No course id given. Can not create slide!")
     
     template = loader.get_template("create_slide.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
 
 
 
@@ -282,7 +275,7 @@ def save_slide(request):
         slide = Slide.objects.get(id=sid)
         slide.html = html
         slide.save()
-        return HttpResponseRedirect(reverse('cbuilder.views.edit_slide')+"?sid=%s" % slide.id)
+        return HttpResponseRedirect(reverse('edit slide')+"?sid=%s" % slide.id)
 
 
 ##################
@@ -301,12 +294,12 @@ def delete_slide(request):
         try:
             slide = Slide.objects.get(id=sid)
             slide.delete()
-            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % slide.course.id)
+            return HttpResponseRedirect(reverse('project')+"?pid=%s" % slide.course.id)
         
         except Exception:
             c["message"] =  _("Could not find slide with id %s" % sid)
             
-    return HttpResponseRedirect(reverse('default.views.dashboard'))
+    return HttpResponseRedirect(reverse('dashboard'))
 
 
 def swap_slide(request):
@@ -333,9 +326,9 @@ def swap_slide(request):
         slide1.number = t2
         slide1.save()
 
-        return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % slide1.course.id)
+        return HttpResponseRedirect(reverse('project')+"?pid=%s" % slide1.course.id)
 
-    return HttpResponseRedirect(reverse('default.views.dashboard'))
+    return HttpResponseRedirect(reverse('dashboard'))
 
 
 def upload_image(request):
@@ -356,7 +349,7 @@ def upload_image(request):
         
             img = Image(course=course, img=imgfile, description=description)
             img.save()
-            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % course.id)
+            return HttpResponseRedirect(reverse('project')+"?pid=%s" % course.id)
         except Exception:
             c["message"] = _("Upload failed!")
 
@@ -369,8 +362,7 @@ def upload_image(request):
         c["message"] = _("No course id was given!")
             
     template = loader.get_template("upload_img.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
 
 
 def upload_video(request):
@@ -391,7 +383,7 @@ def upload_video(request):
         
             vid = Video(course=course, video=vidfile, description=description)
             vid.save()
-            return HttpResponseRedirect(reverse('cbuilder.views.project')+"?pid=%s" % course.id)
+            return HttpResponseRedirect(reverse('project')+"?pid=%s" % course.id)
         except Exception:
             c["message"] = _("Upload failed!")
 
@@ -404,5 +396,4 @@ def upload_video(request):
         c["message"] = _("No course id was given!")
             
     template = loader.get_template("upload_vid.html")
-    context = RequestContext(request, c)
-    return HttpResponse(template.render(context))	
+    return HttpResponse(template.render(c,request))	
