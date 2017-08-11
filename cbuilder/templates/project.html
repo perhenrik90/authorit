@@ -28,9 +28,8 @@
 <div class="row">
   <div class="col-sm-12">
 
-    <div class="btn-group btn-group-lg">
+    <div class="btn-group">
       <a class="btn btn-primary" href="{% url 'create slide' %}?pid={{course.id}}">
-
 	{% blocktrans %}Create slide{% endblocktrans %}
       </a>
       <a class="btn btn-primary" href="{% url 'upload image' %}?pid={{course.id}}">
@@ -50,12 +49,13 @@
 	      {% blocktrans %}Automatic{% endblocktrans %}</a></li>
 	</ul>
       </span>
-	 
+    </div>
+    
   </div>
 </div>
 <br/>
-<div class="row">
 
+<div class="row">
   <div class="col-sm-9">
     {% if slides %}
     <table class="table">
@@ -121,7 +121,7 @@
   
   <div class="col-sm-3">
     {% for image in images %}
-    <a href="{% url 'cbuilder.views.edit_image' %}?id={{image.id}}">
+    <a href="{% url 'edit image' %}?id={{image.id}}">
       <img src="/media/{{image.img}}" alt="{{image.description}}" style="width:100px"/>
     </a>
     {% endfor %}
