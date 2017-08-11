@@ -1,0 +1,60 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{% blocktrans %}Search in all projects{% endblocktrans %}</h1>
+  </div>
+</div>
+
+<div class="row">
+  <form>
+    <div class="col-sm-6">
+      <input name="q"/>
+    </div>
+    <div class="col-sm-6">
+      <input type="submit" value="{% blocktrans %}Search{% endblocktrans %}"/ class="btn btn-primary">
+    </div>
+  </form>
+</div>
+
+{% if courses %}
+<hr/>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table">
+      <tr>
+	<th>{% blocktrans %}Code{% endblocktrans %}</th>
+	<th>{% blocktrans %}Title{% endblocktrans %}</th>
+	<th>{% blocktrans %}Course owner{% endblocktrans %}</th>
+      </tr>
+      {% for course in courses %}
+      <tr>
+	<td><a href="{% url 'export.views.preview' course.code %}"  target="_blank">{{course.code}}</a></td>
+	<td>{{course.title}}</td>
+	<td>{{course.owner}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

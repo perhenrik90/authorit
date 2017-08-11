@@ -7,6 +7,7 @@
 <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 <script src="{% static 'js/quizbuilder.js' %}"></script>
 <script src="{% static 'js/wellbuilder.js' %}"></script>
+<script src="{% static 'js/linkbuilder.js' %}"></script>
 
 <!-- Dynamic JavaScript functions -->
 <script>
@@ -34,6 +35,11 @@
   }
 </script>
 <link href="{% static 'css/slideedit.css' %}" type="text/css" rel="stylesheet"></link>
+
+{% if 'slide.course.theme' %}
+   <link href="/media/{{slide.course.theme.css}}" type="text/css" rel="stylesheet"></link>
+{% endif %}
+
 
 <style>
   .nav_button

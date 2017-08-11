@@ -138,6 +138,7 @@ function initSlideEngine()
 	automode = true;
 	$("#nav-left").css("display","none");
 	$("#nav-right").css("display","none");
+	$("#navbar-header").css("display","none");
 	
 	// auto slide function
 	function autoUpdate()
@@ -237,7 +238,9 @@ function setupTinCan()
 }
 
 
-
+//
+// Called when TinCan is enabeled and course is completed
+//
 function tincanComplete()
 {
     var tincan = setupTinCan()
@@ -264,8 +267,9 @@ function tincanComplete()
     tincan.sendStatement(stm);
 }
 
-
-
+//
+// Called when TinCan is enabeled and couse is started
+//
 function tincanStarted()
 {
     var tincan = setupTinCan()

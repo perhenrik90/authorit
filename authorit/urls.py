@@ -18,7 +18,6 @@ urlpatterns = [
     url(r'^export_scorm$', export.views.export_scorm, name='export_scorm'),
     url(r'^import_scorm$', export.views.import_scorm, name='import_scorm'),
 
-
     url(r'^course/', include('cbuilder.urls')),
 
      url(r'^admin/', admin.site.urls),

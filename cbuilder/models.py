@@ -1,12 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class CustomTheme(models.Model):
+
+    title = models.CharField(max_length=80)
+    created = models.DateTimeField(auto_now_add=True)
+    css = models.FileField(upload_to="css/%Y")
+    
+    def __unicode__(self):
+        return self.title
+    
 class Course(models.Model):
 
     title = models.CharField(max_length=80)
     code = models.CharField(max_length=80, unique=True)
     description = models.CharField(max_length=300)
-
+    theme = models.ForeignKey(CustomTheme, null=True, blank=True)
+    
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User)
 

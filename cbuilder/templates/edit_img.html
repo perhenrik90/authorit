@@ -1,0 +1,61 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block head %}
+{% endblock %}
+
+{% block ekstra_nav %}
+{% endblock %}
+{% block content %}
+{% if message %}
+<div class="row">
+  <div class="col-sm-12">
+    <p>{{message}}</p>
+  </div>
+</div>
+{% else %}
+
+<form method="POST">
+  {% csrf_token %}
+  <input name="id" type="hidden" value="{{image.id}}">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>{% blocktrans %}Edit image{% endblocktrans %}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <img src="/media/{{image.img}}" style="width:100%"></img>
+    </div>
+    <div class="col-sm-6">
+      <p>{{image.created}}</p>
+      <textarea name="description">{{image.description}}</textarea>
+
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="col-sm-6">
+	<div class="checkbox">
+	  <label><input type="checkbox" name="delete">
+	    {% blocktrans %}Delete{% endblocktrans %} 
+	    ({% blocktrans %}Your image will be deleted from the project{% endblocktrans %})
+	  </label>
+	</div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+
+    <div class="col-sm-6">
+      <input type="submit" class="btn btn-primary" value="{% blocktrans %}Update{% endblocktrans %}" />
+    </div>
+  </div>
+</form>
+{% endif %}
+{% endblock %}

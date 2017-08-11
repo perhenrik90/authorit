@@ -9,7 +9,7 @@ from django.utils.encoding import smart_text
 from django.contrib.auth.models import User
 
 from default.views import login_view
-from cbuilder.models import Course, Slide,Image, Video
+from cbuilder.models import Course, Slide,Image, Video, CustomTheme
 
 #
 # View a project
@@ -64,17 +64,26 @@ def edit_project(request):
         owner = request.POST["owner"]
         desc = request.POST["desc"]
 
+        
         course = Course.objects.get(id=pid)
         course.title = title
         course.code = code
         course.owner = User.objects.get(username=owner)
         course.description = desc
+        course.theme = None
+        
+        if request.POST["theme"] != 'none':
+            theme = CustomTheme.objects.get(id=request.POST["theme"])
+            course.theme = theme
+            
         course.save()
         return HttpResponseRedirect(reverse('project')+"?pid="+str(course.id))
         
         
     if 'pid' in request.GET:
         c["course"] = Course.objects.get(id=request.GET["pid"])
+
+    c["themes"] = CustomTheme.objects.all()
     
     template = loader.get_template("edit_project.html")
     return HttpResponse(template.render(c,request))	
@@ -164,7 +173,9 @@ def toggle_menu_slide(request):
 
     return HttpResponseRedirect(reverse('project')+"?pid="+str(slide.course.id))
 
-
+#
+# Create a new course
+#
 def create_course(request):
     c = {}
     if not request.user.is_authenticated():
@@ -190,7 +201,9 @@ def create_course(request):
     context = RequestContext(request, c)
     return HttpResponse(template.render(c,request))	 
 
-
+#
+# Delete a course
+#
 def delete_course(request):
     c = {}
     
@@ -301,7 +314,9 @@ def delete_slide(request):
             
     return HttpResponseRedirect(reverse('dashboard'))
 
-
+#
+# Swap two slides in order
+#
 def swap_slide(request):
 
     c = {}
@@ -331,6 +346,9 @@ def swap_slide(request):
     return HttpResponseRedirect(reverse('dashboard'))
 
 
+#
+# Image views
+#
 def upload_image(request):
     c = {}
     if not request.user.is_authenticated():
@@ -364,7 +382,41 @@ def upload_image(request):
     template = loader.get_template("upload_img.html")
     return HttpResponse(template.render(c,request))	
 
+#
+# Edit image details
+#
+def edit_image(request):
+    c = {}
+    if not request.user.is_authenticated():
+        c["message"] = _("You must be logged in to see this page")
+        return redirect(login_view)
 
+    if request.method == "POST":
+        image = Image.objects.get(id=request.POST["id"])
+        
+        if 'delete' in request.POST:
+            image.img.delete(save=True)
+            image.delete()
+            
+        else:
+            image.description = request.POST["description"]
+            image.save()
+            
+        return redirect( reverse( project)+"?pid="+str(image.course.id))
+    
+    if 'id' not in request.GET:
+        c["message"] = _("Image id not given.")
+
+    image = Image.objects.get( id= request.GET["id"] )
+    c["image"] = image
+    
+    template = loader.get_template("edit_img.html")
+    context = RequestContext(request, c)
+    return HttpResponse(template.render(context))	
+
+#
+# Upload a video file
+#
 def upload_video(request):
     c = {}
     if not request.user.is_authenticated():

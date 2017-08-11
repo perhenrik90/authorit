@@ -150,6 +150,12 @@ class SCORM_Export:
                         full_p = settings.MEDIA_ROOT+str(img.img)
                         relative = 'media/'+img.img.name
                         z.write(full_p, arcname=relative)
+
+                # add custom css
+                if self.course.theme:
+                        full_p = settings.MEDIA_ROOT+str(self.course.theme.css)
+                        relative = 'media/'+self.course.theme.css.name
+                        z.write(full_p, arcname=relative)
                         
                 ######################################################
                 # Export authorit / django xml
@@ -189,6 +195,7 @@ def SCORM_Import(user, new_code, ffile):
         
         # load course xml and create a new course instance
         course_xml = str(z.read('authorit/authorit_course.xml'))
+
         imported_course = None
         for course in serializers.deserialize("xml", course_xml, ignorenonexistent=True):
                 course.object.code = new_code
@@ -199,13 +206,24 @@ def SCORM_Import(user, new_code, ffile):
 
         # import image mediafiles and store changes in a dictionary
         old_new_path = {}
+        files2 = z.extractall(settings.MEDIA_ROOT+"/tmpupload")
+
+        print files2
         files = z.namelist()
+        i = 0
         for path in files:
+
                 if 'media/img/' in path:
-                        nimage = Image(img=File(z.open(path,'r')))
+
+                        data = open(settings.MEDIA_ROOT+"tmpupload/"+path,'r')
+                        data = File(data)
+                        
+                        nimage = Image(img=data)
                         nimage.course = imported_course
                         nimage.save()
-                        old_new_path[path] = settings.MEDIA_URL+nimage.img.name
+
+                        old_new_path[path] = str(settings.MEDIA_URL)+str(nimage.img.name)
+                        i += 1
 
         
         # import the slides and them to the new course instance
@@ -216,6 +234,10 @@ def SCORM_Import(user, new_code, ffile):
                 for old_path in old_new_path:
                         slide.object.html = slide.object.html.replace(old_path, old_new_path[old_path])
 
+                # replace absolute url with server relative
+                slide.object.html = re.sub("https://.*/media","/media/",slide.object.html)
+                slide.object.html = re.sub("http://.*/media","/media/",slide.object.html)
+                
                 # clear id
                 slide.object.id = None
                 slide.object.course = imported_course

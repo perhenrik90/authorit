@@ -27,17 +27,30 @@
 <!-- button row for manipulating slides -->
 <div class="row">
   <div class="col-sm-12">
+
     <div class="btn-group btn-group-lg">
       <a class="btn btn-primary" href="{% url 'create slide' %}?pid={{course.id}}">
+
 	{% blocktrans %}Create slide{% endblocktrans %}
       </a>
       <a class="btn btn-primary" href="{% url 'upload image' %}?pid={{course.id}}">
 	{% blocktrans %}Upload image{% endblocktrans %}</a>
+
             <a class="btn btn-primary" href="{% url 'upload video' %}?pid={{course.id}}">
 	      {% blocktrans %}Upload video{% endblocktrans %}</a>
-	    <a href="{% url 'preview' course.code %}" class="btn btn-primary" target="_blank">
-	      {% blocktrans %}Preview{% endblocktrans %}</a>
-    </div>
+
+      <span class="dropdown">
+	<button class="btn btn-primary dropdown-toggle" type="button"
+		data-toggle="dropdown">{% blocktrans %}Preview{% endblocktrans %}
+	  <span class="caret"></span></button>
+	<ul class="dropdown-menu">
+	  <li><a href="{% url 'preview' course.code %}"  target="_blank">
+	      {% blocktrans %}Preview{% endblocktrans %}</a></li>
+	  <li><a href="{% url 'preview' course.code %}?automode=true"  target="_blank">
+	      {% blocktrans %}Automatic{% endblocktrans %}</a></li>
+	</ul>
+      </span>
+	 
   </div>
 </div>
 <br/>
@@ -108,7 +121,9 @@
   
   <div class="col-sm-3">
     {% for image in images %}
-    <img src="/media/{{image.img}}" style="width:100px"/>
+    <a href="{% url 'cbuilder.views.edit_image' %}?id={{image.id}}">
+      <img src="/media/{{image.img}}" alt="{{image.description}}" style="width:100px"/>
+    </a>
     {% endfor %}
   </div>
 </div>

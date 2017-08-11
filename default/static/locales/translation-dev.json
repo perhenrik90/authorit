@@ -1,5 +1,10 @@
 {
     "builder":{
+	"enterlink":"Add anchor",
+	"link_name":"Anchor name",
+	"url":"URL",
+	"width":"Window Width",
+	"height":"Window height",
 	"add":"Add",
 	"addimage":"Add Image",
 	"addquiz":"Add Quiz",

@@ -28,6 +28,15 @@
       <label for="code">{% blocktrans %}Code{% endblocktrans %}</label>
       <input id="code" name="code" value="{{course.code}}"/><br/>
 
+      <label for="theme">{% blocktrans %}Theme{% endblocktrans %}</label>
+      <select id="theme" name="theme">
+	<option value="none">-</option>
+	{% for theme in themes %}
+	<option value="{{theme.id}}">{{theme.title}}</option>
+	{% endfor %}
+      </select>
+	<br/>
+      
       <label for="owner">{% blocktrans %}Owner{% endblocktrans %}</label>
       <input id="owner" name="owner" value="{{course.owner}}"/><br/>
 
