@@ -8,10 +8,12 @@
 .slide
 {
     margin:25px;
+
 }
 #slides
 {
-    margin-bottom:120px;
+    margin-left:25px;
+    margin-right:25px;    
 }
 
 
