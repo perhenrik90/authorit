@@ -34,7 +34,7 @@
   <div class="col-sm-12">
     <input type="hidden" name="cid" value="{{course.id}}"/>
     <input type="submit" name="confirm" class="btn btn-danger" value="{% blocktrans %}Yes{% endblocktrans %}"/>
-    <a href="{% url 'default.views.dashboard' %}" class="btn btn-primary">{% blocktrans %}No{% endblocktrans %}</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">{% blocktrans %}No{% endblocktrans %}</a>
   </div>
 </div>
 </form>

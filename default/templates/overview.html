@@ -23,10 +23,10 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <a href="{% url 'cbuilder.views.create_course' %}" class="btn btn-primary">
+    <a href="{% url 'create course' %}" class="btn btn-primary">
       {% blocktrans %}Create course{% endblocktrans %}
     </a>
-    <a href="{% url 'export.views.import_scorm' %}" class="btn btn-primary">
+    <a href="{% url 'import_scorm' %}" class="btn btn-primary">
       {% blocktrans %}Import course{% endblocktrans %}
     </a>
 
@@ -41,16 +41,16 @@
     {% for c in courses %}
     <tr>
       <td>{{c.title}}</td>
-      <td><a href="{% url 'cbuilder.views.project' %}?pid={{c.id}}" class="btn btn-default">
-	  {% blocktrans %}Edit Slides{% endblocktrans %}</a></td>
-      <td><a href="{% url 'cbuilder.views.edit_project' %}?pid={{c.id}}" class="btn btn-default">
+      <td><a href="{% url 'project' %}?pid={{c.id}}" class="btn btn-default">
+      	  {% blocktrans %}Edit Slides{% endblocktrans %}</a></td>
+      <td><a href="{% url 'edit project' %}?pid={{c.id}}" class="btn btn-default">
 	  {% blocktrans %}Details{% endblocktrans %}</a></td>
-      <td><a href="{% url 'export.views.preview' c.code %}" class="btn btn-default" target="_blank">
+      <td><a href="{% url 'preview' c.code %}" class="btn btn-default" target="_blank">
 	  {% blocktrans %}Preview{% endblocktrans %}</a></td>
-      <td><a href="{% url 'export.views.export_scorm' %}?pid={{c.id}}" class="btn btn-default" target="_blank">
+      <td><a href="{% url 'export_scorm' %}?pid={{c.id}}" class="btn btn-default" target="_blank">
 	  {% blocktrans %}Export SCORM{% endblocktrans %}</a></td>
       <td>
-	<form method="POST" action="{% url 'cbuilder.views.delete_course' %}">
+	<form method="POST" action="{% url 'delete course' %}">
 	  {% csrf_token %}
 	  <input type="hidden" value="{{c.id}}" name="cid"/>
 	  <input type="submit" value="{% blocktrans %}Delete{% endblocktrans %}" class="btn btn-danger"/>
