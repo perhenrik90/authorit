@@ -53,7 +53,7 @@ class SCORM_Export:
                 c["course"] = self.course
                 c["slides"] = self.slides
 
-                context = Context(c)
+                context = c
                 z = zipfile.ZipFile(self.scorm_path,'w')
                 
                 # setup main
