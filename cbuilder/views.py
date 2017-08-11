@@ -255,7 +255,7 @@ def create_slide(request):
             slide.save()
 
             # send the user to edit slide
-            return HttpResponseRedirect(reverse('edit_slide')+"?sid=%s" % slide.id)            
+            return HttpResponseRedirect(reverse('edit slide')+"?sid=%s" % slide.id)            
 
         except Exception:
             c["message"] = _("Could not create a new slide to course %s" %course.title)
@@ -272,7 +272,7 @@ def create_slide(request):
         c["message"] = _("No course id given. Can not create slide!")
     
     template = loader.get_template("create_slide.html")
-    return HttpResponse(template.render(c,request))	
+    return HttpResponse(template.render(c, request))	
 
 
 
