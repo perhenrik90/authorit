@@ -46,14 +46,14 @@ def search_projects(request):
     c = {}
 
     template = loader.get_template("search_project.html")
-    context = RequestContext(request, c)
+
 
     if('q' in request.GET):
         query = request.GET["q"]
         c["courses"] = Course.objects.filter(title__icontains=query)
 
     
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(c,request))
 
 
 #

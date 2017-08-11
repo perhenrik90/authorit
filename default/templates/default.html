@@ -34,7 +34,7 @@
 	  <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 	      {% if user.is_staff %}
-	      <li><a href="{% url 'export.views.search_projects' %}">{% blocktrans %}Admin{% endblocktrans %}</a></li>
+	      <li><a href="{% url 'search_projects' %}">{% blocktrans %}Admin{% endblocktrans %}</a></li>
 	      {% endif %}
               {% block ekstra_nav %}
 	      {% endblock %}

@@ -46,7 +46,7 @@
       </tr>
       {% for course in courses %}
       <tr>
-	<td><a href="{% url 'export.views.preview' course.code %}"  target="_blank">{{course.code}}</a></td>
+	<td><a href="{% url 'preview' course.code %}"  target="_blank">{{course.code}}</a></td>
 	<td>{{course.title}}</td>
 	<td>{{course.owner}}</td>
       </tr>

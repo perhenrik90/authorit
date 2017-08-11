@@ -13,6 +13,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', default.views.login_view, name='login'),
     url(r'^dashboard$', default.views.dashboard, name='dashboard'),
+    url(r'^search$', export.views.search_projects, name='search_projects'),
 
     url(r'^view/(?P<project>[\w-]+)/$', export.views.preview, name='preview'),
     url(r'^export_scorm$', export.views.export_scorm, name='export_scorm'),
