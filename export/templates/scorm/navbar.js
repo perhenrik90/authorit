@@ -9,20 +9,12 @@ function initNavBar(se)
 {
     
     // data objects / models / got from slideengine.js (!)
-
     se.slides = document.getElementsByClassName("slide");
-    nav = document.getElementById("navbar");
-    fluid = document.createElement("div");
-    fluid.className = "container-fluid";
-    nav.appendChild(fluid);
+    menu = document.getElementById("menu");
 
     // append a header
-    head = makeNavHeader();
-    fluid.appendChild(head);
-
-    menu = document.createElement("ul");
-    fluid.appendChild(menu);
-    menu.className = "nav navbar-nav";
+    // head = makeNavHeader();
+    // fluid.appendChild(head);
 
     /** loop through the stuff and setup menu **/
     for(i = 0; i < se.slides.length; i ++)

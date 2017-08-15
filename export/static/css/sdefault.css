@@ -4,6 +4,10 @@
  * @author Per-Henrik Kvalnes - 2015
  ****************************************/
 
+.navbar-nav>li, .navbar-nav{
+    float: left !important;
+}
+
 /** slide styling **/
 .slide
 {
