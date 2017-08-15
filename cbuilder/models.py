@@ -49,6 +49,8 @@ class Image(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course)
 
+    def __unicode__(self):
+        return self.course.title + " " +self.created.strftime("%Y-%m-%d %H:%M:%S")
     
 class Video(models.Model):
 
@@ -57,3 +59,6 @@ class Video(models.Model):
     video = models.FileField(upload_to="vid/%Y")
     created = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course)   
+    
+    def __unicode__(self):
+        return self.course.title + " " +self.created.strftime("%Y-%m-%d %H:%M:%S")
