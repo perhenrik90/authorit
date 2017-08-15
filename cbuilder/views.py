@@ -411,7 +411,7 @@ def edit_image(request):
     c["image"] = image
     
     template = loader.get_template("edit_img.html")
-    return HttpResponse(template.render(c,context))	
+    return HttpResponse(template.render(c,request))	
 
 #
 # Upload a video file
