@@ -42,6 +42,10 @@ function initSlideEngine()
 	}
 
 	$("#course_progress_bar").css('width', (se.index/(se.slides.length-1)*100)+"%")
+
+	// Set font normal in the menu
+	$('.menuText').css('font-weight','normal');
+	$('#'+se.index).css('font-weight','bold');
 	
     }
 

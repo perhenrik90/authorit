@@ -24,6 +24,8 @@ function initNavBar(se)
 	{
 	    li = document.createElement("li");
 	    a = document.createElement("a");
+	    a.className = "menuText");
+
 	    a.id = i;
 	    li.appendChild(a);
 
